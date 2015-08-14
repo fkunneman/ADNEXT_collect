@@ -11,18 +11,19 @@ Script to collect tweets within a timeframe from twiqs
 """
 parser = argparse.ArgumentParser(description = 
     "Script to collect tweets within a timeframe from twiqs")
-parser.add_argument('-k', action = 'store', nargs = '+', required = True, help = "the keywords")
+parser.add_argument('-k', action = 'store', nargs = '+', required = True, help = "the keyterms")
 parser.add_argument('-u', action = 'store', required = True, help = "twiqs username")
 parser.add_argument('-p', action = 'store', required = True, help = "twiqs password") 
-parser.add_argument('-s', action = 'store', required = True, help = 
-    "the start time (format = YYYYMMDDHH)")
-parser.add_argument('-f', action = 'store', required = True, help = 
-    "the end time (format = YYYYMMDDHH)")
-parser.add_argument('-i', action = 'store', required = True, help = "the ip")
+parser.add_argument('-s', action = 'store', required = True, 
+    help = "the start time (format = YYYYMMDDHH)")
+parser.add_argument('-f', action = 'store', required = True, 
+    help = "the end time (format = YYYYMMDDHH)")
+parser.add_argument('-i', action = 'store', required = True, help = "the current ip-address (check twiqs.nl)")
 parser.add_argument('-o', action = 'store', required = True, help = "the directory to write to")
-parser.add_argument('-l', action = 'store', type = int, default = 30, help = "the time to wait for query results")
-parser.add_argument('-w', action = 'store', type = int, default = 2, help = "the time of repetitive querying")
-
+parser.add_argument('-l', action = 'store', type = int, default = 30, 
+    help = "the time to wait for query results")
+parser.add_argument('-w', action = 'store', type = int, default = 2, 
+    help = "the time of repetitive querying")
 args = parser.parse_args()
 
 requestwait = args.w
@@ -34,14 +35,14 @@ r = s.post("http://" + args.i + "/cgi-bin/twitter", data={"NAME":args.u, "PASSWD
 
 def request_tweets(t):
     try:
-            output1st = requests.get("http://" + args.i + "/cgi-bin/twitter", params=t, cookies=s.cookies)
+            output1st = requests.get("http://" + args.i + "/cgi-bin/twitter", params = t, cookies = s.cookies)
     except:
             print("output1st = false")
             output1st = False
     return output1st
 
 def process_request(t1,t2,k):
-    payload = {'SEARCH': k, 'DATE': t1 + "-" + t2, 'DOWNLOAD':True, 'SHOWTWEETS':True}
+    payload = {'SEARCH' : k, 'DATE' : t1 + "-" + t2, 'DOWNLOAD' : True, 'SHOWTWEETS' : True, 'JSON' : True}
     print("fetching",payload["SEARCH"],"in",payload['DATE'],"from twiqs")
     output = False
     while not output:
