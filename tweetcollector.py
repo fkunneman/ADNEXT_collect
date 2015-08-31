@@ -11,5 +11,7 @@ class Tweetcollector:
 
     def search_keyterm(self, keyterm, language):
         api = self.connect()
-        tweets = api.search(q = keyterm, result_type = "mixed", lang = language)["statuses"]
+        tweets = api.search(q = keyterm, lang = language, result_type = "mixed", count = 100)["statuses"]
         return tweets
+
+    

@@ -15,15 +15,15 @@ def extract_tweets(keyword,api,l):
     tweets = api.search(q = keyword, result_type = "mixed", lang = l)["statuses"]
     return tweets
 
-    for tweet in tweets:
-        user = tweet["user"]["screen_name"]
-        tm = tweet["created_at"]
-        text = re.sub("\n","",tweet["text"])
-        tweet_id = tweet["id"]
-        output = [tweet_id,"\t".join([keyword[1:-1],str(tweet_id),user,tm,text]) + "\n"]
-        tweets_output.append(output)
+    # for tweet in tweets:
+    #     user = tweet["user"]["screen_name"]
+    #     tm = tweet["created_at"]
+    #     text = re.sub("\n","",tweet["text"])
+    #     tweet_id = tweet["id"]
+    #     output = [tweet_id,"\t".join([keyword[1:-1],str(tweet_id),user,tm,text]) + "\n"]
+    #     tweets_output.append(output)
 
-    return tweets_output
+    # return tweets_output
 
 def collect_usertweets(api,user,max_c = 1000,cnt=200):
     no_tweets = False
