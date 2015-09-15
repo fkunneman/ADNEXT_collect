@@ -43,7 +43,7 @@ if cp['collect']['write'] != 'no':
             'user_name' : 'general',
             'user_followers' : '0',
             'user_location' : 'general',
-            'date' : 'dd-mm-yy',
+            'date' : 'dd-mm-yyyy',
             'time' : 'hh:mm:ss',
             'reply_to_user' : 'general',
             'retweet_to_user' : 'general',
@@ -74,7 +74,7 @@ while True:
             jp.convert()
             # write lines
             lw = linewriter.Linewriter(jp.lines)
-            if write == 'xls':
-                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+            lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+            lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
     print('Sleeping')
     time.sleep(960)
