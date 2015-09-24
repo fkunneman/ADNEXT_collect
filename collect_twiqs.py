@@ -45,7 +45,7 @@ if 'xls' in formats:
 
 if keyterms:
     for keyterm in keyterms:
-        tweets = process_request(begin, end, keyterm)
+        tweets = tc.process_request(begin, end, keyterm)
         if tweets != "":
             outfile = collectdir + keyterm + '-' + begin[:8] + '-' + end[:8] + '.txt'
             # convert json
