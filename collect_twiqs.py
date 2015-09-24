@@ -1,90 +1,96 @@
 
-import os
-import argparse
-import requests
+import sys
+import configparser
 import datetime
-import time
-import codecs
 
-"""
-Script to collect tweets within a timeframe from twiqs
-"""
-parser = argparse.ArgumentParser(description = 
-    "Script to collect tweets within a timeframe from twiqs")
-parser.add_argument('-k', action = 'store', nargs = '+', required = True, help = "the keyterms")
-parser.add_argument('-u', action = 'store', required = True, help = "twiqs username")
-parser.add_argument('-p', action = 'store', required = True, help = "twiqs password") 
-parser.add_argument('-s', action = 'store', required = True, 
-    help = "the start time (format = YYYYMMDDHH)")
-parser.add_argument('-f', action = 'store', required = True, 
-    help = "the end time (format = YYYYMMDDHH)")
-parser.add_argument('-i', action = 'store', required = True, help = "the current ip-address (check twiqs.nl)")
-parser.add_argument('-o', action = 'store', required = True, help = "the directory to write to")
-parser.add_argument('-l', action = 'store', type = int, default = 30, 
-    help = "the time to wait for query results")
-parser.add_argument('-w', action = 'store', type = int, default = 2, 
-    help = "the time of repetitive querying")
-args = parser.parse_args()
+import twiqscollector
+import json_tweets_parser
+import linewriter
 
-requestwait = args.w
-requestloop = int(args.l/requestwait)
+configfile = sys.argv[1]
+collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
 
-#get cookie
-s = requests.Session()
-r = s.post("http://" + args.i + "/cgi-bin/twitter", data={"NAME":args.u, "PASSWD":args.p})
+cp = configparser.ConfigParser()
+cp.read(configfile)
 
-def request_tweets(t):
-    try:
-            output1st = requests.get("http://" + args.i + "/cgi-bin/twitter", params = t, cookies = s.cookies)
-    except:
-            print("output1st = false")
-            output1st = False
-    return output1st
+inlog_file = cp['collect']['password_file']
+with open(inlog_file) as inf:
+    inlog = inf.read().split("\n")
+ip = cp['collect']['ip']
+tc = twiqscollector.Twiqscollector(inlog, ip)
 
-def process_request(t1,t2,k):
-    payload = {'SEARCH' : k, 'DATE' : t1 + "-" + t2, 'DOWNLOAD' : True, 'SHOWTWEETS' : True, 'JSON' : True}
-    print("fetching",payload["SEARCH"],"in",payload['DATE'],"from twiqs")
-    output = False
-    while not output:
-        output = request_tweets(payload)
-    dumpoutput = '#user_id\t#tweet_id\t#date\t#time\t#reply_to_tweet_id\t#retweet_to_tweet_id\t#user_name\t#tweet\t#DATE='+payload['DATE']+'\t#SEARCHTOKEN=' + k + '\n'
-    if output.text[:1000] == dumpoutput: #If there isn't any tweet try the request again for x times.
-        for i in range(0,requestloop):
-            output = False
-            while not output:
-                time.sleep(60*requestwait) #Wait for the search done at twiqs.nl before the next request
-                output = request_tweets(payload)
-            if output.text != dumpoutput:
-                break
+if cp['collect']['keyterms'] == 'no':
+    keyterms = False
+else:
+    keyterms = cp['collect']['keyterms'].split()
+begin = cp['collect']['begin']
+end = cp['collect']['end']
+tweetfiles = [collectdir + 'tweets_' + kt for kt in keyterms] 
+keyterm_tweetfile = dict(zip(keyterms, tweetfiles))
 
-    return output.text
+if cp['collect']['write'] != 'no':
+    write = True
+    formats = cp['collect']['write']
+    if 'xls' in formats:
+        header_celltype = {
+            'tweet_id' : 'general',
+            'user_id' : 'general',
+            'user_name' : 'general',
+            'user_followers' : '0',
+            'user_location' : 'general',
+            'date' : 'dd-mm-yyyy',
+            'time' : 'hh:mm:ss',
+            'reply_to_user' : 'general',
+            'retweet_to_user' : 'general',
+            'tweet_text' : 'general'
+        }
+else:
+    write = False
 
-for k in args.k:
-    if k == "echtalles":
-        current = datetime.datetime(int(args.s[:4]),int(args.s[4:6]),int(args.s[6:8]),int(args.s[8:]),0,0)
-        end = datetime.datetime(int(args.f[:4]),int(args.f[4:6]),int(args.f[6:8]),int(args.f[8:]),0,0)
-        while current <= end:
-            year = str(current.year)
-            month = str(current.month)
-            day = str(current.day)
-            hour = str(current.hour)
-            if len(month) == 1:
-                month = "0" + month
-            if len(day) == 1:
-                day = "0" + day
-            if len(hour) == 1:
-                hour = "0" + hour
-            timeobj = year+month+day+hour
-            tweets = process_request(timeobj,timeobj,k)
-            if tweets != "":
-                outfile = codecs.open(args.o + timeobj + ".txt","w","utf-8")
-                outfile.write(tweets)
-                outfile.close()
-                current = current + datetime.timedelta(hours = 1)
-
-    else:
-        tweets = process_request(args.s,args.f,k)
+if keyterms:
+    for keyterm in keyterms:
+        tweets = process_request(begin, end, keyterm)
         if tweets != "":
-            outfile = codecs.open(args.o + k + "-" + args.s[:6] + "-" + args.f[:6] + ".txt","w","utf-8")
-            outfile.write(tweets)
-            outfile.close()
+            if write:
+                # convert json
+                jp = json_tweets_parser.Json_tweets_parser(keyterm_tweetfile[keyterm] + '.json')
+                jp.parse()
+                jp.convert()
+                # write lines
+                lw = linewriter.Linewriter(jp.lines)
+                if 'xls' in formats:
+                    lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+                if 'txt' in formats:
+                    lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+                if 'csv' in formats:
+                    lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
+else: # collect all tweets in time frame
+    current = datetime.datetime(int(begin[:4]),int(begin[4:6]),int(begin[6:8]),int(begin[8:]),0,0)
+    end = datetime.datetime(int(end[:4]),int(end[4:6]),int(end[6:8]),int(end[8:]),0,0)
+    while current <= end:
+        year = str(current.year)
+        month = str(current.month)
+        day = str(current.day)
+        hour = str(current.hour)
+        if len(month) == 1:
+            month = "0" + month
+        if len(day) == 1:
+            day = "0" + day
+        if len(hour) == 1:
+            hour = "0" + hour
+        timeobj = year + month + day + hour
+        tweets = tc.process_request(timeobj, timeobj, 'echtalles')
+        if tweets != "":
+            if write:
+                # convert json
+                jp = json_tweets_parser.Json_tweets_parser(timeobj + '.json')
+                jp.parse()
+                jp.convert()
+                # write lines
+                lw = linewriter.Linewriter(jp.lines)
+                if 'xls' in formats:
+                    lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+                if 'txt' in formats:
+                    lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+                if 'csv' in formats:
+                    lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')

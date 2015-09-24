@@ -14,4 +14,14 @@ class Tweetcollector:
         tweets = api.search(q = keyterm, lang = language, result_type = "mixed", count = 100)["statuses"]
         return tweets
 
-    
+##########TODO##############
+
+    def collect_tweet_id(self, user, id):
+        pass
+
+    def collect_user_timeline(self, user):
+        pass
+
+    def collect_user_followers(self, user):
+        pass
+        
