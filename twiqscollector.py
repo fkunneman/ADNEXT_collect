@@ -8,7 +8,7 @@ class Twiqscollector:
         self.pw = passwords
         self.ip = ip
         self.requestloop = 3
-        self.requestwait = 5
+        self.requestwait = 1
         self.get_cookie()
 
     def get_cookie(self):
@@ -19,6 +19,7 @@ class Twiqscollector:
         try:
             retrieve = requests.get("http://" + self.ip + "/cgi-bin/twitter", params = parameters, cookies = self.cookie)
         except:
+            print('retrieve failed', parameters)
             retrieve = False
         
         return retrieve
@@ -36,6 +37,7 @@ class Twiqscollector:
             for i in range(0, self.requestloop):
                 output = request_tweets(payload)
                 while not output:
+                    print('no output')
                     time.sleep(60 * self.requestwait) #Wait for the search done at twiqs.nl before the next request
                     if output.text != dumpoutput:
                         break
