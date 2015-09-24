@@ -28,7 +28,7 @@ else:
 begin = cp['collect']['begin']
 end = cp['collect']['end']
 
-formats = cp['collect']['write']
+formats = cp['collect']['write'].split()
 if 'xls' in formats:
     header_celltype = {
         'tweet_id' : 'general',
