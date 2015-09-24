@@ -5,6 +5,7 @@ import configparser
 import json
 import re
 import time
+import io
 
 import tweetcollector
 import docreader
@@ -35,8 +36,9 @@ if cp['collect'].getboolean('resume'):
         unique_ids[keyterm] = [x[0] for x in dr.parse_json(keyterm_tweetfile[keyterm] + '.json', [['id']])]
 
 if cp['collect']['write'] != 'no':
-    if cp['collect']['write'] == 'xls':
-        write = 'xls'
+    write = True
+    formats = cp['collect']['write']
+    if 'xls' in formats:
         header_celltype = {
             'tweet_id' : 'general',
             'user_id' : 'general',
@@ -63,9 +65,9 @@ while True:
         unique_ids[keyterm].extend(new_ids)
         new_tweets = [tweet for tweet in tweets if tweet['id'] in new_ids]
         # append new tweets to json file
-        with open(keyterm_tweetfile[keyterm] + '.json', 'a') as tweetfile:
+        with io.open(keyterm_tweetfile[keyterm] + '.json', 'a', encoding = 'utf-8') as tweetfile:
             for tweet in new_tweets:
-                json.dump(tweet, tweetfile)
+                json.dump(tweet, tweetfile, ensure_ascii = False)
                 tweetfile.write('\n')
         if write:
             # convert json
@@ -74,7 +76,12 @@ while True:
             jp.convert()
             # write lines
             lw = linewriter.Linewriter(jp.lines)
-            lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
-            lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+            if 'xls' in formats:
+                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+            if 'txt' in formats:
+                lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+            if 'csv' in formats:
+                lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
     print('Sleeping')
     time.sleep(960)
+
