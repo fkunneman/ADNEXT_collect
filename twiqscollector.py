@@ -17,7 +17,6 @@ class Twiqscollector:
         r = self.session.post('http://' + self.ip + '/cgi-bin/twitter', data = {'NAME' : self.pw[0], 'PASSWD' : self.pw[1]})
     
     def request_tweets(self, parameters):
-        print('http://' + self.ip + '/cgi-bin/twitter', '\n', parameters)
         try:
             retrieve = requests.get('http://' + self.ip + '/cgi-bin/twitter', params = parameters, cookies = self.session.cookies)
         except:
@@ -45,7 +44,13 @@ class Twiqscollector:
     def convert_tweets(self, output):
         tweetlines = [line.split('\t') for line in output.split('\n')]
         new_tweets = []
-        for line in tweetlines:
+        for line in tweetlines[1:]:
+            if len(line) == 1 and line[0] == '':
+                continue
+            try:
+                print(line)
+            except:
+                continue
             datecol = line[2]
             timecol = line[3]
             usercol = line[6]

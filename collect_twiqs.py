@@ -9,6 +9,8 @@ import linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
+if collectdir[0] == '/':
+    collectdir = ''
 
 cp = configparser.ConfigParser()
 cp.read(configfile)
@@ -42,7 +44,7 @@ if 'xls' in formats:
         'retweet_to_user' : 'general',
         'tweet_text' : 'general'
     }
-    columns = ['user_id', 'tweet_id', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'user_name', 'tweet_text']
+    columns = ['user_id', 'tweet_id', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'user_name', 'tweet_url', 'tweet_text']
     
 if keyterms:
     for keyterm in keyterms:
