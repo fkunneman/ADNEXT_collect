@@ -32,7 +32,6 @@ class Twiqscollector:
             output = self.request_tweets(payload)
         dumpoutput = '#user_id\t#tweet_id\t#date\t#time\t#reply_to_tweet_id\t#retweet_to_tweet_id\t#user_name\t#tweet\t#DATE=' + \
             payload['DATE'] + '\t#SEARCHTOKEN=' + keyterm + '\n'
-        print(dumpoutput)
         if output.text[:1000] == dumpoutput: #If there isn't any tweet try the request again for x times.
             for i in range(0, self.requestloop):
                 print('attempt', i)
@@ -43,5 +42,7 @@ class Twiqscollector:
                     #if output.text != dumpoutput:
                     #    break
 
-        print('output', output.text)
+#        print('output', output.text.encode('utf-8'))
+#        print(dir(output))
+#        print(output.json())
         return output.text

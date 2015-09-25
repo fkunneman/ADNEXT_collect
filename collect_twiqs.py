@@ -42,26 +42,20 @@ if 'xls' in formats:
         'retweet_to_user' : 'general',
         'tweet_text' : 'general'
     }
-
+    columns = ['user_id', 'tweet_id', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'user_name', 'tweet_text']
+    
 if keyterms:
     for keyterm in keyterms:
         tweets = tc.process_request(begin, end, keyterm)
-        if tweets != "":
-            outfile = collectdir + keyterm + '-' + begin[:8] + '-' + end[:8] + '.txt'
-            # convert json
-            jp = json_tweets_parser.Json_tweets_parser(keyterm + '.json')
-            jp.parse()
-            jp.convert()
-            # write lines
-            lw = linewriter.Linewriter(jp.lines)
-            if 'xls' in formats:
-                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
-            if 'txt' in formats:
-                lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
-            if 'csv' in formats:
-                lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
-        else:
-            print('No tweets for', keyterm)
+        tweetlines = [line.split('\t') for line in tweets.split('\n')]
+        lw = linewriter.Linewriter(tweetlines)
+        if 'xls' in formats:
+            lw.write_xls(columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+        if 'txt' in formats:
+            lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+        if 'csv' in formats:
+            lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
+
 else: # collect all tweets in time frame
     current = datetime.datetime(int(begin[:4]),int(begin[4:6]),int(begin[6:8]),int(begin[8:]),0,0)
     end = datetime.datetime(int(end[:4]),int(end[4:6]),int(end[6:8]),int(end[8:]),0,0)
@@ -78,19 +72,11 @@ else: # collect all tweets in time frame
             hour = "0" + hour
         timeobj = year + month + day + hour
         tweets = tc.process_request(timeobj, timeobj, 'echtalles')
-        if tweets != "":
-            outfile = collectdir + timeobj + '.txt'
-            # convert json
-            jp = json_tweets_parser.Json_tweets_parser(timeobj + '.json')
-            jp.parse()
-            jp.convert()
-            # write lines
-            lw = linewriter.Linewriter(jp.lines)
-            if 'xls' in formats:
-                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
-            if 'txt' in formats:
-                lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
-            if 'csv' in formats:
-                lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
-        else:
-            print('No tweets for', timeobj)
+        tweetlines = [line.split('\t') for line in tweets.split('\t')]
+        lw = linewriter.Linewriter(tweetlines)
+        if 'xls' in formats:
+            lw.write_xls(columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+        if 'txt' in formats:
+            lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+        if 'csv' in formats:
+            lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
