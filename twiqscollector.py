@@ -1,5 +1,6 @@
 
 import requests
+import datetime
 import time
 
 class Twiqscollector:
@@ -37,12 +38,22 @@ class Twiqscollector:
                 print('attempt', i)
                 output = self.request_tweets(payload)
                 while not output:
-                    #time.sleep(60 * self.requestwait) #Wait for the search done at twiqs.nl before the next request
                     output = self.request_tweets(payload)
-                    #if output.text != dumpoutput:
-                    #    break
 
-#        print('output', output.text.encode('utf-8'))
-#        print(dir(output))
-#        print(output.json())
-        return output.text
+        return self.convert_tweets(output.text)
+
+    def convert_tweets(self, output):
+        tweetlines = [line.split('\t') for line in output.split('\n')]
+        new_tweets = []
+        for line in tweetlines:
+            datecol = line[2]
+            timecol = line[3]
+            usercol = line[6]
+            idcol = line[1]
+            date = datetime.date(int(datecol[:4]), int(datecol[5:7]), int(datecol[8:]))
+            time = datetime.time(int(timecol[:2]), int(timecol[3:5]), int(timecol[6:8]))
+            # generate tweet url
+            url = 'https://twitter.com/' + usercol + '/status/' + idcol
+            # assemble new line and add to new lines
+            new_tweets.append(line[:2] + [date, time] + line[4:7] + [url, line[7]])
+        return new_tweets

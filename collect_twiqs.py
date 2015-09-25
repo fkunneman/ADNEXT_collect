@@ -47,8 +47,7 @@ if 'xls' in formats:
 if keyterms:
     for keyterm in keyterms:
         tweets = tc.process_request(begin, end, keyterm)
-        tweetlines = [line.split('\t') for line in tweets.split('\n')]
-        lw = linewriter.Linewriter(tweetlines)
+        lw = linewriter.Linewriter(tweets)
         if 'xls' in formats:
             lw.write_xls(columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
         if 'txt' in formats:
