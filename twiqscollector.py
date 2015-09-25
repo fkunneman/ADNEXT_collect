@@ -12,13 +12,13 @@ class Twiqscollector:
         self.get_cookie()
 
     def get_cookie(self):
-        session = requests.Session()
-        r = session.post('http://' + self.ip + '/cgi-bin/twitter', data = {'NAME' : self.pw[0], 'PASSWD' : self.pw[1]})
-        self.cookie = session.cookies
+        self.session = requests.Session()
+        r = self.session.post('http://' + self.ip + '/cgi-bin/twitter', data = {'NAME' : self.pw[0], 'PASSWD' : self.pw[1]})
     
     def request_tweets(self, parameters):
+        print('http://' + self.ip + '/cgi-bin/twitter', '\n', parameters)
         try:
-            retrieve = requests.get('http://' + self.ip + '/cgi-bin/twitter', params = parameters, cookies = self.cookie)
+            retrieve = requests.get('http://' + self.ip + '/cgi-bin/twitter', params = parameters, cookies = self.session.cookies)
         except:
             retrieve = False
         
@@ -38,10 +38,10 @@ class Twiqscollector:
                 print('attempt', i)
                 output = self.request_tweets(payload)
                 while not output:
-                    time.sleep(60 * self.requestwait) #Wait for the search done at twiqs.nl before the next request
+                    #time.sleep(60 * self.requestwait) #Wait for the search done at twiqs.nl before the next request
                     output = self.request_tweets(payload)
-                    if output.text != dumpoutput:
-                        break
+                    #if output.text != dumpoutput:
+                    #    break
 
         print('output', output.text)
         return output.text
