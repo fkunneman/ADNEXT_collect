@@ -37,6 +37,7 @@ class Twiqscollector:
                 print('attempt', i)
                 output = self.request_tweets(payload)
                 while not output:
+                    time.sleep(60 * self.requestwait)
                     output = self.request_tweets(payload)
 
         return self.convert_tweets(output.text)
