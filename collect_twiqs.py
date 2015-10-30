@@ -25,7 +25,7 @@ if cp['collect']['keyterms'] == 'no':
     keyterms = False
 else:
     keyterms = cp['collect']['keyterms'].split('|')
-    tweetfiles = [collectdir + 'tweets_' + kt for kt in keyterms] 
+    tweetfiles = [collectdir + 'tweets_' + str(i) for i, kt in enumerate(keyterms)] 
     keyterm_tweetfile = dict(zip(keyterms, tweetfiles))
 begin = cp['collect']['begin']
 end = cp['collect']['end']
