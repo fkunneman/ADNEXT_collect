@@ -8,8 +8,8 @@ class Twiqscollector:
     def __init__(self, passwords, ip):
         self.pw = passwords
         self.ip = ip
-        self.requestloop = 5
-        self.requestwait = 15
+        self.requestloop = 60
+        self.requestwait = 3
         self.get_cookie()
 
     def get_cookie(self):
@@ -25,20 +25,28 @@ class Twiqscollector:
         return retrieve
 
     def process_request(self, begin, end, keyterm):
-        payload = {'SEARCH' : keyterm, 'DATE' : begin + "-" + end, 'DOWNLOAD' : True, 'SHOWTWEETS' : True, 'JSON' : True}
+        payload = {'SEARCH' : keyterm, 'DATE' : begin + "-" + end, 'DOWNLOAD' : True, 'SHOWTWEETS' : True}
+        #payload = {'SEARCH' : keyterm, 'DATE' : begin + "-" + end, 'DOWNLOAD' : True, 'SHOWTWEETS' : True, 'JSON' : True}
         print('fetching', payload['SEARCH'], 'in', payload['DATE'], 'from twiqs')
         output = False
         while not output:
             output = self.request_tweets(payload)
+ #       print('first output...\n\n', output.text)
         dumpoutput = '#user_id\t#tweet_id\t#date\t#time\t#reply_to_tweet_id\t#retweet_to_tweet_id\t#user_name\t#tweet\t#DATE=' + \
             payload['DATE'] + '\t#SEARCHTOKEN=' + keyterm + '\n'
         if output.text[:1000] == dumpoutput: #If there isn't any tweet try the request again for x times.
             for i in range(0, self.requestloop):
-                print('attempt', i)
+#                print('attempt', i)
                 output = self.request_tweets(payload)
-                while not output:
-                    output = self.request_tweets(payload)
-
+#                print(output, dir(output), output.text)
+#                print('raw', output.raw)
+#                print('url', output.url)
+#                while not output:
+#                output = self.request_tweets(payload)
+                if output.text[:1000] != dumpoutput:
+                    break
+                time.sleep(60 * self.requestwait)
+                    
         return self.convert_tweets(output.text)
 
     def convert_tweets(self, output):
@@ -47,10 +55,10 @@ class Twiqscollector:
         for line in tweetlines[1:]:
             if len(line) == 1 and line[0] == '':
                 continue
-            try:
-                print(line)
-            except:
-                continue
+#            try:
+#                print(line)
+#            except:
+#                continue
             datecol = line[2]
             timecol = line[3]
             usercol = line[6]
