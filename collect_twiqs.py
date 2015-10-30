@@ -24,7 +24,7 @@ tc = twiqscollector.Twiqscollector(inlog, ip)
 if cp['collect']['keyterms'] == 'no':
     keyterms = False
 else:
-    keyterms = cp['collect']['keyterms'].split()
+    keyterms = cp['collect']['keyterms'].split('|')
     tweetfiles = [collectdir + 'tweets_' + kt for kt in keyterms] 
     keyterm_tweetfile = dict(zip(keyterms, tweetfiles))
 begin = cp['collect']['begin']
