@@ -36,7 +36,7 @@ def collect_usertweets(api,user,max_c = 1000,cnt=200):
             if len(tweets) < 1:
                 no_tweets = True
             else:
-                print(tweets[1])
+#                print(tweets[1])
                 for tweet in tweets:
                     dtsearch = date_time.search(tweet["created_at"]).groups()
                     date = dtsearch[1] + "-" + month[dtsearch[0]] + "-" + dtsearch[3]
@@ -53,6 +53,6 @@ def collect_usertweets(api,user,max_c = 1000,cnt=200):
     return tweets_total
 
 def return_tweet(api,tid):
-    status = api.show_status(id=tid)
-    #tweet = [tid,status["user"]["screen_name"],time_functions.return_datetime(status["created_at"],setting="twitter"),status["text"]]
-    return status
+    status = api.show_status(id = tid)
+    tweet = [tid, status['user']['screen_name'], time_functions.return_datetime(status['created_at'], setting = 'twitter'), status['text']]
+    return tweet
