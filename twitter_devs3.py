@@ -31,24 +31,24 @@ def collect_usertweets(api,user,max_c = 1000,cnt=200):
     c = 1
 
     while not no_tweets:
-        try:
-            tweets = api.get_user_timeline(screen_name=user,count=cnt,page=c)
-            if len(tweets) < 1:
-                no_tweets = True
-            else:
-                print(tweets[1])
-                for tweet in tweets:
-                    dtsearch = date_time.search(tweet["created_at"]).groups()
-                    date = dtsearch[1] + "-" + month[dtsearch[0]] + "-" + dtsearch[3]
-                    tm = dtsearch[2]
-                    tweets_total.append("\t".join([str(tweet['id']),date,tm,tweet['text']]))
-            c+= 1
-            if c >= max_c:
-                no_tweets = True
-        except:
-            print("limit exceeded")
-            return [False]
-            break
+#        try:
+        tweets = api.get_user_timeline(screen_name=user,count=cnt,page=c)
+        if len(tweets) < 1:
+            no_tweets = True
+        else:
+#            print(tweets[1])
+            for tweet in tweets:
+                dtsearch = date_time.search(tweet["created_at"]).groups()
+                date = dtsearch[1] + "-" + month[dtsearch[0]] + "-" + dtsearch[3]
+                tm = dtsearch[2]
+                tweets_total.append("\t".join([str(tweet['id']),date,tm,tweet['text']]))
+        c+= 1
+        if c >= max_c:
+            no_tweets = True
+#    except:
+#        print("limit exceeded")
+#        return [False]
+#        break
 
     return tweets_total
 
