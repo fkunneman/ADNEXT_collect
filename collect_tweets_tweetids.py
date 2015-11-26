@@ -22,7 +22,13 @@ with open(infile, 'r', encoding = 'utf-8') as idfile:
 tweets = []
 for i, tid in enumerate(ids):
     tweet = twitter_devs3.return_tweet(api, tid)
-    tweets.append(tweet)    
+    if not tweet:
+        time.sleep(1801)
+        tweet = twitter_devs3.return_tweet(api, tid)
+        if not tweet:
+            print('Failure to collect this tweet two times, probably the tweet has been removed or the account has been closed')
+            continue
+    tweets.append(tweet)
 
 with open(outfile, 'w', encoding = 'utf-8') as out_w:
     for tweet in tweets:

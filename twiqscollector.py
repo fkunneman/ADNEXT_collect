@@ -26,26 +26,26 @@ class Twiqscollector:
 
     def process_request(self, begin, end, keyterm):
         payload = {'SEARCH' : keyterm, 'DATE' : begin + "-" + end, 'DOWNLOAD' : True, 'SHOWTWEETS' : True}
-        #payload = {'SEARCH' : keyterm, 'DATE' : begin + "-" + end, 'DOWNLOAD' : True, 'SHOWTWEETS' : True, 'JSON' : True}
         print('fetching', payload['SEARCH'], 'in', payload['DATE'], 'from twiqs')
         output = False
         while not output:
             output = self.request_tweets(payload)
- #       print('first output...\n\n', output.text)
+        print(output.text)
+        quit()
         dumpoutput = '#user_id\t#tweet_id\t#date\t#time\t#reply_to_tweet_id\t#retweet_to_tweet_id\t#user_name\t#tweet\t#DATE=' + \
             payload['DATE'] + '\t#SEARCHTOKEN=' + keyterm + '\n'
-        if output.text[:1000] == dumpoutput: #If there isn't any tweet try the request again for x times.
-            for i in range(0, self.requestloop):
-#                print('attempt', i)
-                output = self.request_tweets(payload)
-#                print(output, dir(output), output.text)
-#                print('raw', output.raw)
-#                print('url', output.url)
-#                while not output:
-#                output = self.request_tweets(payload)
-                if output.text[:1000] != dumpoutput:
-                    break
-                time.sleep(60 * self.requestwait)
+#         if output.text[:1000] == dumpoutput: #If there isn't any tweet try the request again for x times.
+#             for i in range(0, self.requestloop):
+# #                print('attempt', i)
+#                 output = self.request_tweets(payload)
+# #                print(output, dir(output), output.text)
+# #                print('raw', output.raw)
+# #                print('url', output.url)
+# #                while not output:
+# #                output = self.request_tweets(payload)
+#                 if output.text[:1000] != dumpoutput:
+#                     break
+#                 time.sleep(60 * self.requestwait)
                     
         return self.convert_tweets(output.text)
 
