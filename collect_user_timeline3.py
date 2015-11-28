@@ -22,9 +22,12 @@ for user in users:
     outfile = open(outdir + user + ".txt","w",encoding = "utf-8")
     # Collect tweets
     tweets = twitter_devs3.collect_usertweets(api,user)
-    while not tweets[0]:
+    if not tweets[0]:
         time.sleep(1800)
         api = twython.Twython(passwords[0],passwords[1],passwords[2],passwords[3])
         tweets = twitter_devs3.collect_usertweets(api,user)
+        if not tweets[0]:
+            print('Failure to collect tweets for this user two times, probably the account has been closed')
+            continue
     outfile.write("\n".join(tweets))
     outfile.close()

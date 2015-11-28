@@ -51,11 +51,11 @@ if keyterms:
         tweets = tc.process_request(begin, end, keyterm)
         lw = linewriter.Linewriter(tweets)
         if 'xls' in formats:
-            lw.write_xls(columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+            lw.write_xls(columns, header_celltype, collectdir + keyterm + '.xls')
         if 'txt' in formats:
-            lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+            lw.write_txt(collectdir + keyterm + '.txt')
         if 'csv' in formats:
-            lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
+            lw.write_csv(collectdir + keyterm + '.csv')
 
 else: # collect all tweets in time frame
     current = datetime.datetime(int(begin[:4]),int(begin[4:6]),int(begin[6:8]),int(begin[8:]),0,0)
