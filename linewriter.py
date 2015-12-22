@@ -48,7 +48,7 @@ class Linewriter:
             for line in self.lines:
                 out.write(delimiter.join([str(x) for x in line]) + '\n')
 
-    def write_csv(self, outfile, headers):
+    def write_csv(self, outfile):
         """
         CSV writer
         =====

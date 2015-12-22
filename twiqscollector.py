@@ -40,7 +40,7 @@ class Twiqscollector:
                 num_lines = len(output.text.split('\n'))
             else:
                 print('output False')
-                num_lines = 0
+                return False
                     
         return self.convert_tweets(output.text)
 
