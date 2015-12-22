@@ -42,6 +42,7 @@ if 'xls' in formats:
         'time' : 'hh:mm:ss',
         'reply_to_user' : 'general',
         'retweet_to_user' : 'general',
+        'tweet_url' : 'general',
         'tweet_text' : 'general'
     }
     columns = ['user_id', 'tweet_id', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'user_name', 'tweet_url', 'tweet_text']
