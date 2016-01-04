@@ -36,12 +36,15 @@ class Tweetcollector:
 
         return tweets_total
 
+    def collect_tweet_id(self, tid):
+        api = self.connect()
+        try:
+            tweet = api.show_status(id = tid)
+            return tweet
+        except:
+            return False
+
 ##########TODO##############
-
-    def collect_tweet_id(self, user, id):
-        pass
-
-
 
     def collect_user_followers(self, user):
         pass
