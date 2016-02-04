@@ -28,18 +28,23 @@ class Linewriter:
             i += 2
             for j, col in enumerate(line):
                 j += 1
+#                print(type(col))
                 _cell = ws.cell(row = i, column = j, value = col)
                 if re.search('^http', str(col)) and not ' ' in str(col):
                     _cell.hyperlink = col
                 else:
                     st = header_style[number_header[j]]
+ #                   print(col, st)
                     if not st == 'general':
                         if ':' in st:
                             _cell.number_format = numbers.FORMAT_DATE_TIME6
                         elif '-' in st:
                             _cell.number_format = numbers.FORMAT_DATE_YYYYMMDD2
                         else:
-                            _cell = ws.cell(row = i, column = j, value = int(col))
+                            #try:
+                            #    _cell = ws.cell(row = i, column = j, value = int(col))
+                            #except:
+                            #    _cell = ws.cell(row = i, column = j, value = float(col))
                             _cell.number_format = st
         wb.save(filename = outfile)
 
