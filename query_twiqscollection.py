@@ -2,6 +2,7 @@
 
 import sys
 import os
+import shutil
 import configparser
 from datetime import datetime, timedelta
 
@@ -10,8 +11,11 @@ import linewriter
 
 configfile = sys.argv[1]
 writedir = '/'.join(configfile.split('/')[:-1]) + '/'
-if write[0] == '/':
+if writedir[0] == '/':
     writedir = ''
+tmpdir = writedir + 'tmp/'
+if os.path.exists(tmpdir):
+    shutil.rmtree(tmpdir)
 
 cp = configparser.ConfigParser()
 cp.read(configfile)
@@ -39,15 +43,20 @@ while current <= end:
         hour = '0' + hour
     collectfile = collectdir + year + month + '/' + year + month + day + '-' + hour + '.out.gz'
     print(collectfile)
-    tmpdir = writedir + 'tmp/'
     os.mkdir(tmpdir)
-    content = query_defs.open_gz(collectfile)
-    json_tweets_clean = query_defs.clean_json_tweets(content)
-    tweets_text = query_defs.json_tweets2lowercase_text(json_tweets_clean):
-    matching_tweets = query_defs.query_tweets(keyterms, tweets_text, json_tweets_clean, tmpdir)
-    for keyterm in keyterms:
-        lines_json = matching_tweets[keyterm]
-        outfile = keyterm_tweetfile[keyterm]
-        with open(outfile, 'a', encoding = 'utf-8') as tweets_out:
-            tweets_out.write('\n'.join(lines_json) + '\n')
+    try:
+        content = query_defs.open_gz(collectfile)
+        if len(content) > 0:
+            json_tweets_clean = query_defs.clean_json_tweets(content)
+            tweets_text = query_defs.json_tweets2lowercase_text(json_tweets_clean)
+            matching_tweets = query_defs.query_tweets(keyterms, tweets_text, json_tweets_clean, tmpdir)
+            for keyterm in keyterms:
+                lines_json = matching_tweets[keyterm]
+                if len(lines_json) > 0:
+                    outfile = keyterm_tweetfile[keyterm]
+                    with open(outfile, 'a', encoding = 'utf-8') as tweets_out:
+                        tweets_out.write(''.join(lines_json))
+    except:
+        print('cannot open file', collectfile)
+    shutil.rmtree(tmpdir)
     current = current + timedelta(hours = 1)

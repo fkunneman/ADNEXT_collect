@@ -1,6 +1,6 @@
 
 
-import gz
+import gzip
 import re
 import json
 from collections import defaultdict
@@ -10,13 +10,14 @@ import coco
 def open_gz(filename):
     f = gzip.open(filename,'rb')
     file_content = f.readlines()
-    return file_content
+    file_content_str = [x.decode('utf-8') for x in file_content]
+    return file_content_str
 
 def clean_json_tweets(json_tweets):
 
     # check if last tweet is incomplete, if so: throw away
     erikt = re.compile('}$')
-    if not erikt.match(tweets[len(json_tweets)-1]):
+    if not erikt.match(json_tweets[len(json_tweets)-1]):
         json_tweets.pop()
 
     # check json tweets and throw away badly formatted and non-dutch tweets
@@ -67,7 +68,7 @@ def query_tweets(query_terms, tweets_text, tweets_json, tmpdir):
         dictionary with the query_terms as keys, and a list of the matching json tweets as value
     """
     cc = coco.Coco(tmpdir)
-    cc.set_lines(tweets)
+    cc.set_lines(tweets_text)
     cc.simple_tokenize()
     cc.set_file()
     cc.model_ngramperline(query_terms)
