@@ -37,8 +37,18 @@ class Thread:
     def getNrOfPosts(self):
         return len(self.posts)
 
-    def printXML(self,out):
+    def strip_duplicates(self):
+        postdict = {}
+        for post in self.posts:
+            postdict[post.postid] = post
+        self.posts = postdict.values()
+
+    def sort_posts(self):
         self.posts = sorted(self.posts, key = lambda k : k.index)
+
+    def printXML(self,out):
+        self.strip_duplicates()
+        self.sort_posts()
         out.write("<thread id=\""+self.thread_id+"\">\n<category>"+self.category+"</category>\n<title>"+self.title+"</title>\n<posts>\n")
         for post in self.posts:
             post.printXML(out)
@@ -56,16 +66,23 @@ class Post:
         self.postid = postid
         self.author = author
         self.timestamp = timestamp
-        self.body = re.sub("#","&#35;",body)
-        self.body = re.sub("&","&amp;",self.body)
-        self.body = re.sub("<","&lt;",self.body)
-        self.body = re.sub(">","&gt;",self.body)
-        self.body = re.sub("=","&#61;",self.body)
-        self.body = re.sub("http[^ ]*","[URL]",self.body)
+        self.body = body
         self.index = index
         self.parentid = parentid
         self.ups = ups
         self.downs = downs
 
+    def clean_body(self):
+        for i, paragraph in enumerate(self.body):
+            self.body[i] = re.sub("#","&#35;",paragraph)
+            self.body[i] = re.sub("&","&amp;",paragraph)
+            self.body[i] = re.sub("<","&lt;",paragraph)
+            self.body[i] = re.sub(">","&gt;",paragraph)
+            self.body[i] = re.sub("=","&#61;",paragraph)
+            self.body[i] = re.sub("http[^ ]*","[URL]",paragraph)
+
     def printXML(self,out):
-        out.write("<post id=\""+self.postid+"\">\n<author>"+self.author+"</author>\n<timestamp>"+str(self.timestamp)+"</timestamp>\n<postindex>"+str(self.index)+"</postindex>\n<parentid>"+self.parentid+"</parentid>\n<body>"+self.body+"</body>\n<upvotes>"+str(self.ups)+"</upvotes>\n<downvotes>"+str(self.downs)+"</downvotes>\n</post>\n")
+        out.write("<post id=\""+self.postid+"\">\n<author>"+self.author+"</author>\n<timestamp>"+str(self.timestamp)+"</timestamp>\n<postindex>"+str(self.index)+"</postindex>\n<parentid>"+self.parentid+"</parentid>\n<body>\n")
+        for paragraph in self.body:
+            out.write("<paragraph>"+paragraph+"</paragraph>\n")
+        out.write("</body>\n<upvotes>"+str(self.ups)+"</upvotes>\n<downvotes>"+str(self.downs)+"</downvotes>\n</post>\n")

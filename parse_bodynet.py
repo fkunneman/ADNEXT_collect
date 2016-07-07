@@ -13,9 +13,9 @@ def parse_posthead(ph):
         for span in ph_souped.find_all('span'):
             if 'class' in span.attrs:
                 if span['class'][0] == 'date':
-                    date = span.contents[0].split(',')[0]
+                    date = span.contents[0].split(',')[0].strip()
                 elif span['class'][0] == 'time':
-                    time = span.contents[0]
+                    time = span.contents[0].strip()
                 elif span['class'][0] == 'nodecontrols':
                     nc_souped = BeautifulSoup(span.__str__(), 'html.parser')
                     url = nc_souped.a['href']
@@ -24,30 +24,55 @@ def parse_posthead(ph):
     return date + ' ' + time, url, key, index
 
 def parse_postdetails(pd):
-    pd_souped = BeautifulSoup(pd.__str__(), 'html.parser')
-    for a in pd_souped.find_all('a'):
-        user = a['href'].split('/')[-1].split('.html')[0]
+    candidates = re.findall(r'>[^<]+<', pd.__str__())
+    for candidate in candidates:
+        txt = re.search(r'>(.+)<', candidate).groups()[0].strip()
+        if len(txt) > 0:
+            user = txt
+            break
     try:
         return user
     except:
         return '-'
 
-def parse_text(raw_text):
+def postbody2paragraphs(postbody):
+    paragraphs = postbody.split(r'<br/> <br/>')
+    return paragraphs
+
+def clean_text(raw_text):
     cleaned_text = re.sub(r'<[^>]+>', '', raw_text)
-    #cleaned_text = re.sub(r'\n', '', cleaned_text)
     cleaned_text = re.sub(r' {2,}', ' ', cleaned_text)
-    return cleaned_text
+    return cleaned_text.strip()
 
 def parse_postbody(pb):
 
     pb_souped = BeautifulSoup(pb.__str__(), 'html.parser')
+    parent = '-'
     for div in pb_souped.find_all('div'):
         if 'class' in div.attrs.keys():
             if div['class'][0] == 'content':
                 for c in div.contents:
                     if re.search('blockquote', c.__str__()):
-                        text = parse_text(c.__str__())
-    return text
+                        bq_souped = BeautifulSoup(c.__str__(), 'html.parser')
+                        #print("BEFORE", c.__str__())
+                        for d in bq_souped.find_all('div'):
+                            if 'class' in d.attrs.keys():
+                                if d['class'][0] == 'bbcode_container':
+                                    for i, bc in enumerate(d.contents):
+                                        if re.search(r'#post\d+', bc.__str__()):
+                                            m = re.findall(r'post\d+', bc.__str__())
+                                            parent = re.findall(r'\d+', m[0])[0]
+                                    d.replaceWith('')
+                                    c = bq_souped.get_text()
+                        text = c.__str__()
+                        paragraphs = postbody2paragraphs(text)
+                        paragraphs_cleaned = []
+                        for p in paragraphs:
+                            cleaned_paragraph = clean_text(p)
+                            if not cleaned_paragraph == '':
+                                paragraphs_cleaned.append(cleaned_paragraph)
+
+    return paragraphs_cleaned, parent
 
 def parse_thread(thr):
 
@@ -67,11 +92,11 @@ def parse_thread(thr):
         if 'class' in div.attrs.keys():
             if div['class'][0] == 'posthead':
                 dt, url, key, index = parse_posthead(div)
-            if div['class'][0] == 'postdetails':
+            elif div['class'][0] == 'username_container':
                 user = parse_postdetails(div)
             elif div['class'][0] == 'postbody':
-                text = parse_postbody(div)
-                post = Post(key, user, dt, text, index, '-', '-', '-')
+                paragraphs, parent = parse_postbody(div)
+                post = Post(key, user, dt, paragraphs, index, parent, '-', '-')
                 posts.append(post)
     return posts
 
@@ -92,10 +117,8 @@ for thread in threads:
         continue
 
     if re.match('print', thread_details[-1]):
-#        print('page title ends with \"print\", skipping')
         continue
     elif re.search(r'post\d+', thread_details[-1]):
-#        print('page title ends with \"post\", skipping')
         continue
     elif re.match(r'$\d+^', thread_details[-1]):
         thread_index = int(thread_details[-1])
