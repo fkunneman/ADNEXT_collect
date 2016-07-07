@@ -27,7 +27,10 @@ def parse_postdetails(pd):
     pd_souped = BeautifulSoup(pd.__str__(), 'html.parser')
     for a in pd_souped.find_all('a'):
         user = a['href'].split('/')[-1].split('.html')[0]
-    return user
+    try:
+        return user
+    except:
+        return '-'
 
 def parse_text(raw_text):
     cleaned_text = re.sub(r'<[^>]+>', '', raw_text)
@@ -78,7 +81,6 @@ threads = sys.argv[3:]
 
 thread_dict = defaultdict(list)
 for thread in threads:
-    print(thread)
     with open(thread, 'r', encoding = 'iso-8859-1') as t_open:
         thr_str = t_open.read()
 
@@ -90,10 +92,10 @@ for thread in threads:
         continue
 
     if re.match('print', thread_details[-1]):
-        print('page title ends with \"print\", skipping')
+#        print('page title ends with \"print\", skipping')
         continue
     elif re.search(r'post\d+', thread_details[-1]):
-        print('page title ends with \"post\", skipping')
+#        print('page title ends with \"post\", skipping')
         continue
     elif re.match(r'$\d+^', thread_details[-1]):
         thread_index = int(thread_details[-1])
@@ -109,14 +111,31 @@ for thread in threads:
 
 print('Writing xml')
 for thread_id in thread_dict.keys():
-    out = open(outdir + '/threads/' + thread_id + '.xml', 'w')
-    out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
-    out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+    print('WRITE thread_id', outdir, thread_id)
     thread_items = thread_dict[thread_id]
     thread_complete = Thread(thread_id, thread_items[0].title, '-', '-')
     for ti in thread_items:
         for post in ti.posts:
             thread_complete.addPost(post)
-    thread_complete.printXML(out)
-    out.write('</forum>\n')
-    out.close()
+    try:   
+        out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'iso-8859-1')
+        out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+        out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+        thread_complete.printXML(out)
+        out.write('</forum>\n')
+        out.close()
+    except UnicodeEncodeError:
+        try:
+            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'cp1252')
+            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+            thread_complete.printXML(out)
+            out.write('</forum>\n')
+            out.close()
+        except UnicodeEncodeError:
+            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'utf-8', errors = 'ignore')
+            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+            thread_complete.printXML(out)
+            out.write('</forum>\n')
+            out.close()
