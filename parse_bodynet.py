@@ -143,7 +143,7 @@ for thread_id in thread_dict.keys():
     if not os.path.isdir(outdir):
         os.mkdir(outdir)
     #    try:   
-    out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'iso-8859-1', errors='ignore')
+    out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'utf-8', errors='ignore')
     out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
     out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
     thread_complete.printXML(out)
