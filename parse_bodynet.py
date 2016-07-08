@@ -77,7 +77,7 @@ def parse_postbody(pb):
 def parse_thread(thr):
 
     posts = []
-    souped = BeautifulSoup(thr, 'html.parser')
+    souped = BeautifulSoup(thr, 'html.parser', from_encoding='iso-8859-1')
     # for script in souped.find_all('script'):
     #     print(script)
     #     script_souped = BeautifulSoup(script, 'javascript.parser')
