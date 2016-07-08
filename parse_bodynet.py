@@ -1,4 +1,5 @@
 
+import os
 import sys
 from bs4 import BeautifulSoup
 import re
@@ -53,8 +54,7 @@ def parse_postbody(pb):
             if div['class'][0] == 'content':
                 for c in div.contents:
                     if re.search('blockquote', c.__str__()):
-                        bq_souped = BeautifulSoup(c.__str__(), 'html.parser')
-                        #print("BEFORE", c.__str__())
+                        bq_souped = BeautifulSoup(c.__str__().encode('utf-8', errors='replace'), 'html.parser')
                         for d in bq_souped.find_all('div'):
                             if 'class' in d.attrs.keys():
                                 if d['class'][0] == 'bbcode_container':
@@ -106,59 +106,61 @@ threads = sys.argv[3:]
 
 thread_dict = defaultdict(list)
 for thread in threads:
-    with open(thread, 'r', encoding = 'iso-8859-1') as t_open:
-        thr_str = t_open.read()
+    if os.path.exists(thread):
+        with open(thread, 'r', encoding='iso-8859-1') as t_open:
+            thr_str = t_open.read()
+            thread_details = thread.split('/')[-1].split('.')[0].split('-')
+            if re.match(r'\d+', thread_details[0]):
+                thread_id = thread_details[0]
+            else: 
+                print('No proper thread id for', thread, ', skipping')
+                continue
+	
+            if re.match('print', thread_details[-1]):
+                continue
+            elif re.search(r'post\d+', thread_details[-1]):
+                continue
+            elif re.match(r'$\d+^', thread_details[-1]):
+                thread_index = int(thread_details[-1])
+                thread_title = ' '.join(thread_details[1:-1])
+            else:
+                thread_index = 1
+                thread_title = ' '.join(thread_details[1:])
+                thread_item = Thread(thread_id, thread_title, '-', '-')
 
-    thread_details = thread.split('/')[-1].split('.')[0].split('-')
-    if re.match(r'\d+', thread_details[0]):
-        thread_id = thread_details[0]
-    else: 
-        print('No proper thread id for', thread, ', skipping')
-        continue
-
-    if re.match('print', thread_details[-1]):
-        continue
-    elif re.search(r'post\d+', thread_details[-1]):
-        continue
-    elif re.match(r'$\d+^', thread_details[-1]):
-        thread_index = int(thread_details[-1])
-        thread_title = ' '.join(thread_details[1:-1])
-    else:
-        thread_index = 1
-        thread_title = ' '.join(thread_details[1:])
-    thread_item = Thread(thread_id, thread_title, '-', '-')
-
-    posts = parse_thread(thr_str)
-    thread_item.posts = posts
-    thread_dict[thread_id].append(thread_item)
+            posts = parse_thread(thr_str)
+            thread_item.posts = posts
+            thread_dict[thread_id].append(thread_item)
+	
 
 print('Writing xml')
 for thread_id in thread_dict.keys():
-    print('WRITE thread_id', outdir, thread_id)
     thread_items = thread_dict[thread_id]
     thread_complete = Thread(thread_id, thread_items[0].title, '-', '-')
     for ti in thread_items:
         for post in ti.posts:
             thread_complete.addPost(post)
-    try:   
-        out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'iso-8859-1')
-        out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
-        out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
-        thread_complete.printXML(out)
-        out.write('</forum>\n')
-        out.close()
-    except UnicodeEncodeError:
-        try:
-            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'cp1252')
-            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
-            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
-            thread_complete.printXML(out)
-            out.write('</forum>\n')
-            out.close()
-        except UnicodeEncodeError:
-            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'utf-8', errors = 'ignore')
-            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
-            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
-            thread_complete.printXML(out)
-            out.write('</forum>\n')
-            out.close()
+    if not os.path.isdir(outdir):
+        os.mkdir(outdir)
+    #    try:   
+    out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'iso-8859-1', errors='ignore')
+    out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+    out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+    thread_complete.printXML(out)
+    out.write('</forum>\n')
+    out.close()
+#    except UnicodeEncodeError:
+#        try:
+#            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'cp1252')
+#            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+#            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+#            thread_complete.printXML(out)
+#            out.write('</forum>\n')
+#            out.close()
+#        except UnicodeEncodeError:
+#            out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'utf-8', errors = 'ignore')
+#            out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
+#            out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
+#            thread_complete.printXML(out)
+#            out.write('</forum>\n')
+#            out.close()
