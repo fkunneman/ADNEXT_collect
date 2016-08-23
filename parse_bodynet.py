@@ -77,7 +77,7 @@ def parse_postbody(pb):
 def parse_thread(thr):
 
     posts = []
-    souped = BeautifulSoup(thr, 'html.parser', from_encoding='iso-8859-1')
+    souped = BeautifulSoup(thr, 'html.parser')
     # for script in souped.find_all('script'):
     #     print(script)
     #     script_souped = BeautifulSoup(script, 'javascript.parser')
@@ -107,7 +107,8 @@ threads = sys.argv[3:]
 thread_dict = defaultdict(list)
 for thread in threads:
     if os.path.exists(thread):
-        with open(thread, 'r', encoding='iso-8859-1') as t_open:
+        with open(thread, 'r', encoding='cp1252') as t_open:
+        #with open(thread, 'r', encoding='cp1252') as t_open:
             thr_str = t_open.read()
             thread_details = thread.split('/')[-1].split('.')[0].split('-')
             if re.match(r'\d+', thread_details[0]):
@@ -143,7 +144,8 @@ for thread_id in thread_dict.keys():
     if not os.path.isdir(outdir):
         os.mkdir(outdir)
     #    try:   
-    out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'utf-8', errors='ignore')
+    out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'cp1252', errors = 'replace')
+    #out = open(outdir + '/' + thread_id + '.xml', 'w', encoding = 'ascii', errors='ignore')
     out.write("<?xml version='1.0' encoding='iso-8859-1'?>\n")
     out.write(r"<forum type='forum' name='" + forum_name + "'>\n")
     thread_complete.printXML(out)

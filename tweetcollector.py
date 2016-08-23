@@ -11,7 +11,7 @@ class Tweetcollector:
 
     def search_keyterm(self, keyterm, language):
         api = self.connect()
-        tweets = api.search(q = keyterm, lang = language, result_type = "mixed", count = 100)["statuses"]
+        tweets = api.search(q = keyterm, lang = language, result_type = "recent", count = 100)["statuses"]
         return tweets
 
     def collect_user_timeline(self, user):

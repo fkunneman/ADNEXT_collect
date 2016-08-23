@@ -51,7 +51,7 @@ class Thread:
         self.sort_posts()
         out.write("<thread id=\""+self.thread_id+"\">\n<category>"+self.category+"</category>\n<title>"+self.title+"</title>\n<posts>\n")
         for post in self.posts:
-#            post.clean_body()
+            post.clean_body()
             post.printXML(out)
         out.write("</posts>\n</thread>\n")
 
@@ -75,12 +75,20 @@ class Post:
 
     def clean_body(self):
         for i, paragraph in enumerate(self.body):
-            self.body[i] = re.sub("#","&#35;",paragraph)
-            self.body[i] = re.sub("&","&amp;",paragraph)
-            self.body[i] = re.sub("<","&lt;",paragraph)
-            self.body[i] = re.sub(">","&gt;",paragraph)
-            self.body[i] = re.sub("=","&#61;",paragraph)
-            self.body[i] = re.sub("http[^ ]*","[URL]",paragraph)
+            print('BEFORE', paragraph.encode('cp1252'))
+            paragraph = re.sub('&amp#39;','\'',paragraph)
+            print(paragraph.encode('cp1252'))
+            self.body[i] = re.sub('&amp#39;','\'',paragraph)
+#'&amp;#39;'
+#            self.body[i] = re.sub('&amp;#33;','!',paragraph)
+#            self.body[i] = re.sub("#","&#35;",paragraph)
+#            self.body[i] = re.sub("&","&amp;",paragraph)
+#            self.body[i] = re.sub("<","&lt;",paragraph)
+#            self.body[i] = re.sub(">","&gt;",paragraph)
+#            self.body[i] = re.sub("=","&#61;",paragraph)
+#            self.body[i] = re.sub("http[^ ]*","[URL]",paragraph)
+ #           print('AFTER', paragraph.encode('iso-8859-1'))
+
 
     def printXML(self,out):
         out.write("<post id=\""+self.postid+"\">\n<author>"+self.author+"</author>\n<timestamp>"+str(self.timestamp)+"</timestamp>\n<postindex>"+str(self.index)+"</postindex>\n<parentid>"+self.parentid+"</parentid>\n<body>\n")
