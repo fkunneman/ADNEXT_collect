@@ -14,11 +14,8 @@ class Json_tweets_parser:
     def __init__(self, jsonfile):
         self.jsonfile = jsonfile
         self.lines = []
-        self.columns = ['tweet_id', 'user_id', 'user_name', 'user_followers', 'user_location', 'date', 'time', 
-            'reply_to_user', 'retweet_to_user', 'tweet_url', 'tweet_text']
-        self.column_keys = [['id'], ['user', 'id'], ['user', 'screen_name'], ['user', 'followers_count'], 
-            ['user', 'location'], ['created_at'], ['in_reply_to_screen_name'], ['retweeted_status', 'user', 
-            'screen_name'], ['text']]
+        self.columns = ['tweet_id', 'user_id', 'user_name', 'user_followers', 'user_location', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'tweet_url', 'tweet_text']
+        self.column_keys = [['id'], ['user', 'id'], ['user', 'screen_name'], ['user', 'followers_count'], ['user', 'location'], ['created_at'], ['in_reply_to_screen_name'], ['retweeted_status', 'user', 'screen_name'], ['text']]
         
     def parse(self):
         dr = docreader.Docreader()

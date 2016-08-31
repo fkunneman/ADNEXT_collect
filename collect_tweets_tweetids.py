@@ -29,7 +29,7 @@ for i, tid in enumerate(ids):
             with open(outfile, 'a', encoding = 'utf-8') as out_w:
                 for tweet in tweets:
                     out_w.write('\t'.join(tweet) + '\n')
-            tweets []
+            tweets = []
             rate = 0
             print('Rate limit probably exceeded. Now sleeping for 15 minutes.')
             time.sleep(1800)
