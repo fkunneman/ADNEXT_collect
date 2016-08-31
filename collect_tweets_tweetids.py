@@ -76,11 +76,11 @@ for i, tid in enumerate(ids):
             jp.convert()
             lw = linewriter.Linewriter(jp.lines)
             if 'xls' in formats:
-                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+                lw.write_xls(jp.columns, header_celltype, outfile + '.xls')
             if 'txt' in formats:
-                lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+                lw.write_txt(outfile + '.txt')
             if 'csv' in formats:
-                lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
+                lw.write_csv(outfile + '.csv')
             with open(sparefile, 'a', encoding = 'utf-8') as spare_w:
                 spare_w.write('\n'.join(not_collected))
             # resetting cursors
@@ -109,10 +109,10 @@ jp.parse()
 jp.convert()
 lw = linewriter.Linewriter(jp.lines)
 if 'xls' in formats:
-    lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+    lw.write_xls(jp.columns, header_celltype, outfile + '.xls')
 if 'txt' in formats:
-    lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
+    lw.write_txt(outfile + '.txt')
 if 'csv' in formats:
-    lw.write_csv(keyterm_tweetfile[keyterm] + '.csv')
+    lw.write_csv(outfile + '.csv')
 with open(sparefile, 'a', encoding = 'utf-8') as spare_w:
     spare_w.write('\n'.join(not_collected))
