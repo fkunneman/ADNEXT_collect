@@ -63,7 +63,7 @@ not_collected = []
 rate = 0
 for i, tid in enumerate(ids):
     print('Collecting tweet for id', i, 'of', len(ids))
-    tweet = tweetcollector.return_tweet(api, tid)
+    tweet = tweetcollector.collect_tweet_tweetid(tid)
     if not tweet:
         if rate > 180:
             # print intermediary output
@@ -88,7 +88,7 @@ for i, tid in enumerate(ids):
             rate = 0
             print('Rate limit probably exceeded. Now sleeping for 15 minutes.')
             time.sleep(900)
-            tweet = tweetcollector.return_tweet(api, tid)
+            tweet = tweetcollector.collect_tweet_tweetid(tid)
             if not tweet:
                 print('Failure to collect this tweet two times, probably the tweet has been removed or the account has been closed.')
                 not_collected.append(tid)
