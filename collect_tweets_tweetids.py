@@ -4,6 +4,7 @@
 
 import sys
 import json
+import time
 import configparser
 
 import tweetcollector
@@ -63,12 +64,12 @@ not_collected = []
 rate = 0
 for i, tid in enumerate(ids):
     print('Collecting tweet for id', i, 'of', len(ids))
-    tweet = tweetcollector.collect_tweet_tweetid(tid)
+    tweet = tc.collect_tweet_id(tid)
     if not tweet:
         if rate > 180:
             # print intermediary output
-            with io.open(jsonfile, 'a', encoding = 'utf-8') as tweetfile:
-                for tweet in new_tweets:
+            with open(jsonfile, 'a', encoding = 'utf-8') as tweetfile:
+                for tweet in tweets:
                     json.dump(tweet, tweetfile, ensure_ascii = False)
                     tweetfile.write('\n')
             jp = json_tweets_parser.Json_tweets_parser(jsonfile)
@@ -82,26 +83,28 @@ for i, tid in enumerate(ids):
             if 'csv' in formats:
                 lw.write_csv(outfile + '.csv')
             with open(sparefile, 'a', encoding = 'utf-8') as spare_w:
-                spare_w.write('\n'.join(not_collected))
+                spare_w.write('\n'.join(not_collected) + '\n')
             # resetting cursors
             tweets = []
             rate = 0
             print('Rate limit probably exceeded. Now sleeping for 15 minutes.')
             time.sleep(900)
-            tweet = tweetcollector.collect_tweet_tweetid(tid)
+            tweet = tc.collect_tweet_id(tid)
             if not tweet:
                 print('Failure to collect this tweet two times, probably the tweet has been removed or the account has been closed.')
                 not_collected.append(tid)
+                rate += 1
                 continue
         else:
             print('Bad output while within rate limit, continuing to next tweet id.')
             not_collected.append(tid)
+            rate += 1
             continue
     rate += 1
     tweets.append(tweet)
 
-with io.open(jsonfile, 'a', encoding = 'utf-8') as tweetfile:
-    for tweet in new_tweets:
+with open(jsonfile, 'a', encoding = 'utf-8') as tweetfile:
+    for tweet in tweets:
         json.dump(tweet, tweetfile, ensure_ascii = False)
         tweetfile.write('\n')
 jp = json_tweets_parser.Json_tweets_parser(jsonfile)
@@ -115,4 +118,4 @@ if 'txt' in formats:
 if 'csv' in formats:
     lw.write_csv(outfile + '.csv')
 with open(sparefile, 'a', encoding = 'utf-8') as spare_w:
-    spare_w.write('\n'.join(not_collected))
+    spare_w.write('\n'.join(not_collected) + '\n')
