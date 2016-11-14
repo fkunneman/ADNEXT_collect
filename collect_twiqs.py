@@ -9,8 +9,6 @@ import linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
-if collectdir[0] == '/':
-    collectdir = ''
 
 cp = configparser.ConfigParser()
 cp.read(configfile)
