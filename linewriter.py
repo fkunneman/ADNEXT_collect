@@ -28,6 +28,10 @@ class Linewriter:
 #            print('\t'.join([str(x) for x in line]).encode('utf-8'))
             i += 2
             for j, col in enumerate(line):
+                # try:
+                #     print(col)
+                # except:
+                #     print(col.encode('utf-8'))
                 j += 1
 #                print(type(col))
 #                if j != 1:
