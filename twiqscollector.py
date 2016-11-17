@@ -63,5 +63,5 @@ class Twiqscollector:
             # generate tweet url
             url = 'https://twitter.com/' + usercol + '/status/' + idcol
             # assemble new line and add to new lines
-            new_tweets.append(line[:2] + [date, time] + line[4:7] + [url, line[7]])
+            new_tweets.append([line[1],line[0],usercol,0,'-',date,time,line[4],line[5],url,line[7]])
         return new_tweets

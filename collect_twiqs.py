@@ -29,7 +29,7 @@ begin = cp['collect']['begin']
 end = cp['collect']['end']
 
 formats = cp['collect']['write'].split()
-if 'xls' in formats:
+if 'xlsx' in formats:
     header_celltype = {
         'tweet_id' : 'general',
         'user_id' : 'general',
@@ -43,15 +43,15 @@ if 'xls' in formats:
         'tweet_url' : 'general',
         'tweet_text' : 'general'
     }
-    columns = ['user_id', 'tweet_id', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'user_name', 'tweet_url', 'tweet_text']
+    columns = ['tweet_id', 'user_id', 'user_name', 'user_followers', 'user_location', 'date', 'time', 'reply_to_user', 'retweet_to_user', 'tweet_url', 'tweet_text']
     
 if keyterms:
     for keyterm in keyterms:
         tweets = tc.process_request(begin, end, keyterm)
         if tweets:
             lw = linewriter.Linewriter(tweets)
-            if 'xls' in formats:
-                lw.write_xls(columns, header_celltype, collectdir + keyterm + '.xls')
+            if 'xlsx' in formats:
+                lw.write_xlsx(columns, header_celltype, collectdir + keyterm + '.xlsx')
             if 'txt' in formats:
                 lw.write_txt(collectdir + keyterm + '.txt')
             if 'csv' in formats:
