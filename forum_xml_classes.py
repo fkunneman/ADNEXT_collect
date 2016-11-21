@@ -75,9 +75,9 @@ class Post:
 
     def clean_body(self):
         for i, paragraph in enumerate(self.body):
-            print('BEFORE', paragraph.encode('cp1252'))
+            #print('BEFORE', paragraph.encode('cp1252'))
             paragraph = re.sub('&amp#39;','\'',paragraph)
-            print(paragraph.encode('cp1252'))
+            #print(paragraph.encode('cp1252'))
             self.body[i] = re.sub('&amp#39;','\'',paragraph)
 #'&amp;#39;'
 #            self.body[i] = re.sub('&amp;#33;','!',paragraph)
