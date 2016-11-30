@@ -14,6 +14,8 @@ import linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
+if collectdir == '/': # to prevent indicating root as the collectdir
+    collectdir = ''
 
 cp = configparser.ConfigParser()
 cp.read(configfile)

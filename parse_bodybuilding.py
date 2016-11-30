@@ -33,8 +33,12 @@ def parse_postbody(pb):
 
 def parse_posttail(pt):
     tail_souped = BeautifulSoup(pt.__str__(), 'html.parser')
-    dt_info = tail_souped.find_all('span', {'class':'DateTime'})[0]
-    datetime = dt_info['title']
+    dta = tail_souped.find_all('span', {'class':'DateTime'})
+    if len(dta) > 0:
+        dt_info = dta[0]
+        datetime = dt_info['title']
+    else:
+        datetime = tail_souped.find_all('abbr', {'class':'DateTime'})[0].text
     message_index = tail_souped.find_all('a', {'class':'item muted postNumber hashPermalink OverlayTrigger'})[0].text[1:]
     return datetime, message_index   
 
@@ -43,18 +47,20 @@ def parse_post(post):
     post_souped = BeautifulSoup(post.__str__(), 'html.parser')
     parent = '-'
     pid = post['id'][5:]
-    print('ID',pid)
-    author = post_souped.find_all('div', {'class':'messageUserBlock '})[0]
+    a1 = post_souped.find_all('div', {'class':'messageUserBlock '})
+    if len(a1) > 0:
+        author = a1[0]
+    else:
+        author = post_souped.find_all('div', {'class':'messageUserBlock online'})
+    # except:
+    #     print(post_souped.contents)
+    #     quit()
     authorname = parse_author(author)
-    print('Authorname',authorname)
     postbody = post_souped.find_all('div', {'class':'messageContent'})[0]
     # index, text, datetime = parse_postbody(postbody)
     text = parse_postbody(postbody)
-    print('Text',text)
     posttail = post_souped.find_all('div', {'class':'messageMeta ToggleTriggerAnchor'})[0]
     dt, tid = parse_posttail(posttail)
-    print('Datetime',dt)
-    print('Message index',tid)
     #post = Post(pid, authorname, datetime, text, index, '-', '-', '-')
     post = Post(pid, authorname, dt, text, tid, '-', '-', '-')
     return post
@@ -65,7 +71,6 @@ def parse_thread(thr):
     souped = BeautifulSoup(thr, 'html.parser')
     for message in souped.find_all('li', { 'class':'message   '}): # message level
         posts.append(parse_post(message))
-
     return posts
 
 outdir = sys.argv[1]
@@ -84,17 +89,17 @@ for thread in threads:
             thread_name = ''.join(thread_title[:-1])
             thread_id = thread_title[-1]
             thread_details = thread.split('/')[-1].split('.')[0]
-            print(thread,thread_name,thread_id)
-            thread_item = Thread(thread_id, thread_title, '-', '-')
-            try:
-                posts = parse_thread(thr_str)
-            except:
-                print('Error parsing',thread,'skipping...')
-                continue
+            thread_item = Thread(thread_id, thread_name, '-', '-')
+            #try:
+            posts = parse_thread(thr_str)
+            #except:
+            #    print('Error parsing',thread,'skipping...')
+            #    continue
             thread_item.posts = posts
             thread_dict[thread_id].append(thread_item)
 
 for thread_id in thread_dict.keys():
+    print('writing',thread_id)
     thread_items = thread_dict[thread_id]
     thread_complete = Thread(thread_id, thread_items[0].title, '-', '-')
     for ti in thread_items:
