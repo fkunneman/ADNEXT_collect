@@ -76,18 +76,7 @@ class Post:
             self.body[i] = re.sub('&amp#39;','\'',paragraph)
 
     def returnXML(self):
-        xmlstring = 
-            "<post id=\""
-            + self.postid
-            + "\">\n<author>"
-            + self.author
-            + "</author>\n<timestamp>"
-            + str(self.timestamp)
-            + "</timestamp>\n<postindex>"
-            + str(self.index)
-            + "</postindex>\n<parentid>"
-            + self.parentid
-            + "</parentid>\n<body>\n"
+        xmlstring = "<post id=\"" + self.postid + "\">\n<author>" + self.author + "</author>\n<timestamp>" + str(self.timestamp) + "</timestamp>\n<postindex>" + str(self.index) + "</postindex>\n<parentid>" + self.parentid + "</parentid>\n<body>\n"
         for paragraph in self.body:
             xmlstring += "<paragraph>" + paragraph + "</paragraph>\n"
         xmlstring += "</body>\n<upvotes>"+str(self.ups)+"</upvotes>\n<downvotes>"+str(self.downs)+"</downvotes>\n</post>\n" 
