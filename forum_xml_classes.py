@@ -57,11 +57,6 @@ class Thread:
 
 
 class Post:
-    postid=""
-    author=""
-    timestamp=""
-    body=""
-    parent_id=""
 
     def __init__(self,postid,author,timestamp,body,index,parentid,ups,downs):
         self.postid = postid
@@ -79,19 +74,24 @@ class Post:
             paragraph = re.sub('&amp#39;','\'',paragraph)
             #print(paragraph.encode('cp1252'))
             self.body[i] = re.sub('&amp#39;','\'',paragraph)
-#'&amp;#39;'
-#            self.body[i] = re.sub('&amp;#33;','!',paragraph)
-#            self.body[i] = re.sub("#","&#35;",paragraph)
-#            self.body[i] = re.sub("&","&amp;",paragraph)
-#            self.body[i] = re.sub("<","&lt;",paragraph)
-#            self.body[i] = re.sub(">","&gt;",paragraph)
-#            self.body[i] = re.sub("=","&#61;",paragraph)
-#            self.body[i] = re.sub("http[^ ]*","[URL]",paragraph)
- #           print('AFTER', paragraph.encode('iso-8859-1'))
 
+    def returnXML(self):
+        xmlstring = 
+            "<post id=\""
+            + self.postid
+            + "\">\n<author>"
+            + self.author
+            + "</author>\n<timestamp>"
+            + str(self.timestamp)
+            + "</timestamp>\n<postindex>"
+            + str(self.index)
+            + "</postindex>\n<parentid>"
+            + self.parentid
+            + "</parentid>\n<body>\n"
+        for paragraph in self.body:
+            xmlstring += "<paragraph>" + paragraph + "</paragraph>\n"
+        xmlstring += "</body>\n<upvotes>"+str(self.ups)+"</upvotes>\n<downvotes>"+str(self.downs)+"</downvotes>\n</post>\n" 
+        return xmlstring
 
     def printXML(self,out):
-        out.write("<post id=\""+self.postid+"\">\n<author>"+self.author+"</author>\n<timestamp>"+str(self.timestamp)+"</timestamp>\n<postindex>"+str(self.index)+"</postindex>\n<parentid>"+self.parentid+"</parentid>\n<body>\n")
-        for paragraph in self.body:
-            out.write("<paragraph>"+paragraph+"</paragraph>\n")
-        out.write("</body>\n<upvotes>"+str(self.ups)+"</upvotes>\n<downvotes>"+str(self.downs)+"</downvotes>\n</post>\n")
+        out.write(returnXML())
