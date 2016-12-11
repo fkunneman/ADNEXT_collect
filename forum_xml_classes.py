@@ -83,4 +83,4 @@ class Post:
         return xmlstring
 
     def printXML(self,out):
-        out.write(returnXML())
+        out.write(self.returnXML())
