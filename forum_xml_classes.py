@@ -51,7 +51,7 @@ class Thread:
         self.sort_posts()
         out.write("<thread id=\""+self.thread_id+"\">\n<category>"+self.category+"</category>\n<title>"+self.title+"</title>\n<posts>\n")
         for post in self.posts:
-            post.clean_body()
+#            post.clean_body()
             post.printXML(out)
         out.write("</posts>\n</thread>\n")
 
