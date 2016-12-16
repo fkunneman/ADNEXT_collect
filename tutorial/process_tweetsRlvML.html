@@ -173,7 +173,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[206]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
@@ -195,13 +195,22 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/a.hurriyetoglu/anaconda3/lib/python3.5/site-packages/IPython/core/magics/pylab.py:161: UserWarning: pylab import has clobbered these variables: [&apos;f&apos;]
+&#96;%matplotlib&#96; prevents importing * from pylab and numpy
+  &quot;\n&#96;%matplotlib&#96; prevents importing * from pylab and numpy&quot;
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[200]:</div>
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
@@ -229,7 +238,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[201]:</div>
+<div class="prompt input_prompt">In&nbsp;[208]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span>
@@ -243,7 +252,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[201]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[208]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -256,9 +265,28 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Initialize-Relevancer">Initialize Relevancer<a class="anchor-link" href="#Initialize-Relevancer">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Start Relevancer with the correct settings. In principle each parameter has a default value, please be careful, it may not be what you want. Here the language is defined as 'nl' for Dutch. The language setting affect the language specific parts (stop words, text for cleaning/normalization) to be activated, in case they are defined.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[209]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">relevancer</span> <span class="k">as</span> <span class="nn">rlv</span>
@@ -297,25 +325,23 @@ The token pattern: \w+(?:-\w+)+|[-+]?\d+[.,]?\d+|[#@]?\w+\b|[\U00010000-\U0010ff
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reading a JSON file, which contains a tweet per line, will yield a list of the tweets. Only a part of the tweet json is being read. Each element of the list has a flat structure. The tweet creation time is converted to a datetime object.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[210]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">read_json_tweets_file</span><span class="p">(</span><span class="s2">&quot;tweets_griep.json&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tweets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -326,7 +352,14 @@ The token pattern: \w+(?:-\w+)+|[-+]?\d+[.,]?\d+|[#@]?\w+\b|[\U00010000-\U0010ff
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of documents per languge: Counter({&apos;NoLang&apos;: 188474, &apos;nl&apos;: 41020, &apos;de&apos;: 35, &apos;en&apos;: 33, &apos;da&apos;: 28, &apos;pl&apos;: 19, &apos;id&apos;: 18, &apos;no&apos;: 9, &apos;sv&apos;: 7, &apos;vi&apos;: 6, &apos;lv&apos;: 6, &apos;tl&apos;: 5, &apos;tr&apos;: 4, &apos;ht&apos;: 3, &apos;lt&apos;: 2, &apos;pt&apos;: 2, &apos;hu&apos;: 2, &apos;es&apos;: 2, &apos;fi&apos;: 1, &apos;is&apos;: 1, &apos;fr&apos;: 1, &apos;et&apos;: 1})
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[210]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -354,9 +387,19 @@ The token pattern: \w+(?:-\w+)+|[-+]?\d+[.,]?\d+|[#@]?\w+\b|[\U00010000-\U0010ff
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The list of tweets are converted to a dataframe. If the field 'created_at' available, it becomes the index.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[211]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">create_dataframe</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span>
@@ -374,8 +417,7 @@ The token pattern: \w+(?:-\w+)+|[-+]?\d+[.,]?\d+|[#@]?\w+\b|[\U00010000-\U0010ff
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of documents per languge: Counter({&apos;NoLang&apos;: 188474, &apos;nl&apos;: 41020, &apos;de&apos;: 35, &apos;en&apos;: 33, &apos;da&apos;: 28, &apos;pl&apos;: 19, &apos;id&apos;: 18, &apos;no&apos;: 9, &apos;sv&apos;: 7, &apos;vi&apos;: 6, &apos;lv&apos;: 6, &apos;tl&apos;: 5, &apos;tr&apos;: 4, &apos;ht&apos;: 3, &apos;lt&apos;: 2, &apos;pt&apos;: 2, &apos;hu&apos;: 2, &apos;es&apos;: 2, &apos;fi&apos;: 1, &apos;is&apos;: 1, &apos;fr&apos;: 1, &apos;et&apos;: 1})
-41020
+<pre>41020
 &lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;
 DatetimeIndex: 41020 entries, 2012-12-06 22:59:53 to 2013-06-30 21:41:57
 Data columns (total 18 columns):
@@ -409,7 +451,7 @@ memory usage: 5.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[212]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -423,7 +465,7 @@ memory usage: 5.7+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[49]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[212]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -474,45 +516,45 @@ memory usage: 5.7+ MB
   </thead>
   <tbody>
     <tr>
-      <th>2013-01-01 00:04:41</th>
+      <th>2012-12-06 22:59:53</th>
       <td>None</td>
       <td>NaN</td>
-      <td>Twitter for BlackBerry®</td>
-      <td>[]</td>
+      <td>Twitter for iPhone</td>
+      <td>[griep]</td>
       <td>[]</td>
       <td>NaN</td>
       <td>[]</td>
-      <td>285899310338547712</td>
+      <td>276823303736410112</td>
       <td>NaN</td>
       <td>False</td>
-      <td>LipglossaRoosje</td>
-      <td>Jammer genoeg muh griep :'( :'( liet t niet toe overstr te zijn zo n owru yari :(</td>
-      <td>134</td>
-      <td>145</td>
-      <td>408489847</td>
+      <td>manon__klein</td>
+      <td>Is de koorts eindelijk weg, komen de hoestbuien.... #griep</td>
+      <td>82</td>
+      <td>201</td>
+      <td>237384795</td>
       <td></td>
-      <td>Santiago</td>
+      <td>Amsterdam</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>2013-01-01 00:11:54</th>
+      <th>2012-12-07 09:27:10</th>
       <td>None</td>
       <td>NaN</td>
-      <td>Twitter for Android</td>
+      <td>web</td>
       <td>[]</td>
-      <td>[]</td>
+      <td>[kleinekev]</td>
       <td>NaN</td>
       <td>[]</td>
-      <td>285901122747637760</td>
-      <td>NaN</td>
+      <td>276981163535515648</td>
+      <td>290742908.0</td>
       <td>False</td>
-      <td>rswierts</td>
-      <td>Zo en dan nu een week lang handen schudden. Extra aantrekkelijk omdat half NL griep heeft.</td>
-      <td>44</td>
-      <td>54</td>
-      <td>176923354</td>
-      <td>meestal ergens in de benelux.</td>
-      <td>Amsterdam</td>
+      <td>emre_jwz</td>
+      <td>@kleinekev  maag griep ofzo ik heb heel die zieken huis rwina gepleegt</td>
+      <td>95</td>
+      <td>188</td>
+      <td>473372986</td>
+      <td></td>
+      <td>Athens</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -528,7 +570,7 @@ memory usage: 5.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[213]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -542,20 +584,26 @@ memory usage: 5.7+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[50]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[213]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Nederland          423
-The Netherlands    244
-België              36
-Belgium             22
-Niederlande          4
-France               2
-Spanje               1
-Noorwegen            1
-United States        1
-Germany              1
+<pre>Nederland              715
+The Netherlands        410
+België                  51
+Belgium                 27
+Niederlande              5
+Pays-Bas                 3
+France                   2
+South Africa             2
+Verenigd Koninkrijk      1
+United States            1
+Denemarken               1
+Turkije                  1
+Spanje                   1
+Austria                  1
+Noorwegen                1
+Germany                  1
 Name: country, dtype: int64</pre>
 </div>
 
@@ -567,7 +615,7 @@ Name: country, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[214]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">user_tzone</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
@@ -581,15 +629,15 @@ Name: country, dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[52]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[214]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Amsterdam    11732
-Greenland     3069
-Athens        1808
-Brussels       685
-Hawaii         581
+<pre>Amsterdam    19724
+Greenland     5187
+Athens        3234
+Hawaii         965
+Brussels       884
 Name: user_tzone, dtype: int64</pre>
 </div>
 
@@ -601,7 +649,7 @@ Name: user_tzone, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[215]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -615,11 +663,11 @@ Name: user_tzone, dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[215]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x139049b70&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1120bcf60&gt;</pre>
 </div>
 
 </div>
@@ -823,7 +871,7 @@ Sb4Ldyygz0XIRaqhg6IiIhmhJhcRkYxQk4tIjUhOAbCl/xeuCeiU4oOqIo2mJhcRkYxQk4uISEYo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[216]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -837,11 +885,11 @@ Sb4Ldyygz0XIRaqhg6IiIhmhJhcRkYxQk4tIjUhOAbCl/xeuCeiU4oOqIo2mJhcRkYxQk4uISEYo
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[41]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[216]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x143aa8978&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x126d54f98&gt;</pre>
 </div>
 
 </div>
@@ -1045,7 +1093,7 @@ Sb4Ldyygz0XIRaqhg6IiIhmhJhcRkYxQk4tIjUhOAbCl/xeuCeiU4oOqIo2mJhcRkYxQk4uISEYo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[217]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="p">[</span><span class="s1">&#39;2013-01-01 00:00&#39;</span><span class="p">:</span><span class="s1">&#39;2013-02-10 00:00&#39;</span><span class="p">]</span>
@@ -1058,7 +1106,7 @@ Sb4Ldyygz0XIRaqhg6IiIhmhJhcRkYxQk4tIjUhOAbCl/xeuCeiU4oOqIo2mJhcRkYxQk4uISEYo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[218]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -1072,11 +1120,11 @@ Sb4Ldyygz0XIRaqhg6IiIhmhJhcRkYxQk4tIjUhOAbCl/xeuCeiU4oOqIo2mJhcRkYxQk4uISEYo
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[43]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[218]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1129723c8&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11f7c0ef0&gt;</pre>
 </div>
 
 </div>
@@ -1470,7 +1518,7 @@ RWkSVNAVRVGaBBV0RVGUJuH/A6GuPEnfWscYAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[219]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1519,7 +1567,7 @@ memory usage: 3.4+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[220]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">uloc_grps</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;user_loc&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1534,7 +1582,7 @@ memory usage: 3.4+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[53]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[220]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1560,7 +1608,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[221]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">uloc_grps</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
@@ -1587,7 +1635,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[202]:</div>
+<div class="prompt input_prompt">In&nbsp;[222]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tzone_grps</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;user_tzone&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1602,21 +1650,21 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[202]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[222]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>user_tzone
-Amsterdam              10813
-Greenland               2867
-Athens                  1614
-Brussels                 631
-Hawaii                   531
-Paris                     75
-Berlin                    58
-London                    52
-West Central Africa       33
-Santiago                  32
+Amsterdam              11732
+Greenland               3069
+Athens                  1808
+Brussels                 685
+Hawaii                   581
+Paris                     81
+Berlin                    62
+London                    61
+West Central Africa       36
+Santiago                  36
 dtype: int64</pre>
 </div>
 
@@ -1628,7 +1676,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[223]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">screen_name_grps</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;screen_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1643,7 +1691,7 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[54]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[223]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1669,7 +1717,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[224]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">country_grps</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1684,7 +1732,7 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[224]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1710,7 +1758,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[225]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]</span>
@@ -1724,30 +1772,30 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[96]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[225]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Twitter for Android          4995
-Twitter for iPhone           4445
-web                          3611
-Twitter for BlackBerry®      1710
-TweetDeck                    1478
-Twitter for iPad             1225
-UberSocial for BlackBerry     569
-twitterfeed                   424
-Echofon                       422
-HootSuite                     350
-Tweetbot for iOS              334
-Facebook                      301
-Tweet Button                  277
-TweetCaster for Android       246
-Mobile Web (M5)               159
-Mobile Web (M2)               158
-Twitter for Mac               115
-UberSocial for Android        105
-Twitterrific                   73
-dlvr.it                        65
+<pre>Twitter for Android          5477
+Twitter for iPhone           4846
+web                          3917
+Twitter for BlackBerry®      1880
+TweetDeck                    1576
+Twitter for iPad             1331
+UberSocial for BlackBerry     599
+twitterfeed                   595
+Echofon                       436
+HootSuite                     382
+Tweet Button                  379
+Tweetbot for iOS              354
+Facebook                      312
+TweetCaster for Android       269
+Mobile Web (M2)               174
+Mobile Web (M5)               172
+Twitter for Mac               121
+UberSocial for Android        111
+dlvr.it                        89
+Twitterrific                   76
 Name: device, dtype: int64</pre>
 </div>
 
@@ -1766,9 +1814,19 @@ Name: device, dtype: int64</pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We need a date range for creating buckets of tweets. We will search for coherent clusters in these buckets. This is quicker and yields better results. We will use the period between January 1, 2013 and February 7, 2013. Each bucket will be 2 days.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[226]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">myindex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101 00:00&#39;</span><span class="p">,</span><span class="s1">&#39;20130207 23:59&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;2D&#39;</span><span class="p">)</span>
@@ -1781,7 +1839,7 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[204]:</div>
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">mi</span> <span class="ow">in</span> <span class="n">myindex</span><span class="p">:</span>
@@ -1808,23 +1866,11 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[228]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">tweets_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1835,7 +1881,7 @@ Name: device, dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[61]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[228]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1850,7 +1896,7 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[229]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1860,7 +1906,6 @@ Name: device, dtype: int64</pre>
 <span class="n">end</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span>
 <span class="n">rngs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_days</span><span class="p">):</span>
-        <span class="c1">#print(start, &quot;,&quot;, end)</span>
         <span class="n">rngs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
         <span class="n">end</span> <span class="o">=</span> <span class="n">end</span> <span class="o">+</span> <span class="n">delta</span>
@@ -1873,7 +1918,7 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[230]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rngs</span>
@@ -1887,7 +1932,7 @@ Name: device, dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[69]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[230]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1920,10 +1965,11 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[203]:</div>
+<div class="prompt input_prompt">In&nbsp;[231]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">rngs</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check the number of tweets per range.</span>
+<span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">rngs</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">tweets_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -1937,7 +1983,7 @@ Name: device, dtype: int64</pre>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>499,1055,855,1600,1408,1010,818,936,1236,765,1114,1164,1272,1210,1730,1533,1043,1419,1457,</pre>
+<pre>683,1195,886,1750,1500,1139,864,979,1318,832,1185,1244,1507,1356,2025,1658,1088,1465,1586,</pre>
 </div>
 </div>
 
@@ -1947,7 +1993,7 @@ Name: device, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[232]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -1961,11 +2007,11 @@ Name: device, dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[71]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[232]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1144be400&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1126a3240&gt;</pre>
 </div>
 
 </div>
@@ -2360,7 +2406,7 @@ TkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[233]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">rngs</span><span class="p">:</span>
@@ -2851,10 +2897,11 @@ RK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[234]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="s2">&quot;2013-01-30&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># I was curious about the peak.</span>
+<span class="n">tweets_df</span><span class="p">[</span><span class="s2">&quot;2013-01-30&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -2865,11 +2912,11 @@ RK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[78]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[234]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1144d06a0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x129642b00&gt;</pre>
 </div>
 
 </div>
@@ -3069,7 +3116,7 @@ gg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[235]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="s2">&quot;2013-01-30 10&quot;</span><span class="p">][[</span><span class="s2">&quot;text&quot;</span><span class="p">]][:</span><span class="mi">3</span><span class="p">]</span>
@@ -3083,7 +3130,7 @@ gg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[83]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[235]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -3131,13 +3178,23 @@ gg==
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tweet text contain meta information (user names, urls) and symbols (&amp;) that can should be represented suitably 
+to the text mining and machine learning setting.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[236]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#tweets_df[rr.active_column] = tweets_df[rr.main_col].copy()</span>
-<span class="n">tweets_df</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">transform_metatext</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">transform_metatext</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">)</span>
 <span class="n">tweets_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
@@ -3185,7 +3242,7 @@ memory usage: 3.5+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[237]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="s2">&quot;text_active&quot;</span><span class="p">]][</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
@@ -3199,7 +3256,7 @@ memory usage: 3.5+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[86]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[237]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -3255,7 +3312,7 @@ memory usage: 3.5+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[238]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">tweets_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;\&amp;amp;&quot;</span><span class="p">)][[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]][:</span><span class="mi">2</span><span class="p">]</span>
@@ -3269,7 +3326,7 @@ memory usage: 3.5+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[87]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[238]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -3308,12 +3365,22 @@ memory usage: 3.5+ MB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After the transformation, we can check weather there are exact duplicates.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[239]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="c1">#[20:40]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -3324,71 +3391,20 @@ memory usage: 3.5+ MB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[93]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[239]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes de Griep. #Droge_ ...         57
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt…. Groetjes, de Griep. #Slech ...           55
-RT usrusr Please RT! Iemand morgen naar Parijs voor 2 nachten?! Ik lig met zware griep in bed :( hotel incl P&amp;ontbijt, 100m n ...           46
-RT usrusr Oke ik heb de griep. Bedankt Nederlands kut klimaat                                                                               42
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt…. Groetjes, de Griep. #topmoppen           41
-bestziek\nGriep. Op de een of andere manier slaat het bij mannen altijd harder toe. Soort virale mutatie. #bestziek                         41
-RT usrusr Griep is bij mannen écht heftiger dan bij vrouwen - urlurl                                                                        41
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes de Griep. #nieto ...          39
-RT usrusr Mijn zoon komt elke vrijdag thuis met rode ogen. Hij heeft zo vaak last van de griep he...                                        38
-RT usrusr Mensen met bruine ogen kunnen last krijgen van de griep komende week. #Ooghoroscoop                                               38
-&apos;Mexicaanse griep besmette 1 op 5 mensen&apos;: GENÈVE - Zeker een op de vijf mensen is in 2009 besmet geraakt met he... urlurl                  37
-RT usrusr Mensen met bruine ogen zullen eerder vatbaar zijn voor de griep! Neem je vitamine! #Ooghoroscoop                                  35
-RT usrusr Deze griep is een bitch.                                                                                                          33
-RT usrusr de Spaanse griep (1918-1919) meer slachtoffers eiste dan de Eerste Wereldoorlog                                                   32
-RT usrusr Mensen met bruine ogen hebben jullie extra vitamine genomen? Jullie zijn extra vatbaar voor de griep! #Ooghoroscoop               31
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep. #topmoppen         30
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep                     28
-RT usrusr Mensen met groene ogen neem wat extra fruit want er staat een griep op jullie te wachten! #Ooghoroscoop                           28
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep. #Droge ...         28
-RT usrusr Kamohelo #Mokotjo vervangt #Janmaat vanavond bij #psvFEY, die in Rotterdam achterblijft vanwege griep.                            28
-RT usrusr Daryl #Janmaat vanavond niet tegen PSV. Hij ontbreekt vanwege griep. #psvFEY                                                      26
-RT usrusr Last van een koorts/griepje:  twee gouden regels bij griep en sport. urlurl                                                       26
-RT usrusr Griep is bij mannen heftiger dan bij vrouwen #Mannengriep urlurl via usrusr                                                       25
-RT usrusr Feyenoord verdediger Daryl Janmaat is geveld door de griep en zal vanavond afwezig zijn bij de bekerwedstrijd PSV - Feyenoord.    22
-RT usrusr Mensen met blauwe ogen vergeten jullie niet jullie vitamine vandaag!! Griep komt eraan! #Ooghoroscoop                             19
-RT usrusr Goedemorgen! Zorgen de bruine ogen ervoor als ze naar buiten gaan dat ze zich goed aankleden! Griep ligt op de loer #O ...        19
-RT usrusr Wel of niet sporten met griep/verkoudheid? Doe de &apos;nek-check&apos;: urlurl                                                             19
-RT usrusr AANBOD: 2 kaarten Requiem van Mozart morgenavond in Zwolle. Helaas verhinderd wegens griep :-( €45 per kaart. Stuur me  ...       18
-Deze kruiden verzachten de symptomen van griep - LeerWiki.nl - Schat aan informatie urlurl                                                  18
-RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep #KapotGr ...        18
-                                                                                                                                            ..
-Mij verre van ziek voelende maar toch een beste koorts/griep te pakken hebbend. Morgen nog steeds afwezig. #grrrr                            1
-Iets met griep hebben en de ijsbaan naast de deur is behoorlijk irritant..  #eenfrieshoortophetijstestaan                                    1
-Toename griep Nederland. Volgens nieuwste invluenza nieuwsbrief in Noorden veruit meeste patiënten. Twee keer meer dan in andere regio&apos;s     1
-beginnende griep eh.. ik haat het                                                                                                            1
-Wie weet hoelang de griep duurt ? Vrouwtje is al 7 dagen ziek. Wel gezellig vrouwtje thuis !!!                                               1
-Juplaa kzit ook de rest van de weke thuis met Luchtwegeninfectie en de griep ....                                                            1
-Nog steeds verkouden en kan maar moeilijk ademen zo benauwd. Toch nog steeds aan het werk #zalwelmoeten #griep                               1
-Bijna allemaal #verkouden hier en #griep ! Zal blij zijn als het voorjaar zich aandient!                                                     1
-zo, vandaag begint het Twinfield jaar 2013. Weer bijna hersteld van de heftige griep en veel energie opgedaan.                               1
-Tik ik ruim de 39 weer aan. #Griep                                                                                                           1
-2013 begint met een vette griep:S                                                                                                            1
-usrusr koorts/griep vandaag nog steeds :S                                                                                                    1
-RT usrusr Gister op rand van afgrond geweest! Vandaag gaat het stukken beter. #griep #koorts en nog 3 andere bacteriën                       1
-Voelde m gisteren al wel aankomen maar toen kon ik mezelf nog verschuilen achter ibuprofen. #griep #koorts                                   1
-Ik weet dat in Meerdijk alles sneller gaat maar de griep binnen 1 minuut over krijgen bestaat echt niet #GTST                                1
-usrusr ik wil zaterdag wel komen, maar ik heb griep dus ik ga anders een andere dag proberen te komen                                        1
-je hebt van die bepaalde soorten griep. waarvan je je zo ziek gaat voelen dat je gewoon je erfenis al schrijft op 18de.                      1
-Ik ben bang dat ik de griep krijg .. zat ik net niet op te wachten                                                                           1
-usrusr  NIVEL Mexicaanse griep beleeft een comeback; pos bij 40% van geteste patienten.urlurl #griep #infuenza #yam                          1
-usrusr Goedemorgen buuf. Oh jee, de griep heeft toegeslagen? Heel veel sterkte voor jullie!                                                  1
-usrusr HAHAHAHHA,GOED ADVIEESS ♥ , maar er heerst griep ;p dus mensen worden denk ik aangestoken !                                           1
-Goeie instelling! Beterschap!! MyradeGroot: De griep is morgen weg, dat heb ik met mezelf afgesproken #positiefdenken&quot;                       1
-Iemand tips om de #griep NIET te krijgen? #griepepidemie                                                                                     1
-usrusr Nou ik heb eigenlijk 8 uur les maar lig al sinds maandag met griep xD Beter dat je zo vroeg uit bent c:                               1
-Mag de deur niet uit dus zou niet veel schelen als ze zaandam is.. Gvd kut griep                                                             1
-Dames, mannen zijn echt niet van die mietjes als ze griep hebben, hier een uiteenzetting:\nGriep is bij mannen écht... urlurl                1
-Dochter had 2 PR&apos;s op ver en 60mHorden ondanks dat ze net griep heeft gehad. Knap hoor!  #trotsemoeder                                       1
-De #griep neemt mij nu ook in zn macht :(  ,maar ik verzet me er nog tegen zolang ik het vol hou...                                          1
-It&apos;s #ESNS13 ! Kids weer beter, papa met de eerste griep verschijnselen. Wat een timing.                                                     1
-Helaas geen feest voor mij vanavond mijn twee zonen zijn te ziek vaderplicht gaat vóór #griep                                                1
+<pre>RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes de Griep. #Droge_ ...    57
+RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt…. Groetjes, de Griep. #Slech ...      55
+RT usrusr Please RT! Iemand morgen naar Parijs voor 2 nachten?! Ik lig met zware griep in bed :( hotel incl P&amp;ontbijt, 100m n ...      46
+RT usrusr Oke ik heb de griep. Bedankt Nederlands kut klimaat                                                                          42
+RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt…. Groetjes, de Griep. #topmoppen      41
+bestziek\nGriep. Op de een of andere manier slaat het bij mannen altijd harder toe. Soort virale mutatie. #bestziek                    41
+RT usrusr Griep is bij mannen écht heftiger dan bij vrouwen - urlurl                                                                   41
+RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes de Griep. #nieto ...     39
+RT usrusr Mijn zoon komt elke vrijdag thuis met rode ogen. Hij heeft zo vaak last van de griep he...                                   38
+RT usrusr Mensen met bruine ogen kunnen last krijgen van de griep komende week. #Ooghoroscoop                                          38
 Name: text_active, dtype: int64</pre>
 </div>
 
@@ -3398,9 +3414,19 @@ Name: text_active, dtype: int64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We eliminate exact duplicates. We skip the near-duplicate detection and elimination in this exercise.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[240]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">))</span>
@@ -3430,10 +3456,11 @@ Name: text_active, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[241]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">rngs</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Extreme peaks are smaller now.</span>
+<span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">rngs</span><span class="p">:</span>
     <span class="n">tweets_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">tweet_count</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
@@ -4014,11 +4041,11 @@ PwRIAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[245]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df_back_up</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="c1">#tweets_df = tweets_df_back_up.copy()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#tweets_df_back_up = tweets_df.copy()</span>
+<span class="n">tweets_df</span> <span class="o">=</span> <span class="n">tweets_df_back_up</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -4028,10 +4055,10 @@ PwRIAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[246]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">tweets_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -4044,16 +4071,18 @@ PwRIAAAAAElFTkSuQmCC
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&quot; @InaStrating: Grip op Griep... #hoedoejedat? &quot; Door je er aan over te geven. #somsisdeoplossinghetprobleem
-&quot; Ik kan niet eens goed lachen......stont griep x_x&quot;
+<pre>&quot; Ik kan niet eens goed lachen......stont griep x_x&quot;
 &quot; Is het hip om de griep te hebben?&quot;
-&quot;1500 op de 100.000 Nederlanders hebben griep&quot; http://t.co/tIfKnIlb Hopelijk zit ik daar niet bij,.!
-&quot;@Aaaamyxx: Koorts , spierpijn ,misselijk en knallende koppijn dankje griep dat je ook mij te pakken hebt !&quot; Sterkte meis.. xx
-&quot;@AngelicaVanSon: Ojee ik hoop ni dat ik hier iedereen mijn griep geef. Ligt dadelijk iedereen plat.&quot; Thanks muppet
-&quot;@AnnelotteEsmee: 3e dag ziek en nog steeds geen verbetering.. kut griep&quot; beterschap
-&quot;@ArjenHolleman: Zo appotheek. Spul wat de griep onderdrukt halen&quot;stel je niet zo aan man..
-&quot;@Beetjeobsessief: Nou de romantiek is om te snijden hier. Het moet even. Tot over 5 minuten.&quot; #Joepie #begentle #griep
-&quot;@BlondeBosua_: Ziekjes .. Heb de griep te pakken :(((((((&quot; beterschap nichiee
+&quot; usrusr Grip op Griep... #hoedoejedat? &quot; Door je er aan over te geven. #somsisdeoplossinghetprobleem
+&quot;1500 op de 100.000 Nederlanders hebben griep&quot; urlurl Hopelijk zit ik daar niet bij,.!
+&quot;Aan je bekkie te zien heb jij ook last van de griep, Tarin.&quot; Eh, nou, nee. Dankje.
+&quot;Bijna genezen van de griep morgen weer school en helemaal klaar voor de eerste toets.&quot;
+&quot;De griep heerst zeiden ze gisteren&quot;. En dan is het waar.
+&quot;Deze griep is een bitch.&quot;
+&quot;Een goede nachtrust speelt een cruciale rol bij het herstel van griep of zware verkoudheid&quot;.       
+
+Shit. #gaap
+&quot;Een milde griepepidemie slaat op het aantal geïnfecteerden, het aantal gehospitaliseerden en het aantal overledenen ten gevolge van griep&quot;
 </pre>
 </div>
 </div>
@@ -4064,7 +4093,7 @@ PwRIAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[247]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">remove_text_parts</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">)</span>
@@ -4092,7 +4121,7 @@ Only language independent normalisation will take place.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[248]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -4128,7 +4157,7 @@ Only language independent normalisation will take place.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[249]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]][</span><span class="mi">15</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
@@ -4142,7 +4171,7 @@ Only language independent normalisation will take place.
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[103]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[249]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4198,10 +4227,10 @@ Only language independent normalisation will take place.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[250]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -4224,17 +4253,6 @@ Only language independent normalisation will take place.
 #BalNieuws Janmaat door griep niet tegen PSV: Daryl Janmaat moet het bekertreffen met PSV laten schieten. De rec... urlurl
 #Bluemonday of niet, maar ik zit met een fikse griep opgezadeld! :-( #flinkbalen
 #Brussels Nieuws Aantal mensen met griep blijft stijgen - Nieuwsblad: Aantal mensen met griep blijft stijgenNieu... urlurl
-#Cito, maanden spanning opgebouwd... Slaat de griep toe. Waarom toch zo&apos;n eindtoets?
-#Depri:Weer een winter van niks- giet-oan behalve de griep die te paard kwam wegens problemen met het spoor.
-#Dode Gaza door Mexicaanse griep - NOS: Dode Gaza door Mexicaanse griep NOS In de Gazastrook is... urlurl #Gezondheid #nieuws
-#Eet verstandig en hou #griep buiten de deur. Tip: veel #fruit en nog veel meer #groenten urlurl
-#Elfstedenkoorts? Of toch gewoon #griep?
-Meer weten? urlurl
-#ErLigtHierIetsOpDeLoer #Griep ? Jongste toch maar thuis vanmiddag en zelf ook niet oké #EnDatHetNuEensEenKeerDoorzet! #kwakkelen is ook nix
-#Feit! Deca1! Het gaat allemaal weer beginnen! Mét griep.. Wij willen papa en mama worden! #ICSI urlurl
-#Feyenoord Janmaat ontbreekt vanavond door griep. - Daryl Janmaat zal vanavond niet mee doen in de be... urlurl
-#Feyenoord moet het vanavond zonder rechtsback Daryl Janmaat doen tegen PSV. Hij heeft griep. Mokotjo gaat nu mee naar Eindhoven. #psvFEY
-#Flu Misschien is dit het moment om midden in Chicago een nascholing te organiseren over het nut van griep vaccinatie?  #handsoncourse
 </pre>
 </div>
 </div>
@@ -4245,7 +4263,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[251]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)][[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]]</span>
@@ -4259,7 +4277,7 @@ Meer weten? urlurl
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[105]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[251]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4290,7 +4308,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[252]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">))</span>
@@ -4320,7 +4338,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[253]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">==</span><span class="mi">1</span><span class="p">)][[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]]</span>
@@ -4334,7 +4352,7 @@ Meer weten? urlurl
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[110]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[253]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4375,7 +4393,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="prompt input_prompt">In&nbsp;[254]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tweets_df</span><span class="p">))</span>
@@ -4405,7 +4423,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In&nbsp;[255]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">==</span><span class="mi">1</span><span class="p">)][[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]]</span>
@@ -4419,7 +4437,7 @@ Meer weten? urlurl
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[112]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[255]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4450,7 +4468,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="prompt input_prompt">In&nbsp;[256]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;# &quot;</span><span class="p">)]</span>
@@ -4464,7 +4482,7 @@ Meer weten? urlurl
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[113]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[256]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4551,7 +4569,7 @@ Meer weten? urlurl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="prompt input_prompt">In&nbsp;[266]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">token_cntr</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
@@ -4577,25 +4595,25 @@ Meer weten? urlurl
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Jammer genoeg muh griep :&apos;( :&apos;( liet t niet toe overstr te zijn zo n owru yari :(
-[&apos;jammer&apos;, &apos;genoeg&apos;, &apos;muh&apos;, &apos;griep&apos;, &apos;liet&apos;, &apos;t&apos;, &apos;niet&apos;, &apos;toe&apos;, &apos;overstr&apos;, &apos;te&apos;, &apos;zijn&apos;, &apos;zo&apos;, &apos;n&apos;, &apos;owru&apos;, &apos;yari&apos;]
+[&apos;jammer&apos;, &apos;genoeg&apos;, &apos;muh&apos;, &apos;griep&apos;, &quot;:&apos;(&quot;, &quot;:&apos;(&quot;, &apos;liet&apos;, &apos;t&apos;, &apos;niet&apos;, &apos;toe&apos;, &apos;overstr&apos;, &apos;te&apos;, &apos;zijn&apos;, &apos;zo&apos;, &apos;n&apos;, &apos;owru&apos;, &apos;yari&apos;, &apos;:(&apos;]
 
 Zo en dan nu een week lang handen schudden. Extra aantrekkelijk omdat half NL griep heeft.
 [&apos;zo&apos;, &apos;en&apos;, &apos;dan&apos;, &apos;nu&apos;, &apos;een&apos;, &apos;week&apos;, &apos;lang&apos;, &apos;handen&apos;, &apos;schudden&apos;, &apos;extra&apos;, &apos;aantrekkelijk&apos;, &apos;omdat&apos;, &apos;half&apos;, &apos;nl&apos;, &apos;griep&apos;, &apos;heeft&apos;]
 
 Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep #KapotGrappig
-[&apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgrappig&apos;]
+[&apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;....&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgrappig&apos;]
 
 RT usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep #KapotGr ...
-[&apos;rt&apos;, &apos;usrusr&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgr&apos;]
+[&apos;rt&apos;, &apos;usrusr&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;....&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgr&apos;, &apos;...&apos;]
 
 usrusr Ik kom je bezoeken, je ligt op bed, ik kom in je, je gaat trillen en zweten, je kreunt.... Groetjes, de Griep #KapotGrappig
-[&apos;usrusr&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgrappig&apos;]
+[&apos;usrusr&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;je&apos;, &apos;bezoeken&apos;, &apos;je&apos;, &apos;ligt&apos;, &apos;op&apos;, &apos;bed&apos;, &apos;ik&apos;, &apos;kom&apos;, &apos;in&apos;, &apos;je&apos;, &apos;je&apos;, &apos;gaat&apos;, &apos;trillen&apos;, &apos;en&apos;, &apos;zweten&apos;, &apos;je&apos;, &apos;kreunt&apos;, &apos;....&apos;, &apos;groetjes&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;#kapotgrappig&apos;]
 
 vanmiddag impulsief zomaar-kunstgeschenkje  gebracht naar kanjer die het verdiend heeft; op de stoep gebleven want griep=niet goed voor haar
 [&apos;vanmiddag&apos;, &apos;impulsief&apos;, &apos;zomaar-kunstgeschenkje&apos;, &apos;gebracht&apos;, &apos;naar&apos;, &apos;kanjer&apos;, &apos;die&apos;, &apos;het&apos;, &apos;verdiend&apos;, &apos;heeft&apos;, &apos;op&apos;, &apos;de&apos;, &apos;stoep&apos;, &apos;gebleven&apos;, &apos;want&apos;, &apos;griep&apos;, &apos;niet&apos;, &apos;goed&apos;, &apos;voor&apos;, &apos;haar&apos;]
 
 Stem weg, griep en thuis moeten blijven ..........
-[&apos;stem&apos;, &apos;weg&apos;, &apos;griep&apos;, &apos;en&apos;, &apos;thuis&apos;, &apos;moeten&apos;, &apos;blijven&apos;]
+[&apos;stem&apos;, &apos;weg&apos;, &apos;griep&apos;, &apos;en&apos;, &apos;thuis&apos;, &apos;moeten&apos;, &apos;blijven&apos;, &apos;....&apos;, &apos;....&apos;, &apos;..&apos;]
 
 usrusr Mel ik heb weer griep -.-
 [&apos;usrusr&apos;, &apos;mel&apos;, &apos;ik&apos;, &apos;heb&apos;, &apos;weer&apos;, &apos;griep&apos;]
@@ -4604,7 +4622,7 @@ ik verveel me de griep hiero usrusr
 [&apos;ik&apos;, &apos;verveel&apos;, &apos;me&apos;, &apos;de&apos;, &apos;griep&apos;, &apos;hiero&apos;, &apos;usrusr&apos;]
 
 No mag bai brionplein doordat ik griep heb :&apos;(  zo gemeen is iedereen en dit griep en al:(
-[&apos;no&apos;, &apos;mag&apos;, &apos;bai&apos;, &apos;brionplein&apos;, &apos;doordat&apos;, &apos;ik&apos;, &apos;griep&apos;, &apos;heb&apos;, &apos;zo&apos;, &apos;gemeen&apos;, &apos;is&apos;, &apos;iedereen&apos;, &apos;en&apos;, &apos;dit&apos;, &apos;griep&apos;, &apos;en&apos;, &apos;al&apos;]
+[&apos;no&apos;, &apos;mag&apos;, &apos;bai&apos;, &apos;brionplein&apos;, &apos;doordat&apos;, &apos;ik&apos;, &apos;griep&apos;, &apos;heb&apos;, &quot;:&apos;(&quot;, &apos;zo&apos;, &apos;gemeen&apos;, &apos;is&apos;, &apos;iedereen&apos;, &apos;en&apos;, &apos;dit&apos;, &apos;griep&apos;, &apos;en&apos;, &apos;al&apos;, &apos;:(&apos;]
 
 </pre>
 </div>
@@ -4616,7 +4634,7 @@ No mag bai brionplein doordat ik griep heb :&apos;(  zo gemeen is iedereen en di
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[267]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">token_cntr</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
@@ -4632,7 +4650,7 @@ No mag bai brionplein doordat ik griep heb :&apos;(  zo gemeen is iedereen en di
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[(&apos;griep&apos;, 79), (&apos;de&apos;, 45), (&apos;ik&apos;, 37), (&apos;een&apos;, 34), (&apos;en&apos;, 33), (&apos;je&apos;, 30), (&apos;usrusr&apos;, 30), (&apos;het&apos;, 29), (&apos;#griep&apos;, 22), (&apos;niet&apos;, 20), (&apos;maar&apos;, 19), (&apos;in&apos;, 19), (&apos;van&apos;, 18), (&apos;jaar&apos;, 17), (&apos;dat&apos;, 16), (&apos;2013&apos;, 16), (&apos;met&apos;, 16), (&apos;nog&apos;, 14), (&apos;is&apos;, 14), (&apos;op&apos;, 13), (&apos;te&apos;, 13), (&apos;mijn&apos;, 12), (&apos;nu&apos;, 11), (&apos;voor&apos;, 11), (&apos;die&apos;, 10), (&apos;heb&apos;, 10), (&apos;ook&apos;, 9), (&apos;begin&apos;, 9), (&apos;zo&apos;, 9), (&apos;al&apos;, 8), (&apos;bed&apos;, 8), (&apos;naar&apos;, 8), (&apos;heeft&apos;, 8), (&apos;ziek&apos;, 8), (&apos;zijn&apos;, 8), (&apos;nieuwe&apos;, 7), (&apos;dus&apos;, 7), (&apos;ben&apos;, 7), (&apos;kom&apos;, 7), (&apos;echt&apos;, 7), (&apos;lekker&apos;, 7), (&apos;aan&apos;, 7), (&apos;mij&apos;, 7), (&apos;goed&apos;, 7), (&apos;weer&apos;, 7), (&apos;me&apos;, 7), (&apos;door&apos;, 6), (&apos;wel&apos;, 6), (&apos;gaat&apos;, 6), (&apos;er&apos;, 6), (&apos;begint&apos;, 6), (&apos;gehad&apos;, 6), (&apos;ja&apos;, 6), (&apos;iedereen&apos;, 6), (&apos;gelukkig&apos;, 6), (&apos;we&apos;, 6), (&apos;n&apos;, 5), (&apos;toch&apos;, 5), (&apos;geen&apos;, 5), (&apos;dit&apos;, 5), (&apos;t&apos;, 5), (&apos;beter&apos;, 5), (&apos;wat&apos;, 5), (&apos;kan&apos;, 4), (&apos;dan&apos;, 4), (&apos;niks&apos;, 4), (&apos;om&apos;, 4), (&apos;nieuwjaar&apos;, 4), (&apos;als&apos;, 4), (&apos;gezond&apos;, 4), (&apos;nacht&apos;, 4), (&apos;heel&apos;, 4), (&apos;bezoeken&apos;, 4), (&apos;andere&apos;, 4), (&apos;was&apos;, 4), (&apos;wakker&apos;, 4), (&apos;af&apos;, 4), (&apos;rt&apos;, 4), (&apos;ligt&apos;, 3), (&apos;alsof&apos;, 3), (&apos;o&apos;, 3), (&apos;5&apos;, 3), (&apos;volgens&apos;, 3), (&apos;pakken&apos;, 3), (&apos;wij&apos;, 3), (&apos;trillen&apos;, 3), (&apos;zweten&apos;, 3), (&apos;over&apos;, 3), (&apos;10&apos;, 3), (&apos;of&apos;, 3), (&apos;bier&apos;, 3), (&apos;kreunt&apos;, 3), (&apos;steeds&apos;, 3), (&apos;bijna&apos;, 3), (&apos;begonnen&apos;, 3), (&apos;groetjes&apos;, 3), (&apos;weg&apos;, 3), (&apos;kater&apos;, 3), (&apos;dag&apos;, 3), (&apos;want&apos;, 3)]
+<pre>[(&apos;je&apos;, 15), (&apos;griep&apos;, 11), (&apos;ik&apos;, 9), (&apos;en&apos;, 7), (&apos;kom&apos;, 6), (&apos;....&apos;, 5), (&apos;de&apos;, 5), (&apos;op&apos;, 4), (&apos;usrusr&apos;, 4), (&quot;:&apos;(&quot;, 3), (&apos;zweten&apos;, 3), (&apos;ligt&apos;, 3), (&apos;bezoeken&apos;, 3), (&apos;bed&apos;, 3), (&apos;zo&apos;, 3), (&apos;trillen&apos;, 3), (&apos;kreunt&apos;, 3), (&apos;gaat&apos;, 3), (&apos;in&apos;, 3), (&apos;groetjes&apos;, 3), (&apos;#kapotgrappig&apos;, 2), (&apos;heeft&apos;, 2), (&apos;niet&apos;, 2), (&apos;:(&apos;, 2), (&apos;heb&apos;, 2), (&apos;t&apos;, 1), (&apos;nu&apos;, 1), (&apos;no&apos;, 1), (&apos;want&apos;, 1), (&apos;thuis&apos;, 1), (&apos;owru&apos;, 1), (&apos;zomaar-kunstgeschenkje&apos;, 1), (&apos;al&apos;, 1), (&apos;#kapotgr&apos;, 1), (&apos;yari&apos;, 1), (&apos;een&apos;, 1), (&apos;n&apos;, 1), (&apos;het&apos;, 1), (&apos;naar&apos;, 1), (&apos;overstr&apos;, 1), (&apos;vanmiddag&apos;, 1), (&apos;zijn&apos;, 1), (&apos;voor&apos;, 1), (&apos;is&apos;, 1), (&apos;schudden&apos;, 1), (&apos;haar&apos;, 1), (&apos;impulsief&apos;, 1), (&apos;handen&apos;, 1), (&apos;nl&apos;, 1), (&apos;stem&apos;, 1), (&apos;gebracht&apos;, 1), (&apos;te&apos;, 1), (&apos;mag&apos;, 1), (&apos;week&apos;, 1), (&apos;dan&apos;, 1), (&apos;toe&apos;, 1), (&apos;genoeg&apos;, 1), (&apos;verveel&apos;, 1), (&apos;jammer&apos;, 1), (&apos;hiero&apos;, 1), (&apos;goed&apos;, 1), (&apos;omdat&apos;, 1), (&apos;weer&apos;, 1), (&apos;extra&apos;, 1), (&apos;doordat&apos;, 1), (&apos;muh&apos;, 1), (&apos;gebleven&apos;, 1), (&apos;...&apos;, 1), (&apos;kanjer&apos;, 1), (&apos;stoep&apos;, 1), (&apos;..&apos;, 1), (&apos;iedereen&apos;, 1), (&apos;brionplein&apos;, 1), (&apos;bai&apos;, 1), (&apos;liet&apos;, 1), (&apos;weg&apos;, 1), (&apos;mel&apos;, 1), (&apos;gemeen&apos;, 1), (&apos;me&apos;, 1), (&apos;blijven&apos;, 1), (&apos;die&apos;, 1), (&apos;lang&apos;, 1), (&apos;verdiend&apos;, 1), (&apos;dit&apos;, 1), (&apos;aantrekkelijk&apos;, 1), (&apos;half&apos;, 1), (&apos;rt&apos;, 1), (&apos;moeten&apos;, 1)]
 </pre>
 </div>
 </div>
@@ -4643,7 +4661,7 @@ No mag bai brionplein doordat ik griep heb :&apos;(  zo gemeen is iedereen en di
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[268]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="p">[</span><span class="n">rr</span><span class="o">.</span><span class="n">active_column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -4660,6 +4678,16 @@ No mag bai brionplein doordat ik griep heb :&apos;(  zo gemeen is iedereen en di
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Cluster-the-Tweets">Cluster the Tweets<a class="anchor-link" href="#Cluster-the-Tweets">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The clustering will be done seperately for each bucket.</p>
+
 </div>
 </div>
 </div>
@@ -6223,6 +6251,16 @@ oVAougRK6AqFQtElUEJXKBSKLoESukKhUHQJlNAVCoWiS/D/AbndmdXyrsr1AAAAAElFTkSuQmCC
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Time periods may not capture the time independent characteristics. We cluster all remaining tweets at once.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[128]:</div>
@@ -7543,18 +7581,30 @@ pC0QCARtBCFtgUAgaCMIaQsEAkEbQUhbIBAI2gj/HzbcI1hoAiloAAAAAElFTkSuQmCC
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Some</span> <span class="n">explanation</span> <span class="ow">is</span> <span class="n">provided</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">presentation</span><span class="o">.</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some explanation is provided in the presentation. Example cluster:</p>
+<ul>
+<li>Migraine is geen griep</li>
+<li>Migraine is geen griep. "NEE DA WEET IK OOK WEL.</li>
+<li>Migraine is geen griep, migraine is een ondraaglijke hoofdpijn" als je dat maar weet</li>
+<li>Migraine is geen griep #jemeenthet</li>
+<li>Migraine is geen griep, migraine is ondraaglijke hoofdpijn. Maar dan helpt #advil ook niet</li>
+<li>Migraine is geen griep, want het is een zeurende hoofdpijn.</li>
+<li>Beste #Advil. Wat dacht je toen je die ‘Migraine is geen griep’ #reclame maakte? En migraine is ook geen fietsband… Wat een lulkoek</li>
+<li>Migraine is geen griep'. Ja en Advil werkt niet beter dan paracetamol.</li>
+<li>Migraine is geen griep." Ja en kanker is geen AIDS. Bedankt voor deze ophelderende reclame.</li>
+<li>Migranne is geen griep, migranne is onverdraagelijke hoofdpijn</li>
+<li>usrusr wist je ook al dat migraine geen griep is? #advil” en albert heijn geen jumbo? #verschillendesupermarktenopnoemen</li>
+<li>usrusr Migranne is geen griep, migranne is onverdraagelijke hoofdpijn"ik denk dat nee grapje do :-) urlurl</li>
+<li>usrusr Ja, vind het echt zo'n domme reclame...of althans, de boodschap van migraine is geen griep dan...</li>
+</ul>
 
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -7567,13 +7617,13 @@ pC0QCARtBCFtgUAgaCMIaQsEAkEbQUhbIBAI2gj/HzbcI1hoAiloAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[154]:</div>
+<div class="prompt input_prompt">In&nbsp;[274]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;20161216_griep_hourly_clusters50_all_0_labels.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">file_content</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
     <span class="n">order_label</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">file_content</span><span class="p">}</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_content</span><span class="p">),</span> <span class="n">file_content</span><span class="p">,</span> <span class="n">order_label</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_content</span><span class="p">),</span> <span class="n">file_content</span><span class="p">[:</span><span class="mi">15</span><span class="p">],</span> <span class="n">order_label</span><span class="p">[</span><span class="s1">&#39;629&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -7586,7 +7636,7 @@ pC0QCARtBCFtgUAgaCMIaQsEAkEbQUhbIBAI2gj/HzbcI1hoAiloAAAAAElFTkSuQmCC
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>1066 [&apos;0:irrelevant&apos;, &apos;1:goodwish&apos;, &apos;2:ziekmelding&apos;, &apos;3:ziekmelding&apos;, &apos;4:ziekmelding&apos;, &apos;5:incoherent&apos;, &apos;6:news&apos;, &apos;7:&apos;, &apos;8:incoherent&apos;, &apos;9:incoherent&apos;, &apos;10:&apos;, &apos;11:&apos;, &apos;12:&apos;, &apos;13:&apos;, &apos;14:&apos;, &apos;15:&apos;, &apos;16:&apos;, &apos;17:&apos;, &apos;18:&apos;, &apos;19:&apos;, &apos;20:&apos;, &apos;21:&apos;, &apos;22:&apos;, &apos;23:&apos;, &apos;24:&apos;, &apos;25:&apos;, &apos;26:&apos;, &apos;27:&apos;, &apos;28:&apos;, &apos;29:&apos;, &apos;30:&apos;, &apos;31:&apos;, &apos;32:&apos;, &apos;33:&apos;, &apos;34:&apos;, &apos;35:&apos;, &apos;36:&apos;, &apos;37:&apos;, &apos;38:&apos;, &apos;39:&apos;, &apos;40:&apos;, &apos;41:&apos;, &apos;42:&apos;, &apos;43:&apos;, &apos;44:&apos;, &apos;45:&apos;, &apos;46:&apos;, &apos;47:&apos;, &apos;48:&apos;, &apos;49:&apos;, &apos;50:&apos;, &apos;51:&apos;, &apos;52:&apos;, &apos;53:&apos;, &apos;54:&apos;, &apos;55:&apos;, &apos;56:&apos;, &apos;57:&apos;, &apos;58:&apos;, &apos;59:&apos;, &apos;60:&apos;, &apos;61:&apos;, &apos;62:&apos;, &apos;63:&apos;, &apos;64:&apos;, &apos;65:&apos;, &apos;66:&apos;, &apos;67:&apos;, &apos;68:&apos;, &apos;69:&apos;, &apos;70:&apos;, &apos;71:&apos;, &apos;72:&apos;, &apos;73:&apos;, &apos;74:&apos;, &apos;75:&apos;, &apos;76:&apos;, &apos;77:&apos;, &apos;78:&apos;, &apos;79:&apos;, &apos;80:&apos;, &apos;81:&apos;, &apos;82:&apos;, &apos;83:&apos;, &apos;84:&apos;, &apos;85:&apos;, &apos;86:&apos;, &apos;87:&apos;, &apos;88:&apos;, &apos;89:&apos;, &apos;90:&apos;, &apos;91:&apos;, &apos;92:&apos;, &apos;93:&apos;, &apos;94:&apos;, &apos;95:&apos;, &apos;96:&apos;, &apos;97:&apos;, &apos;98:&apos;, &apos;99:&apos;, &apos;100:&apos;, &apos;101:&apos;, &apos;102:&apos;, &apos;103:&apos;, &apos;104:&apos;, &apos;105:&apos;, &apos;106:&apos;, &apos;107:&apos;, &apos;108:&apos;, &apos;109:&apos;, &apos;110:&apos;, &apos;111:&apos;, &apos;112:&apos;, &apos;113:&apos;, &apos;114:&apos;, &apos;115:&apos;, &apos;116:&apos;, &apos;117:&apos;, &apos;118:&apos;, &apos;119:&apos;, &apos;120:&apos;, &apos;121:&apos;, &apos;122:&apos;, &apos;123:&apos;, &apos;124:&apos;, &apos;125:&apos;, &apos;126:&apos;, &apos;127:&apos;, &apos;128:&apos;, &apos;129:&apos;, &apos;130:&apos;, &apos;131:&apos;, &apos;132:&apos;, &apos;133:&apos;, &apos;134:&apos;, &apos;135:&apos;, &apos;136:&apos;, &apos;137:&apos;, &apos;138:&apos;, &apos;139:&apos;, &apos;140:&apos;, &apos;141:&apos;, &apos;142:&apos;, &apos;143:&apos;, &apos;144:&apos;, &apos;145:&apos;, &apos;146:&apos;, &apos;147:&apos;, &apos;148:&apos;, &apos;149:&apos;, &apos;150:&apos;, &apos;151:&apos;, &apos;152:&apos;, &apos;153:&apos;, &apos;154:&apos;, &apos;155:&apos;, &apos;156:&apos;, &apos;157:&apos;, &apos;158:&apos;, &apos;159:&apos;, &apos;160:&apos;, &apos;161:&apos;, &apos;162:&apos;, &apos;163:&apos;, &apos;164:&apos;, &apos;165:&apos;, &apos;166:&apos;, &apos;167:&apos;, &apos;168:&apos;, &apos;169:&apos;, &apos;170:&apos;, &apos;171:&apos;, &apos;172:&apos;, &apos;173:&apos;, &apos;174:&apos;, &apos;175:&apos;, &apos;176:&apos;, &apos;177:&apos;, &apos;178:&apos;, &apos;179:&apos;, &apos;180:&apos;, &apos;181:&apos;, &apos;182:&apos;, &apos;183:&apos;, &apos;184:&apos;, &apos;185:&apos;, &apos;186:&apos;, &apos;187:&apos;, &apos;188:&apos;, &apos;189:&apos;, &apos;190:&apos;, &apos;191:&apos;, &apos;192:&apos;, &apos;193:&apos;, &apos;194:&apos;, &apos;195:&apos;, &apos;196:&apos;, &apos;197:&apos;, &apos;198:&apos;, &apos;199:&apos;, &apos;200:&apos;, &apos;201:&apos;, &apos;202:&apos;, &apos;203:&apos;, &apos;204:&apos;, &apos;205:&apos;, &apos;206:&apos;, &apos;207:&apos;, &apos;208:&apos;, &apos;209:&apos;, &apos;210:&apos;, &apos;211:&apos;, &apos;212:&apos;, &apos;213:&apos;, &apos;214:&apos;, &apos;215:&apos;, &apos;216:&apos;, &apos;217:&apos;, &apos;218:&apos;, &apos;219:&apos;, &apos;220:&apos;, &apos;221:&apos;, &apos;222:&apos;, &apos;223:&apos;, &apos;224:&apos;, &apos;225:&apos;, &apos;226:&apos;, &apos;227:&apos;, &apos;228:&apos;, &apos;229:&apos;, &apos;230:&apos;, &apos;231:&apos;, &apos;232:&apos;, &apos;233:&apos;, &apos;234:&apos;, &apos;235:&apos;, &apos;236:&apos;, &apos;237:&apos;, &apos;238:&apos;, &apos;239:&apos;, &apos;240:&apos;, &apos;241:&apos;, &apos;242:&apos;, &apos;243:&apos;, &apos;244:&apos;, &apos;245:&apos;, &apos;246:&apos;, &apos;247:&apos;, &apos;248:&apos;, &apos;249:&apos;, &apos;250:&apos;, &apos;251:&apos;, &apos;252:&apos;, &apos;253:&apos;, &apos;254:&apos;, &apos;255:&apos;, &apos;256:&apos;, &apos;257:&apos;, &apos;258:&apos;, &apos;259:&apos;, &apos;260:&apos;, &apos;261:&apos;, &apos;262:&apos;, &apos;263:&apos;, &apos;264:&apos;, &apos;265:&apos;, &apos;266:&apos;, &apos;267:&apos;, &apos;268:&apos;, &apos;269:&apos;, &apos;270:&apos;, &apos;271:&apos;, &apos;272:&apos;, &apos;273:&apos;, &apos;274:&apos;, &apos;275:&apos;, &apos;276:&apos;, &apos;277:&apos;, &apos;278:&apos;, &apos;279:&apos;, &apos;280:&apos;, &apos;281:&apos;, &apos;282:&apos;, &apos;283:&apos;, &apos;284:&apos;, &apos;285:&apos;, &apos;286:&apos;, &apos;287:&apos;, &apos;288:&apos;, &apos;289:&apos;, &apos;290:&apos;, &apos;291:&apos;, &apos;292:&apos;, &apos;293:&apos;, &apos;294:&apos;, &apos;295:&apos;, &apos;296:&apos;, &apos;297:&apos;, &apos;298:&apos;, &apos;299:&apos;, &apos;300:&apos;, &apos;301:&apos;, &apos;302:&apos;, &apos;303:&apos;, &apos;304:&apos;, &apos;305:&apos;, &apos;306:&apos;, &apos;307:&apos;, &apos;308:&apos;, &apos;309:&apos;, &apos;310:&apos;, &apos;311:&apos;, &apos;312:&apos;, &apos;313:&apos;, &apos;314:&apos;, &apos;315:&apos;, &apos;316:&apos;, &apos;317:&apos;, &apos;318:&apos;, &apos;319:&apos;, &apos;320:&apos;, &apos;321:&apos;, &apos;322:&apos;, &apos;323:&apos;, &apos;324:&apos;, &apos;325:&apos;, &apos;326:&apos;, &apos;327:&apos;, &apos;328:&apos;, &apos;329:&apos;, &apos;330:&apos;, &apos;331:&apos;, &apos;332:&apos;, &apos;333:&apos;, &apos;334:&apos;, &apos;335:&apos;, &apos;336:&apos;, &apos;337:&apos;, &apos;338:&apos;, &apos;339:&apos;, &apos;340:&apos;, &apos;341:&apos;, &apos;342:&apos;, &apos;343:&apos;, &apos;344:&apos;, &apos;345:&apos;, &apos;346:&apos;, &apos;347:&apos;, &apos;348:&apos;, &apos;349:&apos;, &apos;350:&apos;, &apos;351:&apos;, &apos;352:&apos;, &apos;353:&apos;, &apos;354:&apos;, &apos;355:&apos;, &apos;356:&apos;, &apos;357:&apos;, &apos;358:&apos;, &apos;359:&apos;, &apos;360:&apos;, &apos;361:&apos;, &apos;362:&apos;, &apos;363:&apos;, &apos;364:&apos;, &apos;365:&apos;, &apos;366:&apos;, &apos;367:&apos;, &apos;368:&apos;, &apos;369:&apos;, &apos;370:&apos;, &apos;371:&apos;, &apos;372:&apos;, &apos;373:&apos;, &apos;374:&apos;, &apos;375:&apos;, &apos;376:&apos;, &apos;377:&apos;, &apos;378:&apos;, &apos;379:&apos;, &apos;380:&apos;, &apos;381:&apos;, &apos;382:&apos;, &apos;383:&apos;, &apos;384:&apos;, &apos;385:&apos;, &apos;386:&apos;, &apos;387:&apos;, &apos;388:&apos;, &apos;389:&apos;, &apos;390:&apos;, &apos;391:&apos;, &apos;392:&apos;, &apos;393:&apos;, &apos;394:&apos;, &apos;395:&apos;, &apos;396:&apos;, &apos;397:&apos;, &apos;398:&apos;, &apos;399:&apos;, &apos;400:&apos;, &apos;401:&apos;, &apos;402:&apos;, &apos;403:&apos;, &apos;404:&apos;, &apos;405:&apos;, &apos;406:&apos;, &apos;407:&apos;, &apos;408:&apos;, &apos;409:&apos;, &apos;410:&apos;, &apos;411:&apos;, &apos;412:&apos;, &apos;413:&apos;, &apos;414:&apos;, &apos;415:&apos;, &apos;416:&apos;, &apos;417:&apos;, &apos;418:&apos;, &apos;419:&apos;, &apos;420:&apos;, &apos;421:&apos;, &apos;422:&apos;, &apos;423:&apos;, &apos;424:&apos;, &apos;425:&apos;, &apos;426:&apos;, &apos;427:&apos;, &apos;428:&apos;, &apos;429:&apos;, &apos;430:&apos;, &apos;431:&apos;, &apos;432:&apos;, &apos;433:&apos;, &apos;434:&apos;, &apos;435:&apos;, &apos;436:&apos;, &apos;437:&apos;, &apos;438:&apos;, &apos;439:&apos;, &apos;440:&apos;, &apos;441:&apos;, &apos;442:&apos;, &apos;443:&apos;, &apos;444:&apos;, &apos;445:&apos;, &apos;446:&apos;, &apos;447:&apos;, &apos;448:&apos;, &apos;449:&apos;, &apos;450:&apos;, &apos;451:&apos;, &apos;452:&apos;, &apos;453:&apos;, &apos;454:&apos;, &apos;455:&apos;, &apos;456:&apos;, &apos;457:&apos;, &apos;458:&apos;, &apos;459:&apos;, &apos;460:&apos;, &apos;461:&apos;, &apos;462:&apos;, &apos;463:&apos;, &apos;464:&apos;, &apos;465:&apos;, &apos;466:&apos;, &apos;467:&apos;, &apos;468:&apos;, &apos;469:&apos;, &apos;470:&apos;, &apos;471:&apos;, &apos;472:&apos;, &apos;473:&apos;, &apos;474:&apos;, &apos;475:&apos;, &apos;476:&apos;, &apos;477:&apos;, &apos;478:&apos;, &apos;479:&apos;, &apos;480:&apos;, &apos;481:&apos;, &apos;482:&apos;, &apos;483:&apos;, &apos;484:&apos;, &apos;485:&apos;, &apos;486:&apos;, &apos;487:&apos;, &apos;488:&apos;, &apos;489:&apos;, &apos;490:&apos;, &apos;491:&apos;, &apos;492:&apos;, &apos;493:&apos;, &apos;494:&apos;, &apos;495:&apos;, &apos;496:&apos;, &apos;497:&apos;, &apos;498:&apos;, &apos;499:&apos;, &apos;500:&apos;, &apos;501:&apos;, &apos;502:&apos;, &apos;503:&apos;, &apos;504:&apos;, &apos;505:&apos;, &apos;506:&apos;, &apos;507:&apos;, &apos;508:&apos;, &apos;509:&apos;, &apos;510:&apos;, &apos;511:&apos;, &apos;512:&apos;, &apos;513:&apos;, &apos;514:&apos;, &apos;515:&apos;, &apos;516:&apos;, &apos;517:&apos;, &apos;518:&apos;, &apos;519:&apos;, &apos;520:&apos;, &apos;521:&apos;, &apos;522:&apos;, &apos;523:&apos;, &apos;524:&apos;, &apos;525:&apos;, &apos;526:&apos;, &apos;527:&apos;, &apos;528:&apos;, &apos;529:&apos;, &apos;530:&apos;, &apos;531:&apos;, &apos;532:&apos;, &apos;533:&apos;, &apos;534:&apos;, &apos;535:&apos;, &apos;536:&apos;, &apos;537:&apos;, &apos;538:&apos;, &apos;539:&apos;, &apos;540:&apos;, &apos;541:&apos;, &apos;542:&apos;, &apos;543:&apos;, &apos;544:&apos;, &apos;545:&apos;, &apos;546:&apos;, &apos;547:&apos;, &apos;548:&apos;, &apos;549:&apos;, &apos;550:&apos;, &apos;551:&apos;, &apos;552:&apos;, &apos;553:&apos;, &apos;554:&apos;, &apos;555:&apos;, &apos;556:&apos;, &apos;557:&apos;, &apos;558:&apos;, &apos;559:&apos;, &apos;560:&apos;, &apos;561:&apos;, &apos;562:&apos;, &apos;563:&apos;, &apos;564:&apos;, &apos;565:&apos;, &apos;566:&apos;, &apos;567:&apos;, &apos;568:&apos;, &apos;569:&apos;, &apos;570:&apos;, &apos;571:&apos;, &apos;572:&apos;, &apos;573:&apos;, &apos;574:&apos;, &apos;575:&apos;, &apos;576:&apos;, &apos;577:&apos;, &apos;578:&apos;, &apos;579:&apos;, &apos;580:&apos;, &apos;581:&apos;, &apos;582:&apos;, &apos;583:&apos;, &apos;584:&apos;, &apos;585:&apos;, &apos;586:&apos;, &apos;587:&apos;, &apos;588:&apos;, &apos;589:&apos;, &apos;590:&apos;, &apos;591:&apos;, &apos;592:&apos;, &apos;593:&apos;, &apos;594:&apos;, &apos;595:&apos;, &apos;596:&apos;, &apos;597:&apos;, &apos;598:&apos;, &apos;599:&apos;, &apos;600:&apos;, &apos;601:&apos;, &apos;602:&apos;, &apos;603:&apos;, &apos;604:&apos;, &apos;605:&apos;, &apos;606:&apos;, &apos;607:&apos;, &apos;608:&apos;, &apos;609:&apos;, &apos;610:&apos;, &apos;611:&apos;, &apos;612:&apos;, &apos;613:&apos;, &apos;614:&apos;, &apos;615:&apos;, &apos;616:&apos;, &apos;617:&apos;, &apos;618:&apos;, &apos;619:&apos;, &apos;620:&apos;, &apos;621:&apos;, &apos;622:&apos;, &apos;623:&apos;, &apos;624:&apos;, &apos;625:&apos;, &apos;626:&apos;, &apos;627:&apos;, &apos;628:&apos;, &apos;629:&apos;, &apos;630:&apos;, &apos;631:&apos;, &apos;632:&apos;, &apos;633:&apos;, &apos;634:&apos;, &apos;635:&apos;, &apos;636:&apos;, &apos;637:&apos;, &apos;638:&apos;, &apos;639:&apos;, &apos;640:&apos;, &apos;641:&apos;, &apos;642:&apos;, &apos;643:&apos;, &apos;644:&apos;, &apos;645:&apos;, &apos;646:&apos;, &apos;647:&apos;, &apos;648:&apos;, &apos;649:&apos;, &apos;650:&apos;, &apos;651:&apos;, &apos;652:&apos;, &apos;653:&apos;, &apos;654:&apos;, &apos;655:&apos;, &apos;656:&apos;, &apos;657:&apos;, &apos;658:&apos;, &apos;659:&apos;, &apos;660:&apos;, &apos;661:&apos;, &apos;662:&apos;, &apos;663:&apos;, &apos;664:&apos;, &apos;665:&apos;, &apos;666:&apos;, &apos;667:&apos;, &apos;668:&apos;, &apos;669:&apos;, &apos;670:&apos;, &apos;671:&apos;, &apos;672:&apos;, &apos;673:&apos;, &apos;674:&apos;, &apos;675:&apos;, &apos;676:&apos;, &apos;677:&apos;, &apos;678:&apos;, &apos;679:&apos;, &apos;680:&apos;, &apos;681:&apos;, &apos;682:&apos;, &apos;683:&apos;, &apos;684:&apos;, &apos;685:&apos;, &apos;686:&apos;, &apos;687:&apos;, &apos;688:&apos;, &apos;689:&apos;, &apos;690:&apos;, &apos;691:&apos;, &apos;692:&apos;, &apos;693:&apos;, &apos;694:&apos;, &apos;695:&apos;, &apos;696:&apos;, &apos;697:&apos;, &apos;698:&apos;, &apos;699:&apos;, &apos;700:&apos;, &apos;701:&apos;, &apos;702:&apos;, &apos;703:&apos;, &apos;704:&apos;, &apos;705:&apos;, &apos;706:&apos;, &apos;707:&apos;, &apos;708:&apos;, &apos;709:&apos;, &apos;710:&apos;, &apos;711:&apos;, &apos;712:&apos;, &apos;713:&apos;, &apos;714:&apos;, &apos;715:&apos;, &apos;716:&apos;, &apos;717:&apos;, &apos;718:&apos;, &apos;719:&apos;, &apos;720:&apos;, &apos;721:&apos;, &apos;722:&apos;, &apos;723:&apos;, &apos;724:&apos;, &apos;725:&apos;, &apos;726:&apos;, &apos;727:&apos;, &apos;728:&apos;, &apos;729:&apos;, &apos;730:&apos;, &apos;731:&apos;, &apos;732:&apos;, &apos;733:&apos;, &apos;734:&apos;, &apos;735:&apos;, &apos;736:&apos;, &apos;737:&apos;, &apos;738:&apos;, &apos;739:&apos;, &apos;740:&apos;, &apos;741:&apos;, &apos;742:&apos;, &apos;743:&apos;, &apos;744:&apos;, &apos;745:&apos;, &apos;746:&apos;, &apos;747:&apos;, &apos;748:&apos;, &apos;749:&apos;, &apos;750:&apos;, &apos;751:&apos;, &apos;752:&apos;, &apos;753:&apos;, &apos;754:&apos;, &apos;755:&apos;, &apos;756:&apos;, &apos;757:&apos;, &apos;758:&apos;, &apos;759:&apos;, &apos;760:&apos;, &apos;761:&apos;, &apos;762:&apos;, &apos;763:&apos;, &apos;764:&apos;, &apos;765:&apos;, &apos;766:&apos;, &apos;767:&apos;, &apos;768:&apos;, &apos;769:&apos;, &apos;770:&apos;, &apos;771:&apos;, &apos;772:&apos;, &apos;773:&apos;, &apos;774:&apos;, &apos;775:&apos;, &apos;776:&apos;, &apos;777:&apos;, &apos;778:&apos;, &apos;779:&apos;, &apos;780:&apos;, &apos;781:&apos;, &apos;782:&apos;, &apos;783:&apos;, &apos;784:&apos;, &apos;785:&apos;, &apos;786:&apos;, &apos;787:&apos;, &apos;788:&apos;, &apos;789:&apos;, &apos;790:&apos;, &apos;791:&apos;, &apos;792:&apos;, &apos;793:&apos;, &apos;794:&apos;, &apos;795:&apos;, &apos;796:&apos;, &apos;797:&apos;, &apos;798:&apos;, &apos;799:&apos;, &apos;800:&apos;, &apos;801:&apos;, &apos;802:&apos;, &apos;803:&apos;, &apos;804:&apos;, &apos;805:&apos;, &apos;806:&apos;, &apos;807:&apos;, &apos;808:&apos;, &apos;809:&apos;, &apos;810:&apos;, &apos;811:&apos;, &apos;812:&apos;, &apos;813:&apos;, &apos;814:&apos;, &apos;815:&apos;, &apos;816:&apos;, &apos;817:&apos;, &apos;818:&apos;, &apos;819:&apos;, &apos;820:&apos;, &apos;821:&apos;, &apos;822:&apos;, &apos;823:&apos;, &apos;824:&apos;, &apos;825:&apos;, &apos;826:&apos;, &apos;827:&apos;, &apos;828:&apos;, &apos;829:&apos;, &apos;830:&apos;, &apos;831:&apos;, &apos;832:&apos;, &apos;833:&apos;, &apos;834:&apos;, &apos;835:&apos;, &apos;836:&apos;, &apos;837:&apos;, &apos;838:&apos;, &apos;839:&apos;, &apos;840:&apos;, &apos;841:&apos;, &apos;842:&apos;, &apos;843:&apos;, &apos;844:&apos;, &apos;845:&apos;, &apos;846:&apos;, &apos;847:&apos;, &apos;848:&apos;, &apos;849:&apos;, &apos;850:&apos;, &apos;851:&apos;, &apos;852:&apos;, &apos;853:&apos;, &apos;854:&apos;, &apos;855:&apos;, &apos;856:&apos;, &apos;857:&apos;, &apos;858:&apos;, &apos;859:&apos;, &apos;860:&apos;, &apos;861:&apos;, &apos;862:&apos;, &apos;863:&apos;, &apos;864:&apos;, &apos;865:&apos;, &apos;866:&apos;, &apos;867:&apos;, &apos;868:&apos;, &apos;869:&apos;, &apos;870:&apos;, &apos;871:&apos;, &apos;872:&apos;, &apos;873:&apos;, &apos;874:&apos;, &apos;875:&apos;, &apos;876:&apos;, &apos;877:&apos;, &apos;878:&apos;, &apos;879:&apos;, &apos;880:&apos;, &apos;881:&apos;, &apos;882:&apos;, &apos;883:&apos;, &apos;884:&apos;, &apos;885:&apos;, &apos;886:&apos;, &apos;887:&apos;, &apos;888:&apos;, &apos;889:&apos;, &apos;890:&apos;, &apos;891:&apos;, &apos;892:&apos;, &apos;893:&apos;, &apos;894:&apos;, &apos;895:&apos;, &apos;896:&apos;, &apos;897:&apos;, &apos;898:&apos;, &apos;899:&apos;, &apos;900:&apos;, &apos;901:&apos;, &apos;902:&apos;, &apos;903:&apos;, &apos;904:&apos;, &apos;905:&apos;, &apos;906:&apos;, &apos;907:&apos;, &apos;908:&apos;, &apos;909:&apos;, &apos;910:&apos;, &apos;911:&apos;, &apos;912:&apos;, &apos;913:&apos;, &apos;914:&apos;, &apos;915:&apos;, &apos;916:&apos;, &apos;917:&apos;, &apos;918:&apos;, &apos;919:&apos;, &apos;920:&apos;, &apos;921:&apos;, &apos;922:&apos;, &apos;923:&apos;, &apos;924:&apos;, &apos;925:&apos;, &apos;926:&apos;, &apos;927:&apos;, &apos;928:&apos;, &apos;929:&apos;, &apos;930:&apos;, &apos;931:&apos;, &apos;932:&apos;, &apos;933:&apos;, &apos;934:&apos;, &apos;935:&apos;, &apos;936:&apos;, &apos;937:&apos;, &apos;938:&apos;, &apos;939:&apos;, &apos;940:&apos;, &apos;941:&apos;, &apos;942:&apos;, &apos;943:&apos;, &apos;944:&apos;, &apos;945:&apos;, &apos;946:&apos;, &apos;947:&apos;, &apos;948:&apos;, &apos;949:&apos;, &apos;950:&apos;, &apos;951:&apos;, &apos;952:&apos;, &apos;953:&apos;, &apos;954:&apos;, &apos;955:&apos;, &apos;956:&apos;, &apos;957:&apos;, &apos;958:&apos;, &apos;959:&apos;, &apos;960:&apos;, &apos;961:&apos;, &apos;962:&apos;, &apos;963:&apos;, &apos;964:&apos;, &apos;965:&apos;, &apos;966:&apos;, &apos;967:&apos;, &apos;968:&apos;, &apos;969:&apos;, &apos;970:&apos;, &apos;971:&apos;, &apos;972:&apos;, &apos;973:&apos;, &apos;974:&apos;, &apos;975:&apos;, &apos;976:&apos;, &apos;977:&apos;, &apos;978:&apos;, &apos;979:&apos;, &apos;980:&apos;, &apos;981:&apos;, &apos;982:&apos;, &apos;983:&apos;, &apos;984:&apos;, &apos;985:&apos;, &apos;986:&apos;, &apos;987:&apos;, &apos;988:&apos;, &apos;989:&apos;, &apos;990:&apos;, &apos;991:&apos;, &apos;992:&apos;, &apos;993:&apos;, &apos;994:&apos;, &apos;995:&apos;, &apos;996:&apos;, &apos;997:&apos;, &apos;998:&apos;, &apos;999:&apos;, &apos;1000:&apos;, &apos;1001:&apos;, &apos;1002:&apos;, &apos;1003:&apos;, &apos;1004:&apos;, &apos;1005:&apos;, &apos;1006:&apos;, &apos;1007:&apos;, &apos;1008:&apos;, &apos;1009:&apos;, &apos;1010:&apos;, &apos;1011:&apos;, &apos;1012:&apos;, &apos;1013:&apos;, &apos;1014:&apos;, &apos;1015:&apos;, &apos;1016:&apos;, &apos;1017:&apos;, &apos;1018:&apos;, &apos;1019:&apos;, &apos;1020:&apos;, &apos;1021:&apos;, &apos;1022:&apos;, &apos;1023:&apos;, &apos;1024:&apos;, &apos;1025:&apos;, &apos;1026:&apos;, &apos;1027:&apos;, &apos;1028:&apos;, &apos;1029:&apos;, &apos;1030:&apos;, &apos;1031:&apos;, &apos;1032:&apos;, &apos;1033:&apos;, &apos;1034:&apos;, &apos;1035:&apos;, &apos;1036:&apos;, &apos;1037:&apos;, &apos;1038:&apos;, &apos;1039:&apos;, &apos;1040:&apos;, &apos;1041:&apos;, &apos;1042:&apos;, &apos;1043:&apos;, &apos;1044:&apos;, &apos;1045:&apos;, &apos;1046:&apos;, &apos;1047:&apos;, &apos;1048:&apos;, &apos;1049:&apos;, &apos;1050:&apos;, &apos;1051:&apos;, &apos;1052:&apos;, &apos;1053:&apos;, &apos;1054:&apos;, &apos;1055:&apos;, &apos;1056:&apos;, &apos;1057:&apos;, &apos;1058:&apos;, &apos;1059:&apos;, &apos;1060:&apos;, &apos;1061:&apos;, &apos;1062:&apos;, &apos;1063:&apos;, &apos;1064:&apos;, &apos;1065:&apos;] {&apos;629&apos;: &apos;&apos;, &apos;699&apos;: &apos;&apos;, &apos;1065&apos;: &apos;&apos;, &apos;568&apos;: &apos;&apos;, &apos;522&apos;: &apos;&apos;, &apos;618&apos;: &apos;&apos;, &apos;273&apos;: &apos;&apos;, &apos;64&apos;: &apos;&apos;, &apos;902&apos;: &apos;&apos;, &apos;1052&apos;: &apos;&apos;, &apos;286&apos;: &apos;&apos;, &apos;359&apos;: &apos;&apos;, &apos;886&apos;: &apos;&apos;, &apos;205&apos;: &apos;&apos;, &apos;735&apos;: &apos;&apos;, &apos;154&apos;: &apos;&apos;, &apos;960&apos;: &apos;&apos;, &apos;196&apos;: &apos;&apos;, &apos;507&apos;: &apos;&apos;, &apos;224&apos;: &apos;&apos;, &apos;853&apos;: &apos;&apos;, &apos;36&apos;: &apos;&apos;, &apos;470&apos;: &apos;&apos;, &apos;622&apos;: &apos;&apos;, &apos;215&apos;: &apos;&apos;, &apos;934&apos;: &apos;&apos;, &apos;282&apos;: &apos;&apos;, &apos;947&apos;: &apos;&apos;, &apos;676&apos;: &apos;&apos;, &apos;1049&apos;: &apos;&apos;, &apos;766&apos;: &apos;&apos;, &apos;779&apos;: &apos;&apos;, &apos;765&apos;: &apos;&apos;, &apos;249&apos;: &apos;&apos;, &apos;956&apos;: &apos;&apos;, &apos;997&apos;: &apos;&apos;, &apos;206&apos;: &apos;&apos;, &apos;753&apos;: &apos;&apos;, &apos;774&apos;: &apos;&apos;, &apos;203&apos;: &apos;&apos;, &apos;937&apos;: &apos;&apos;, &apos;544&apos;: &apos;&apos;, &apos;911&apos;: &apos;&apos;, &apos;347&apos;: &apos;&apos;, &apos;1010&apos;: &apos;&apos;, &apos;271&apos;: &apos;&apos;, &apos;756&apos;: &apos;&apos;, &apos;108&apos;: &apos;&apos;, &apos;195&apos;: &apos;&apos;, &apos;438&apos;: &apos;&apos;, &apos;402&apos;: &apos;&apos;, &apos;100&apos;: &apos;&apos;, &apos;314&apos;: &apos;&apos;, &apos;288&apos;: &apos;&apos;, &apos;457&apos;: &apos;&apos;, &apos;412&apos;: &apos;&apos;, &apos;295&apos;: &apos;&apos;, &apos;851&apos;: &apos;&apos;, &apos;610&apos;: &apos;&apos;, &apos;187&apos;: &apos;&apos;, &apos;259&apos;: &apos;&apos;, &apos;694&apos;: &apos;&apos;, &apos;575&apos;: &apos;&apos;, &apos;216&apos;: &apos;&apos;, &apos;22&apos;: &apos;&apos;, &apos;698&apos;: &apos;&apos;, &apos;293&apos;: &apos;&apos;, &apos;261&apos;: &apos;&apos;, &apos;376&apos;: &apos;&apos;, &apos;156&apos;: &apos;&apos;, &apos;730&apos;: &apos;&apos;, &apos;128&apos;: &apos;&apos;, &apos;190&apos;: &apos;&apos;, &apos;631&apos;: &apos;&apos;, &apos;686&apos;: &apos;&apos;, &apos;394&apos;: &apos;&apos;, &apos;174&apos;: &apos;&apos;, &apos;855&apos;: &apos;&apos;, &apos;173&apos;: &apos;&apos;, &apos;157&apos;: &apos;&apos;, &apos;868&apos;: &apos;&apos;, &apos;277&apos;: &apos;&apos;, &apos;599&apos;: &apos;&apos;, &apos;227&apos;: &apos;&apos;, &apos;411&apos;: &apos;&apos;, &apos;825&apos;: &apos;&apos;, &apos;452&apos;: &apos;&apos;, &apos;390&apos;: &apos;&apos;, &apos;892&apos;: &apos;&apos;, &apos;1064&apos;: &apos;&apos;, &apos;728&apos;: &apos;&apos;, &apos;138&apos;: &apos;&apos;, &apos;106&apos;: &apos;&apos;, &apos;696&apos;: &apos;&apos;, &apos;782&apos;: &apos;&apos;, &apos;127&apos;: &apos;&apos;, &apos;565&apos;: &apos;&apos;, &apos;963&apos;: &apos;&apos;, &apos;98&apos;: &apos;&apos;, &apos;852&apos;: &apos;&apos;, &apos;929&apos;: &apos;&apos;, &apos;930&apos;: &apos;&apos;, &apos;38&apos;: &apos;&apos;, &apos;941&apos;: &apos;&apos;, &apos;355&apos;: &apos;&apos;, &apos;864&apos;: &apos;&apos;, &apos;480&apos;: &apos;&apos;, &apos;61&apos;: &apos;&apos;, &apos;140&apos;: &apos;&apos;, &apos;845&apos;: &apos;&apos;, &apos;258&apos;: &apos;&apos;, &apos;1060&apos;: &apos;&apos;, &apos;989&apos;: &apos;&apos;, &apos;637&apos;: &apos;&apos;, &apos;1030&apos;: &apos;&apos;, &apos;7&apos;: &apos;&apos;, &apos;502&apos;: &apos;&apos;, &apos;923&apos;: &apos;&apos;, &apos;255&apos;: &apos;&apos;, &apos;944&apos;: &apos;&apos;, &apos;257&apos;: &apos;&apos;, &apos;893&apos;: &apos;&apos;, &apos;687&apos;: &apos;&apos;, &apos;541&apos;: &apos;&apos;, &apos;711&apos;: &apos;&apos;, &apos;856&apos;: &apos;&apos;, &apos;361&apos;: &apos;&apos;, &apos;327&apos;: &apos;&apos;, &apos;866&apos;: &apos;&apos;, &apos;980&apos;: &apos;&apos;, &apos;237&apos;: &apos;&apos;, &apos;806&apos;: &apos;&apos;, &apos;639&apos;: &apos;&apos;, &apos;454&apos;: &apos;&apos;, &apos;0&apos;: &apos;irrelevant&apos;, &apos;894&apos;: &apos;&apos;, &apos;329&apos;: &apos;&apos;, &apos;133&apos;: &apos;&apos;, &apos;445&apos;: &apos;&apos;, &apos;458&apos;: &apos;&apos;, &apos;8&apos;: &apos;incoherent&apos;, &apos;527&apos;: &apos;&apos;, &apos;722&apos;: &apos;&apos;, &apos;167&apos;: &apos;&apos;, &apos;292&apos;: &apos;&apos;, &apos;1057&apos;: &apos;&apos;, &apos;125&apos;: &apos;&apos;, &apos;909&apos;: &apos;&apos;, &apos;690&apos;: &apos;&apos;, &apos;898&apos;: &apos;&apos;, &apos;580&apos;: &apos;&apos;, &apos;748&apos;: &apos;&apos;, &apos;57&apos;: &apos;&apos;, &apos;745&apos;: &apos;&apos;, &apos;737&apos;: &apos;&apos;, &apos;386&apos;: &apos;&apos;, &apos;339&apos;: &apos;&apos;, &apos;995&apos;: &apos;&apos;, &apos;65&apos;: &apos;&apos;, &apos;1035&apos;: &apos;&apos;, &apos;714&apos;: &apos;&apos;, &apos;1034&apos;: &apos;&apos;, &apos;1023&apos;: &apos;&apos;, &apos;1005&apos;: &apos;&apos;, &apos;567&apos;: &apos;&apos;, &apos;204&apos;: &apos;&apos;, &apos;585&apos;: &apos;&apos;, &apos;297&apos;: &apos;&apos;, &apos;958&apos;: &apos;&apos;, &apos;981&apos;: &apos;&apos;, &apos;481&apos;: &apos;&apos;, &apos;625&apos;: &apos;&apos;, &apos;448&apos;: &apos;&apos;, &apos;1041&apos;: &apos;&apos;, &apos;1004&apos;: &apos;&apos;, &apos;818&apos;: &apos;&apos;, &apos;490&apos;: &apos;&apos;, &apos;560&apos;: &apos;&apos;, &apos;785&apos;: &apos;&apos;, &apos;925&apos;: &apos;&apos;, &apos;665&apos;: &apos;&apos;, &apos;18&apos;: &apos;&apos;, &apos;662&apos;: &apos;&apos;, &apos;353&apos;: &apos;&apos;, &apos;538&apos;: &apos;&apos;, &apos;130&apos;: &apos;&apos;, &apos;417&apos;: &apos;&apos;, &apos;161&apos;: &apos;&apos;, &apos;783&apos;: &apos;&apos;, &apos;147&apos;: &apos;&apos;, &apos;418&apos;: &apos;&apos;, &apos;443&apos;: &apos;&apos;, &apos;214&apos;: &apos;&apos;, &apos;523&apos;: &apos;&apos;, &apos;754&apos;: &apos;&apos;, &apos;419&apos;: &apos;&apos;, &apos;41&apos;: &apos;&apos;, &apos;614&apos;: &apos;&apos;, &apos;432&apos;: &apos;&apos;, &apos;648&apos;: &apos;&apos;, &apos;281&apos;: &apos;&apos;, &apos;1019&apos;: &apos;&apos;, &apos;796&apos;: &apos;&apos;, &apos;306&apos;: &apos;&apos;, &apos;178&apos;: &apos;&apos;, &apos;336&apos;: &apos;&apos;, &apos;150&apos;: &apos;&apos;, &apos;47&apos;: &apos;&apos;, &apos;959&apos;: &apos;&apos;, &apos;529&apos;: &apos;&apos;, &apos;899&apos;: &apos;&apos;, &apos;750&apos;: &apos;&apos;, &apos;927&apos;: &apos;&apos;, &apos;729&apos;: &apos;&apos;, &apos;1062&apos;: &apos;&apos;, &apos;621&apos;: &apos;&apos;, &apos;340&apos;: &apos;&apos;, &apos;999&apos;: &apos;&apos;, &apos;746&apos;: &apos;&apos;, &apos;836&apos;: &apos;&apos;, &apos;6&apos;: &apos;news&apos;, &apos;532&apos;: &apos;&apos;, &apos;661&apos;: &apos;&apos;, &apos;268&apos;: &apos;&apos;, &apos;182&apos;: &apos;&apos;, &apos;677&apos;: &apos;&apos;, &apos;497&apos;: &apos;&apos;, &apos;391&apos;: &apos;&apos;, &apos;810&apos;: &apos;&apos;, &apos;77&apos;: &apos;&apos;, &apos;447&apos;: &apos;&apos;, &apos;816&apos;: &apos;&apos;, &apos;482&apos;: &apos;&apos;, &apos;334&apos;: &apos;&apos;, &apos;535&apos;: &apos;&apos;, &apos;553&apos;: &apos;&apos;, &apos;743&apos;: &apos;&apos;, &apos;284&apos;: &apos;&apos;, &apos;144&apos;: &apos;&apos;, &apos;771&apos;: &apos;&apos;, &apos;365&apos;: &apos;&apos;, &apos;678&apos;: &apos;&apos;, &apos;151&apos;: &apos;&apos;, &apos;253&apos;: &apos;&apos;, &apos;468&apos;: &apos;&apos;, &apos;44&apos;: &apos;&apos;, &apos;472&apos;: &apos;&apos;, &apos;473&apos;: &apos;&apos;, &apos;713&apos;: &apos;&apos;, &apos;389&apos;: &apos;&apos;, &apos;373&apos;: &apos;&apos;, &apos;663&apos;: &apos;&apos;, &apos;201&apos;: &apos;&apos;, &apos;229&apos;: &apos;&apos;, &apos;165&apos;: &apos;&apos;, &apos;623&apos;: &apos;&apos;, &apos;870&apos;: &apos;&apos;, &apos;437&apos;: &apos;&apos;, &apos;256&apos;: &apos;&apos;, &apos;25&apos;: &apos;&apos;, &apos;92&apos;: &apos;&apos;, &apos;28&apos;: &apos;&apos;, &apos;155&apos;: &apos;&apos;, &apos;337&apos;: &apos;&apos;, &apos;834&apos;: &apos;&apos;, &apos;55&apos;: &apos;&apos;, &apos;315&apos;: &apos;&apos;, &apos;828&apos;: &apos;&apos;, &apos;608&apos;: &apos;&apos;, &apos;489&apos;: &apos;&apos;, &apos;87&apos;: &apos;&apos;, &apos;985&apos;: &apos;&apos;, &apos;563&apos;: &apos;&apos;, &apos;434&apos;: &apos;&apos;, &apos;71&apos;: &apos;&apos;, &apos;27&apos;: &apos;&apos;, &apos;882&apos;: &apos;&apos;, &apos;935&apos;: &apos;&apos;, &apos;708&apos;: &apos;&apos;, &apos;362&apos;: &apos;&apos;, &apos;444&apos;: &apos;&apos;, &apos;102&apos;: &apos;&apos;, &apos;63&apos;: &apos;&apos;, &apos;1044&apos;: &apos;&apos;, &apos;433&apos;: &apos;&apos;, &apos;1022&apos;: &apos;&apos;, &apos;505&apos;: &apos;&apos;, &apos;1037&apos;: &apos;&apos;, &apos;598&apos;: &apos;&apos;, &apos;372&apos;: &apos;&apos;, &apos;887&apos;: &apos;&apos;, &apos;221&apos;: &apos;&apos;, &apos;248&apos;: &apos;&apos;, &apos;566&apos;: &apos;&apos;, &apos;606&apos;: &apos;&apos;, &apos;431&apos;: &apos;&apos;, &apos;43&apos;: &apos;&apos;, &apos;29&apos;: &apos;&apos;, &apos;183&apos;: &apos;&apos;, &apos;398&apos;: &apos;&apos;, &apos;269&apos;: &apos;&apos;, &apos;755&apos;: &apos;&apos;, &apos;1027&apos;: &apos;&apos;, &apos;556&apos;: &apos;&apos;, &apos;491&apos;: &apos;&apos;, &apos;375&apos;: &apos;&apos;, &apos;801&apos;: &apos;&apos;, &apos;596&apos;: &apos;&apos;, &apos;40&apos;: &apos;&apos;, &apos;1000&apos;: &apos;&apos;, &apos;346&apos;: &apos;&apos;, &apos;287&apos;: &apos;&apos;, &apos;932&apos;: &apos;&apos;, &apos;869&apos;: &apos;&apos;, &apos;219&apos;: &apos;&apos;, &apos;908&apos;: &apos;&apos;, &apos;924&apos;: &apos;&apos;, &apos;369&apos;: &apos;&apos;, &apos;843&apos;: &apos;&apos;, &apos;994&apos;: &apos;&apos;, &apos;254&apos;: &apos;&apos;, &apos;296&apos;: &apos;&apos;, &apos;233&apos;: &apos;&apos;, &apos;31&apos;: &apos;&apos;, &apos;784&apos;: &apos;&apos;, &apos;263&apos;: &apos;&apos;, &apos;34&apos;: &apos;&apos;, &apos;11&apos;: &apos;&apos;, &apos;938&apos;: &apos;&apos;, &apos;420&apos;: &apos;&apos;, &apos;1036&apos;: &apos;&apos;, &apos;970&apos;: &apos;&apos;, &apos;1048&apos;: &apos;&apos;, &apos;226&apos;: &apos;&apos;, &apos;760&apos;: &apos;&apos;, &apos;555&apos;: &apos;&apos;, &apos;987&apos;: &apos;&apos;, &apos;499&apos;: &apos;&apos;, &apos;488&apos;: &apos;&apos;, &apos;717&apos;: &apos;&apos;, &apos;52&apos;: &apos;&apos;, &apos;358&apos;: &apos;&apos;, &apos;1043&apos;: &apos;&apos;, &apos;903&apos;: &apos;&apos;, &apos;1058&apos;: &apos;&apos;, &apos;312&apos;: &apos;&apos;, &apos;513&apos;: &apos;&apos;, &apos;764&apos;: &apos;&apos;, &apos;675&apos;: &apos;&apos;, &apos;593&apos;: &apos;&apos;, &apos;1040&apos;: &apos;&apos;, &apos;1017&apos;: &apos;&apos;, &apos;552&apos;: &apos;&apos;, &apos;521&apos;: &apos;&apos;, &apos;134&apos;: &apos;&apos;, &apos;67&apos;: &apos;&apos;, &apos;906&apos;: &apos;&apos;, &apos;576&apos;: &apos;&apos;, &apos;459&apos;: &apos;&apos;, &apos;946&apos;: &apos;&apos;, &apos;1055&apos;: &apos;&apos;, &apos;752&apos;: &apos;&apos;, &apos;805&apos;: &apos;&apos;, &apos;131&apos;: &apos;&apos;, &apos;744&apos;: &apos;&apos;, &apos;275&apos;: &apos;&apos;, &apos;554&apos;: &apos;&apos;, &apos;14&apos;: &apos;&apos;, &apos;199&apos;: &apos;&apos;, &apos;1028&apos;: &apos;&apos;, &apos;602&apos;: &apos;&apos;, &apos;260&apos;: &apos;&apos;, &apos;325&apos;: &apos;&apos;, &apos;624&apos;: &apos;&apos;, &apos;704&apos;: &apos;&apos;, &apos;446&apos;: &apos;&apos;, &apos;239&apos;: &apos;&apos;, &apos;611&apos;: &apos;&apos;, &apos;850&apos;: &apos;&apos;, &apos;615&apos;: &apos;&apos;, &apos;531&apos;: &apos;&apos;, &apos;597&apos;: &apos;&apos;, &apos;574&apos;: &apos;&apos;, &apos;343&apos;: &apos;&apos;, &apos;547&apos;: &apos;&apos;, &apos;33&apos;: &apos;&apos;, &apos;680&apos;: &apos;&apos;, &apos;667&apos;: &apos;&apos;, &apos;815&apos;: &apos;&apos;, &apos;986&apos;: &apos;&apos;, &apos;827&apos;: &apos;&apos;, &apos;49&apos;: &apos;&apos;, &apos;652&apos;: &apos;&apos;, &apos;524&apos;: &apos;&apos;, &apos;702&apos;: &apos;&apos;, &apos;773&apos;: &apos;&apos;, &apos;274&apos;: &apos;&apos;, &apos;48&apos;: &apos;&apos;, &apos;170&apos;: &apos;&apos;, &apos;920&apos;: &apos;&apos;, &apos;793&apos;: &apos;&apos;, &apos;116&apos;: &apos;&apos;, &apos;584&apos;: &apos;&apos;, &apos;477&apos;: &apos;&apos;, &apos;873&apos;: &apos;&apos;, &apos;107&apos;: &apos;&apos;, &apos;918&apos;: &apos;&apos;, &apos;318&apos;: &apos;&apos;, &apos;234&apos;: &apos;&apos;, &apos;58&apos;: &apos;&apos;, &apos;814&apos;: &apos;&apos;, &apos;520&apos;: &apos;&apos;, &apos;961&apos;: &apos;&apos;, &apos;1002&apos;: &apos;&apos;, &apos;283&apos;: &apos;&apos;, &apos;664&apos;: &apos;&apos;, &apos;820&apos;: &apos;&apos;, &apos;992&apos;: &apos;&apos;, &apos;797&apos;: &apos;&apos;, &apos;192&apos;: &apos;&apos;, &apos;26&apos;: &apos;&apos;, &apos;197&apos;: &apos;&apos;, &apos;826&apos;: &apos;&apos;, &apos;310&apos;: &apos;&apos;, &apos;379&apos;: &apos;&apos;, &apos;136&apos;: &apos;&apos;, &apos;1059&apos;: &apos;&apos;, &apos;13&apos;: &apos;&apos;, &apos;670&apos;: &apos;&apos;, &apos;9&apos;: &apos;incoherent&apos;, &apos;331&apos;: &apos;&apos;, &apos;548&apos;: &apos;&apos;, &apos;656&apos;: &apos;&apos;, &apos;35&apos;: &apos;&apos;, &apos;660&apos;: &apos;&apos;, &apos;236&apos;: &apos;&apos;, &apos;655&apos;: &apos;&apos;, &apos;1026&apos;: &apos;&apos;, &apos;129&apos;: &apos;&apos;, &apos;967&apos;: &apos;&apos;, &apos;534&apos;: &apos;&apos;, &apos;867&apos;: &apos;&apos;, &apos;838&apos;: &apos;&apos;, &apos;70&apos;: &apos;&apos;, &apos;962&apos;: &apos;&apos;, &apos;245&apos;: &apos;&apos;, &apos;403&apos;: &apos;&apos;, &apos;747&apos;: &apos;&apos;, &apos;891&apos;: &apos;&apos;, &apos;832&apos;: &apos;&apos;, &apos;285&apos;: &apos;&apos;, &apos;307&apos;: &apos;&apos;, &apos;368&apos;: &apos;&apos;, &apos;467&apos;: &apos;&apos;, &apos;617&apos;: &apos;&apos;, &apos;366&apos;: &apos;&apos;, &apos;789&apos;: &apos;&apos;, &apos;635&apos;: &apos;&apos;, &apos;142&apos;: &apos;&apos;, &apos;559&apos;: &apos;&apos;, &apos;830&apos;: &apos;&apos;, &apos;1029&apos;: &apos;&apos;, &apos;56&apos;: &apos;&apos;, &apos;525&apos;: &apos;&apos;, &apos;115&apos;: &apos;&apos;, &apos;243&apos;: &apos;&apos;, &apos;213&apos;: &apos;&apos;, &apos;179&apos;: &apos;&apos;, &apos;113&apos;: &apos;&apos;, &apos;545&apos;: &apos;&apos;, &apos;300&apos;: &apos;&apos;, &apos;474&apos;: &apos;&apos;, &apos;212&apos;: &apos;&apos;, &apos;768&apos;: &apos;&apos;, &apos;298&apos;: &apos;&apos;, &apos;890&apos;: &apos;&apos;, &apos;725&apos;: &apos;&apos;, &apos;453&apos;: &apos;&apos;, &apos;450&apos;: &apos;&apos;, &apos;679&apos;: &apos;&apos;, &apos;511&apos;: &apos;&apos;, &apos;460&apos;: &apos;&apos;, &apos;305&apos;: &apos;&apos;, &apos;817&apos;: &apos;&apos;, &apos;104&apos;: &apos;&apos;, &apos;724&apos;: &apos;&apos;, &apos;252&apos;: &apos;&apos;, &apos;672&apos;: &apos;&apos;, &apos;977&apos;: &apos;&apos;, &apos;587&apos;: &apos;&apos;, &apos;849&apos;: &apos;&apos;, &apos;121&apos;: &apos;&apos;, &apos;786&apos;: &apos;&apos;, &apos;917&apos;: &apos;&apos;, &apos;546&apos;: &apos;&apos;, &apos;831&apos;: &apos;&apos;, &apos;697&apos;: &apos;&apos;, &apos;348&apos;: &apos;&apos;, &apos;406&apos;: &apos;&apos;, &apos;537&apos;: &apos;&apos;, &apos;626&apos;: &apos;&apos;, &apos;705&apos;: &apos;&apos;, &apos;1014&apos;: &apos;&apos;, &apos;383&apos;: &apos;&apos;, &apos;751&apos;: &apos;&apos;, &apos;901&apos;: &apos;&apos;, &apos;1015&apos;: &apos;&apos;, &apos;798&apos;: &apos;&apos;, &apos;222&apos;: &apos;&apos;, &apos;251&apos;: &apos;&apos;, &apos;82&apos;: &apos;&apos;, &apos;316&apos;: &apos;&apos;, &apos;123&apos;: &apos;&apos;, &apos;799&apos;: &apos;&apos;, &apos;146&apos;: &apos;&apos;, &apos;919&apos;: &apos;&apos;, &apos;23&apos;: &apos;&apos;, &apos;978&apos;: &apos;&apos;, &apos;1&apos;: &apos;goodwish&apos;, &apos;759&apos;: &apos;&apos;, &apos;95&apos;: &apos;&apos;, &apos;506&apos;: &apos;&apos;, &apos;647&apos;: &apos;&apos;, &apos;651&apos;: &apos;&apos;, &apos;407&apos;: &apos;&apos;, &apos;479&apos;: &apos;&apos;, &apos;841&apos;: &apos;&apos;, &apos;634&apos;: &apos;&apos;, &apos;202&apos;: &apos;&apos;, &apos;594&apos;: &apos;&apos;, &apos;1001&apos;: &apos;&apos;, &apos;303&apos;: &apos;&apos;, &apos;4&apos;: &apos;ziekmelding&apos;, &apos;313&apos;: &apos;&apos;, &apos;427&apos;: &apos;&apos;, &apos;75&apos;: &apos;&apos;, &apos;323&apos;: &apos;&apos;, &apos;649&apos;: &apos;&apos;, &apos;66&apos;: &apos;&apos;, &apos;603&apos;: &apos;&apos;, &apos;1033&apos;: &apos;&apos;, &apos;719&apos;: &apos;&apos;, &apos;60&apos;: &apos;&apos;, &apos;710&apos;: &apos;&apos;, &apos;342&apos;: &apos;&apos;, &apos;726&apos;: &apos;&apos;, &apos;573&apos;: &apos;&apos;, &apos;416&apos;: &apos;&apos;, &apos;424&apos;: &apos;&apos;, &apos;628&apos;: &apos;&apos;, &apos;515&apos;: &apos;&apos;, &apos;990&apos;: &apos;&apos;, &apos;1050&apos;: &apos;&apos;, &apos;861&apos;: &apos;&apos;, &apos;572&apos;: &apos;&apos;, &apos;247&apos;: &apos;&apos;, &apos;979&apos;: &apos;&apos;, &apos;822&apos;: &apos;&apos;, &apos;884&apos;: &apos;&apos;, &apos;1003&apos;: &apos;&apos;, &apos;591&apos;: &apos;&apos;, &apos;367&apos;: &apos;&apos;, &apos;291&apos;: &apos;&apos;, &apos;160&apos;: &apos;&apos;, &apos;1056&apos;: &apos;&apos;, &apos;519&apos;: &apos;&apos;, &apos;1051&apos;: &apos;&apos;, &apos;191&apos;: &apos;&apos;, &apos;877&apos;: &apos;&apos;, &apos;942&apos;: &apos;&apos;, &apos;653&apos;: &apos;&apos;, &apos;860&apos;: &apos;&apos;, &apos;712&apos;: &apos;&apos;, &apos;530&apos;: &apos;&apos;, &apos;498&apos;: &apos;&apos;, &apos;208&apos;: &apos;&apos;, &apos;81&apos;: &apos;&apos;, &apos;723&apos;: &apos;&apos;, &apos;922&apos;: &apos;&apos;, &apos;761&apos;: &apos;&apos;, &apos;539&apos;: &apos;&apos;, &apos;163&apos;: &apos;&apos;, &apos;501&apos;: &apos;&apos;, &apos;12&apos;: &apos;&apos;, &apos;103&apos;: &apos;&apos;, &apos;880&apos;: &apos;&apos;, &apos;145&apos;: &apos;&apos;, &apos;993&apos;: &apos;&apos;, &apos;512&apos;: &apos;&apos;, &apos;739&apos;: &apos;&apos;, &apos;669&apos;: &apos;&apos;, &apos;180&apos;: &apos;&apos;, &apos;684&apos;: &apos;&apos;, &apos;788&apos;: &apos;&apos;, &apos;193&apos;: &apos;&apos;, &apos;360&apos;: &apos;&apos;, &apos;374&apos;: &apos;&apos;, &apos;218&apos;: &apos;&apos;, &apos;671&apos;: &apos;&apos;, &apos;808&apos;: &apos;&apos;, &apos;632&apos;: &apos;&apos;, &apos;317&apos;: &apos;&apos;, &apos;954&apos;: &apos;&apos;, &apos;364&apos;: &apos;&apos;, &apos;456&apos;: &apos;&apos;, &apos;736&apos;: &apos;&apos;, &apos;122&apos;: &apos;&apos;, &apos;969&apos;: &apos;&apos;, &apos;377&apos;: &apos;&apos;, &apos;718&apos;: &apos;&apos;, &apos;1038&apos;: &apos;&apos;, &apos;322&apos;: &apos;&apos;, &apos;330&apos;: &apos;&apos;, &apos;1009&apos;: &apos;&apos;, &apos;449&apos;: &apos;&apos;, &apos;279&apos;: &apos;&apos;, &apos;794&apos;: &apos;&apos;, &apos;727&apos;: &apos;&apos;, &apos;741&apos;: &apos;&apos;, &apos;455&apos;: &apos;&apos;, &apos;442&apos;: &apos;&apos;, &apos;510&apos;: &apos;&apos;, &apos;517&apos;: &apos;&apos;, &apos;952&apos;: &apos;&apos;, &apos;59&apos;: &apos;&apos;, &apos;404&apos;: &apos;&apos;, &apos;983&apos;: &apos;&apos;, &apos;1032&apos;: &apos;&apos;, &apos;319&apos;: &apos;&apos;, &apos;1007&apos;: &apos;&apos;, &apos;290&apos;: &apos;&apos;, &apos;643&apos;: &apos;&apos;, &apos;484&apos;: &apos;&apos;, &apos;907&apos;: &apos;&apos;, &apos;874&apos;: &apos;&apos;, &apos;693&apos;: &apos;&apos;, &apos;616&apos;: &apos;&apos;, &apos;740&apos;: &apos;&apos;, &apos;857&apos;: &apos;&apos;, &apos;299&apos;: &apos;&apos;, &apos;184&apos;: &apos;&apos;, &apos;965&apos;: &apos;&apos;, &apos;400&apos;: &apos;&apos;, &apos;823&apos;: &apos;&apos;, &apos;557&apos;: &apos;&apos;, &apos;842&apos;: &apos;&apos;, &apos;333&apos;: &apos;&apos;, &apos;862&apos;: &apos;&apos;, &apos;638&apos;: &apos;&apos;, &apos;99&apos;: &apos;&apos;, &apos;872&apos;: &apos;&apos;, &apos;396&apos;: &apos;&apos;, &apos;395&apos;: &apos;&apos;, &apos;733&apos;: &apos;&apos;, &apos;998&apos;: &apos;&apos;, &apos;270&apos;: &apos;&apos;, &apos;968&apos;: &apos;&apos;, &apos;939&apos;: &apos;&apos;, &apos;421&apos;: &apos;&apos;, &apos;996&apos;: &apos;&apos;, &apos;630&apos;: &apos;&apos;, &apos;964&apos;: &apos;&apos;, &apos;429&apos;: &apos;&apos;, &apos;76&apos;: &apos;&apos;, &apos;839&apos;: &apos;&apos;, &apos;266&apos;: &apos;&apos;, &apos;84&apos;: &apos;&apos;, &apos;413&apos;: &apos;&apos;, &apos;401&apos;: &apos;&apos;, &apos;164&apos;: &apos;&apos;, &apos;495&apos;: &apos;&apos;, &apos;423&apos;: &apos;&apos;, &apos;465&apos;: &apos;&apos;, &apos;957&apos;: &apos;&apos;, &apos;904&apos;: &apos;&apos;, &apos;171&apos;: &apos;&apos;, &apos;62&apos;: &apos;&apos;, &apos;139&apos;: &apos;&apos;, &apos;758&apos;: &apos;&apos;, &apos;840&apos;: &apos;&apos;, &apos;381&apos;: &apos;&apos;, &apos;926&apos;: &apos;&apos;, &apos;440&apos;: &apos;&apos;, &apos;280&apos;: &apos;&apos;, &apos;721&apos;: &apos;&apos;, &apos;351&apos;: &apos;&apos;, &apos;683&apos;: &apos;&apos;, &apos;289&apos;: &apos;&apos;, &apos;526&apos;: &apos;&apos;, &apos;811&apos;: &apos;&apos;, &apos;770&apos;: &apos;&apos;, &apos;45&apos;: &apos;&apos;, &apos;1021&apos;: &apos;&apos;, &apos;824&apos;: &apos;&apos;, &apos;356&apos;: &apos;&apos;, &apos;757&apos;: &apos;&apos;, &apos;311&apos;: &apos;&apos;, &apos;476&apos;: &apos;&apos;, &apos;775&apos;: &apos;&apos;, &apos;232&apos;: &apos;&apos;, &apos;378&apos;: &apos;&apos;, &apos;504&apos;: &apos;&apos;, &apos;10&apos;: &apos;&apos;, &apos;393&apos;: &apos;&apos;, &apos;551&apos;: &apos;&apos;, &apos;304&apos;: &apos;&apos;, &apos;971&apos;: &apos;&apos;, &apos;695&apos;: &apos;&apos;, &apos;117&apos;: &apos;&apos;, &apos;414&apos;: &apos;&apos;, &apos;561&apos;: &apos;&apos;, &apos;1063&apos;: &apos;&apos;, &apos;392&apos;: &apos;&apos;, &apos;564&apos;: &apos;&apos;, &apos;600&apos;: &apos;&apos;, &apos;951&apos;: &apos;&apos;, &apos;931&apos;: &apos;&apos;, &apos;220&apos;: &apos;&apos;, &apos;837&apos;: &apos;&apos;, &apos;382&apos;: &apos;&apos;, &apos;542&apos;: &apos;&apos;, &apos;988&apos;: &apos;&apos;, &apos;90&apos;: &apos;&apos;, &apos;636&apos;: &apos;&apos;, &apos;73&apos;: &apos;&apos;, &apos;3&apos;: &apos;ziekmelding&apos;, &apos;772&apos;: &apos;&apos;, &apos;408&apos;: &apos;&apos;, &apos;137&apos;: &apos;&apos;, &apos;516&apos;: &apos;&apos;, &apos;945&apos;: &apos;&apos;, &apos;777&apos;: &apos;&apos;, &apos;791&apos;: &apos;&apos;, &apos;883&apos;: &apos;&apos;, &apos;86&apos;: &apos;&apos;, &apos;119&apos;: &apos;&apos;, &apos;50&apos;: &apos;&apos;, &apos;492&apos;: &apos;&apos;, &apos;105&apos;: &apos;&apos;, &apos;88&apos;: &apos;&apos;, &apos;682&apos;: &apos;&apos;, &apos;439&apos;: &apos;&apos;, &apos;921&apos;: &apos;&apos;, &apos;500&apos;: &apos;&apos;, &apos;715&apos;: &apos;&apos;, &apos;503&apos;: &apos;&apos;, &apos;787&apos;: &apos;&apos;, &apos;716&apos;: &apos;&apos;, &apos;478&apos;: &apos;&apos;, &apos;126&apos;: &apos;&apos;, &apos;863&apos;: &apos;&apos;, &apos;778&apos;: &apos;&apos;, &apos;168&apos;: &apos;&apos;, &apos;915&apos;: &apos;&apos;, &apos;225&apos;: &apos;&apos;, &apos;858&apos;: &apos;&apos;, &apos;321&apos;: &apos;&apos;, &apos;15&apos;: &apos;&apos;, &apos;32&apos;: &apos;&apos;, &apos;435&apos;: &apos;&apos;, &apos;78&apos;: &apos;&apos;, &apos;97&apos;: &apos;&apos;, &apos;844&apos;: &apos;&apos;, &apos;953&apos;: &apos;&apos;, &apos;640&apos;: &apos;&apos;, &apos;135&apos;: &apos;&apos;, &apos;114&apos;: &apos;&apos;, &apos;645&apos;: &apos;&apos;, &apos;276&apos;: &apos;&apos;, &apos;972&apos;: &apos;&apos;, &apos;217&apos;: &apos;&apos;, &apos;328&apos;: &apos;&apos;, &apos;659&apos;: &apos;&apos;, &apos;549&apos;: &apos;&apos;, &apos;200&apos;: &apos;&apos;, &apos;441&apos;: &apos;&apos;, &apos;592&apos;: &apos;&apos;, &apos;177&apos;: &apos;&apos;, &apos;211&apos;: &apos;&apos;, &apos;262&apos;: &apos;&apos;, &apos;646&apos;: &apos;&apos;, &apos;294&apos;: &apos;&apos;, &apos;940&apos;: &apos;&apos;, &apos;581&apos;: &apos;&apos;, &apos;674&apos;: &apos;&apos;, &apos;264&apos;: &apos;&apos;, &apos;385&apos;: &apos;&apos;, &apos;485&apos;: &apos;&apos;, &apos;876&apos;: &apos;&apos;, &apos;159&apos;: &apos;&apos;, &apos;363&apos;: &apos;&apos;, &apos;734&apos;: &apos;&apos;, &apos;912&apos;: &apos;&apos;, &apos;350&apos;: &apos;&apos;, &apos;948&apos;: &apos;&apos;, &apos;928&apos;: &apos;&apos;, &apos;859&apos;: &apos;&apos;, &apos;207&apos;: &apos;&apos;, &apos;309&apos;: &apos;&apos;, &apos;265&apos;: &apos;&apos;, &apos;20&apos;: &apos;&apos;, &apos;933&apos;: &apos;&apos;, &apos;158&apos;: &apos;&apos;, &apos;272&apos;: &apos;&apos;, &apos;641&apos;: &apos;&apos;, &apos;802&apos;: &apos;&apos;, &apos;384&apos;: &apos;&apos;, &apos;349&apos;: &apos;&apos;, &apos;5&apos;: &apos;incoherent&apos;, &apos;466&apos;: &apos;&apos;, &apos;302&apos;: &apos;&apos;, &apos;172&apos;: &apos;&apos;, &apos;654&apos;: &apos;&apos;, &apos;426&apos;: &apos;&apos;, &apos;984&apos;: &apos;&apos;, &apos;242&apos;: &apos;&apos;, &apos;69&apos;: &apos;&apos;, &apos;345&apos;: &apos;&apos;, &apos;210&apos;: &apos;&apos;, &apos;590&apos;: &apos;&apos;, &apos;21&apos;: &apos;&apos;, &apos;604&apos;: &apos;&apos;, &apos;1045&apos;: &apos;&apos;, &apos;658&apos;: &apos;&apos;, &apos;589&apos;: &apos;&apos;, &apos;509&apos;: &apos;&apos;, &apos;471&apos;: &apos;&apos;, &apos;706&apos;: &apos;&apos;, &apos;463&apos;: &apos;&apos;, &apos;436&apos;: &apos;&apos;, &apos;17&apos;: &apos;&apos;, &apos;579&apos;: &apos;&apos;, &apos;854&apos;: &apos;&apos;, &apos;301&apos;: &apos;&apos;, &apos;483&apos;: &apos;&apos;, &apos;111&apos;: &apos;&apos;, &apos;720&apos;: &apos;&apos;, &apos;240&apos;: &apos;&apos;, &apos;803&apos;: &apos;&apos;, &apos;1013&apos;: &apos;&apos;, &apos;776&apos;: &apos;&apos;, &apos;889&apos;: &apos;&apos;, &apos;607&apos;: &apos;&apos;, &apos;620&apos;: &apos;&apos;, &apos;487&apos;: &apos;&apos;, &apos;668&apos;: &apos;&apos;, &apos;42&apos;: &apos;&apos;, &apos;387&apos;: &apos;&apos;, &apos;518&apos;: &apos;&apos;, &apos;354&apos;: &apos;&apos;, &apos;132&apos;: &apos;&apos;, &apos;338&apos;: &apos;&apos;, &apos;246&apos;: &apos;&apos;, &apos;533&apos;: &apos;&apos;, &apos;558&apos;: &apos;&apos;, &apos;991&apos;: &apos;&apos;, &apos;673&apos;: &apos;&apos;, &apos;79&apos;: &apos;&apos;, &apos;703&apos;: &apos;&apos;, &apos;605&apos;: &apos;&apos;, &apos;143&apos;: &apos;&apos;, &apos;914&apos;: &apos;&apos;, &apos;335&apos;: &apos;&apos;, &apos;39&apos;: &apos;&apos;, &apos;230&apos;: &apos;&apos;, &apos;896&apos;: &apos;&apos;, &apos;461&apos;: &apos;&apos;, &apos;1008&apos;: &apos;&apos;, &apos;807&apos;: &apos;&apos;, &apos;543&apos;: &apos;&apos;, &apos;410&apos;: &apos;&apos;, &apos;974&apos;: &apos;&apos;, &apos;464&apos;: &apos;&apos;, &apos;244&apos;: &apos;&apos;, &apos;731&apos;: &apos;&apos;, &apos;1024&apos;: &apos;&apos;, &apos;422&apos;: &apos;&apos;, &apos;582&apos;: &apos;&apos;, &apos;469&apos;: &apos;&apos;, &apos;763&apos;: &apos;&apos;, &apos;250&apos;: &apos;&apos;, &apos;332&apos;: &apos;&apos;, &apos;612&apos;: &apos;&apos;, &apos;83&apos;: &apos;&apos;, &apos;189&apos;: &apos;&apos;, &apos;540&apos;: &apos;&apos;, &apos;409&apos;: &apos;&apos;, &apos;46&apos;: &apos;&apos;, &apos;1039&apos;: &apos;&apos;, &apos;1053&apos;: &apos;&apos;, &apos;19&apos;: &apos;&apos;, &apos;1046&apos;: &apos;&apos;, &apos;691&apos;: &apos;&apos;, &apos;110&apos;: &apos;&apos;, &apos;1012&apos;: &apos;&apos;, &apos;94&apos;: &apos;&apos;, &apos;209&apos;: &apos;&apos;, &apos;85&apos;: &apos;&apos;, &apos;767&apos;: &apos;&apos;, &apos;800&apos;: &apos;&apos;, &apos;790&apos;: &apos;&apos;, &apos;149&apos;: &apos;&apos;, &apos;833&apos;: &apos;&apos;, &apos;166&apos;: &apos;&apos;, &apos;308&apos;: &apos;&apos;, &apos;486&apos;: &apos;&apos;, &apos;53&apos;: &apos;&apos;, &apos;879&apos;: &apos;&apos;, &apos;514&apos;: &apos;&apos;, &apos;910&apos;: &apos;&apos;, &apos;749&apos;: &apos;&apos;, &apos;642&apos;: &apos;&apos;, &apos;885&apos;: &apos;&apos;, &apos;550&apos;: &apos;&apos;, &apos;162&apos;: &apos;&apos;, &apos;871&apos;: &apos;&apos;, &apos;320&apos;: &apos;&apos;, &apos;601&apos;: &apos;&apos;, &apos;16&apos;: &apos;&apos;, &apos;835&apos;: &apos;&apos;, &apos;650&apos;: &apos;&apos;, &apos;848&apos;: &apos;&apos;, &apos;700&apos;: &apos;&apos;, &apos;613&apos;: &apos;&apos;, &apos;905&apos;: &apos;&apos;, &apos;124&apos;: &apos;&apos;, &apos;451&apos;: &apos;&apos;, &apos;881&apos;: &apos;&apos;, &apos;1018&apos;: &apos;&apos;, &apos;425&apos;: &apos;&apos;, &apos;101&apos;: &apos;&apos;, &apos;37&apos;: &apos;&apos;, &apos;399&apos;: &apos;&apos;, &apos;267&apos;: &apos;&apos;, &apos;380&apos;: &apos;&apos;, &apos;278&apos;: &apos;&apos;, &apos;1020&apos;: &apos;&apos;, &apos;975&apos;: &apos;&apos;, &apos;493&apos;: &apos;&apos;, &apos;936&apos;: &apos;&apos;, &apos;688&apos;: &apos;&apos;, &apos;1006&apos;: &apos;&apos;, &apos;475&apos;: &apos;&apos;, &apos;1031&apos;: &apos;&apos;, &apos;732&apos;: &apos;&apos;, &apos;405&apos;: &apos;&apos;, &apos;72&apos;: &apos;&apos;, &apos;30&apos;: &apos;&apos;, &apos;228&apos;: &apos;&apos;, &apos;198&apos;: &apos;&apos;, &apos;633&apos;: &apos;&apos;, &apos;681&apos;: &apos;&apos;, &apos;496&apos;: &apos;&apos;, &apos;430&apos;: &apos;&apos;, &apos;428&apos;: &apos;&apos;, &apos;238&apos;: &apos;&apos;, &apos;813&apos;: &apos;&apos;, &apos;943&apos;: &apos;&apos;, &apos;93&apos;: &apos;&apos;, &apos;738&apos;: &apos;&apos;, &apos;900&apos;: &apos;&apos;, &apos;916&apos;: &apos;&apos;, &apos;74&apos;: &apos;&apos;, &apos;812&apos;: &apos;&apos;, &apos;536&apos;: &apos;&apos;, &apos;709&apos;: &apos;&apos;, &apos;966&apos;: &apos;&apos;, &apos;2&apos;: &apos;ziekmelding&apos;, &apos;231&apos;: &apos;&apos;, &apos;344&apos;: &apos;&apos;, &apos;153&apos;: &apos;&apos;, &apos;326&apos;: &apos;&apos;, &apos;982&apos;: &apos;&apos;, &apos;324&apos;: &apos;&apos;, &apos;865&apos;: &apos;&apos;, &apos;1047&apos;: &apos;&apos;, &apos;569&apos;: &apos;&apos;, &apos;357&apos;: &apos;&apos;, &apos;141&apos;: &apos;&apos;, &apos;508&apos;: &apos;&apos;, &apos;707&apos;: &apos;&apos;, &apos;352&apos;: &apos;&apos;, &apos;91&apos;: &apos;&apos;, &apos;792&apos;: &apos;&apos;, &apos;194&apos;: &apos;&apos;, &apos;186&apos;: &apos;&apos;, &apos;627&apos;: &apos;&apos;, &apos;819&apos;: &apos;&apos;, &apos;829&apos;: &apos;&apos;, &apos;235&apos;: &apos;&apos;, &apos;462&apos;: &apos;&apos;, &apos;781&apos;: &apos;&apos;, &apos;120&apos;: &apos;&apos;, &apos;397&apos;: &apos;&apos;, &apos;1011&apos;: &apos;&apos;, &apos;895&apos;: &apos;&apos;, &apos;875&apos;: &apos;&apos;, &apos;51&apos;: &apos;&apos;, &apos;804&apos;: &apos;&apos;, &apos;888&apos;: &apos;&apos;, &apos;176&apos;: &apos;&apos;, &apos;68&apos;: &apos;&apos;, &apos;701&apos;: &apos;&apos;, &apos;370&apos;: &apos;&apos;, &apos;341&apos;: &apos;&apos;, &apos;578&apos;: &apos;&apos;, &apos;175&apos;: &apos;&apos;, &apos;169&apos;: &apos;&apos;, &apos;950&apos;: &apos;&apos;, &apos;586&apos;: &apos;&apos;, &apos;780&apos;: &apos;&apos;, &apos;181&apos;: &apos;&apos;, &apos;415&apos;: &apos;&apos;, &apos;619&apos;: &apos;&apos;, &apos;821&apos;: &apos;&apos;, &apos;666&apos;: &apos;&apos;, &apos;1042&apos;: &apos;&apos;, &apos;588&apos;: &apos;&apos;, &apos;112&apos;: &apos;&apos;, &apos;571&apos;: &apos;&apos;, &apos;742&apos;: &apos;&apos;, &apos;96&apos;: &apos;&apos;, &apos;973&apos;: &apos;&apos;, &apos;1025&apos;: &apos;&apos;, &apos;583&apos;: &apos;&apos;, &apos;89&apos;: &apos;&apos;, &apos;185&apos;: &apos;&apos;, &apos;494&apos;: &apos;&apos;, &apos;795&apos;: &apos;&apos;, &apos;24&apos;: &apos;&apos;, &apos;109&apos;: &apos;&apos;, &apos;685&apos;: &apos;&apos;, &apos;762&apos;: &apos;&apos;, &apos;1061&apos;: &apos;&apos;, &apos;371&apos;: &apos;&apos;, &apos;577&apos;: &apos;&apos;, &apos;1054&apos;: &apos;&apos;, &apos;562&apos;: &apos;&apos;, &apos;223&apos;: &apos;&apos;, &apos;809&apos;: &apos;&apos;, &apos;152&apos;: &apos;&apos;, &apos;846&apos;: &apos;&apos;, &apos;80&apos;: &apos;&apos;, &apos;644&apos;: &apos;&apos;, &apos;388&apos;: &apos;&apos;, &apos;528&apos;: &apos;&apos;, &apos;595&apos;: &apos;&apos;, &apos;689&apos;: &apos;&apos;, &apos;769&apos;: &apos;&apos;, &apos;570&apos;: &apos;&apos;, &apos;878&apos;: &apos;&apos;, &apos;847&apos;: &apos;&apos;, &apos;913&apos;: &apos;&apos;, &apos;976&apos;: &apos;&apos;, &apos;955&apos;: &apos;&apos;, &apos;692&apos;: &apos;&apos;, &apos;148&apos;: &apos;&apos;, &apos;657&apos;: &apos;&apos;, &apos;949&apos;: &apos;&apos;, &apos;897&apos;: &apos;&apos;, &apos;1016&apos;: &apos;&apos;, &apos;54&apos;: &apos;&apos;, &apos;609&apos;: &apos;&apos;, &apos;241&apos;: &apos;&apos;, &apos;118&apos;: &apos;&apos;, &apos;188&apos;: &apos;&apos;}
+<pre>1066 [&apos;0:irrelevant&apos;, &apos;1:goodwish&apos;, &apos;2:ziekmelding&apos;, &apos;3:ziekmelding&apos;, &apos;4:ziekmelding&apos;, &apos;5:incoherent&apos;, &apos;6:news&apos;, &apos;7:&apos;, &apos;8:incoherent&apos;, &apos;9:incoherent&apos;, &apos;10:&apos;, &apos;11:&apos;, &apos;12:&apos;, &apos;13:&apos;, &apos;14:&apos;] 
 </pre>
 </div>
 </div>
