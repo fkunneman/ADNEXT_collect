@@ -1,15 +1,12 @@
 #!/usr/bin/env 
 ###################################
 
-
 import sys
 import json
 import time
 import configparser
 
-import tweetcollector
-import json_tweets_parser
-import linewriter
+from functions import tweetcollector, json_tweets_parser, linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
@@ -26,7 +23,7 @@ outfile = cp['collect']['outfile']
 jsonfile = outfile + '.json'
 sparefile = cp['collect']['spare']
 formats = cp['collect']['write']
-if 'xls' in formats:
+if 'xlsx' in formats:
     header_celltype = {
         'tweet_id' : 'general',
         'user_id' : 'general',
@@ -111,7 +108,7 @@ jp = json_tweets_parser.Json_tweets_parser(jsonfile)
 jp.parse()
 jp.convert()
 lw = linewriter.Linewriter(jp.lines)
-if 'xls' in formats:
+if 'xlsx' in formats:
     lw.write_xls(jp.columns, header_celltype, outfile + '.xls')
 if 'txt' in formats:
     lw.write_txt(outfile + '.txt')

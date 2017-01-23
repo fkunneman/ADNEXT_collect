@@ -7,10 +7,7 @@ import re
 import time
 import io
 
-import tweetcollector
-import docreader
-import json_tweets_parser
-import linewriter
+from functions import tweetcollector, docreader, json_tweets_parser, linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
@@ -24,7 +21,7 @@ password_file = cp['collect']['password_file']
 with open(password_file) as pw:
     passwords = pw.read().split("\n")
 
-keyterms = cp['collect']['keyterms'].split()
+keyterms = cp['collect']['keyterms'].split('|')
 language = cp['collect']['language']
 
 tc = tweetcollector.Tweetcollector(passwords)

@@ -7,6 +7,7 @@ import json
 import copy
 import re
 import string
+from itertools import product
 
 class Docreader:
 
@@ -21,8 +22,16 @@ class Docreader:
             self.lines = self.parse_xls(doc, header, date, time)
         elif form == 'xlsx':
             self.lines = self.parse_xlsx(doc, sheet)
-        else:
+        elif form == 'json': # default twitter parse keys
+            parse_keys = [['id'], ['user', 'id'], ['user', 'screen_name'], ['user', 'followers_count'], 
+            ['user', 'location'], ['created_at'], ['in_reply_to_screen_name'], ['retweeted_status', 'user', 
+            'screen_name'], ['text']]
+            self.lines = self.parse_json(doc, parse_keys)
+        elif form == '.csv':
             self.lines = self.parse_csv(doc)
+        else:
+            print('File extension not known, exiting program')
+            exit()
 
     def parse_txt(self, doc, delimiter, header):
         if not delimiter:
@@ -77,7 +86,7 @@ class Docreader:
             rows.append(values)
         return rows
         
-    def parse_xlsx(self, doc, sh):
+    def parse_xlsx(self, doc, sh=False):
         workbook = load_workbook(filename = doc)
         if sh:
             sheet = workbook[sh]
@@ -86,20 +95,21 @@ class Docreader:
         dimensions = sheet.dimensions
         d1, d2 = dimensions.split(':')
         cols = list(string.ascii_uppercase)
+        cols += [''.join(x) for x in product(cols,cols)] # to include further columns, named as combinations of characters
         firstcol = ''.join([x for x in d1 if re.search(r'[A-Z]', x)])
         lastcol = ''.join([x for x in d2 if re.search(r'[A-Z]', x)])
         firstrow = int(''.join([x for x in d1 if re.search(r'[0-9]', x)]))
         lastrow = int(''.join([x for x in d2 if re.search(r'[0-9]', x)]))
         cols = cols[:cols.index(lastcol) + 1]
         lines = []
-        for i in range(firstrow, lastrow):
+        for i in range(firstrow, lastrow+1):
             line = []
             for c in cols:
                 line.append(sheet[c + str(i)].value)
             lines.append(line)
         return lines
 
-    def parse_csv(self, doc):
+    def parse_csv(self, doc, delim=','):
         """
         Csv reader
         =====
@@ -119,7 +129,7 @@ class Docreader:
         try:
             lines = []
             with open(doc, 'r', encoding = 'utf-8') as csvfile:
-                csv_reader = csv.reader(csvfile)
+                csv_reader = csv.reader(csvfile, delimiter = delim)
                 for line in csv_reader:
                     lines.append(line)
         except:
