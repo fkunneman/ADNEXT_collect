@@ -1,7 +1,8 @@
 
-import json_tweets_parser
-import linewriter
 import sys
+
+from functions import json_tweets_parser
+from functions import linewriter
 
 jsonfile = sys.argv[1]
 outputformats = sys.argv[2:] # choose 'xlsx', 'txt' or 'csv' 

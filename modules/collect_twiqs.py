@@ -3,9 +3,7 @@ import sys
 import configparser
 import datetime
 
-import twiqscollector
-import json_tweets_parser
-import linewriter
+from functions import twiqscollector, json_tweets_parser, linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'

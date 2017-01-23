@@ -1,10 +1,11 @@
 #! /usr/bin/env python
 
 import twython
-import twitter_devs3
 import sys
 import re
 import time
+
+from functions import twitter_devs3
 
 userfile = open(sys.argv[1],"r",encoding = "utf-8")
 passwordfile = open(sys.argv[2],"r",encoding = "utf-8")
