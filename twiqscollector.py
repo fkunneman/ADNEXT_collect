@@ -2,6 +2,7 @@
 import requests
 import datetime
 import time
+import json
 
 class Twiqscollector:
 
@@ -31,6 +32,10 @@ class Twiqscollector:
         while not output:
             output = self.request_tweets(payload)
         num_lines = len(output.text.split('\n'))
+        print('num_lines',num_lines)
+        print(dir(output))
+        print(output.json())
+        
         i = 0
         while num_lines <= 2:
             time.sleep(1800)             
