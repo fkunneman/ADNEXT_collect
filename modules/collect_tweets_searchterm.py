@@ -1,4 +1,5 @@
 
+import os
 import sys
 from collections import defaultdict
 import configparser
@@ -7,7 +8,11 @@ import re
 import time
 import io
 
-from functions import tweetcollector, docreader, json_tweets_parser, linewriter
+sys.path.append(os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + '/../functions'))
+import tweetcollector
+import docreader
+import json_tweets_parser
+import linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
@@ -37,7 +42,7 @@ if cp['collect'].getboolean('resume'):
 if cp['collect']['write'] != 'no':
     write = True
     formats = cp['collect']['write']
-    if 'xls' in formats:
+    if 'xlsx' in formats:
         header_celltype = {
             'tweet_id' : 'general',
             'user_id' : 'general',
@@ -75,8 +80,8 @@ while True:
             jp.convert()
             # write lines
             lw = linewriter.Linewriter(jp.lines)
-            if 'xls' in formats:
-                lw.write_xls(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xls')
+            if 'xlsx' in formats:
+                lw.write_xlsx(jp.columns, header_celltype, keyterm_tweetfile[keyterm] + '.xlsx')
             if 'txt' in formats:
                 lw.write_txt(keyterm_tweetfile[keyterm] + '.txt')
             if 'csv' in formats:

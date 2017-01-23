@@ -1,12 +1,16 @@
 #!/usr/bin/env 
 ###################################
 
+import os
 import sys
 import json
 import time
 import configparser
 
-from functions import tweetcollector, json_tweets_parser, linewriter
+sys.path.append(os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + '/../functions'))
+import tweetcollector
+import json_tweets_parser
+import linewriter
 
 configfile = sys.argv[1]
 collectdir = '/'.join(configfile.split('/')[:-1]) + '/'
@@ -109,7 +113,7 @@ jp.parse()
 jp.convert()
 lw = linewriter.Linewriter(jp.lines)
 if 'xlsx' in formats:
-    lw.write_xls(jp.columns, header_celltype, outfile + '.xls')
+    lw.write_xlsx(jp.columns, header_celltype, outfile + '.xlsx')
 if 'txt' in formats:
     lw.write_txt(outfile + '.txt')
 if 'csv' in formats:
