@@ -1,4 +1,4 @@
-# python json2xml_fb.py  NL_GIST_forum
+# python json2xml_fb.py NL_GIST_forum
 # Suzan Verberne
 import re
 
@@ -51,7 +51,6 @@ class Thread:
         self.sort_posts()
         out.write("<thread id=\""+self.thread_id+"\">\n<category>"+self.category+"</category>\n<title>"+self.title+"</title>\n<posts>\n")
         for post in self.posts:
-#            post.clean_body()
             post.printXML(out)
         out.write("</posts>\n</thread>\n")
 
