@@ -44,7 +44,7 @@ class Thread:
         self.posts = postdict.values()
 
     def sort_posts(self):
-        self.posts = sorted(self.posts, key = lambda k : k.index)
+        self.posts = sorted(self.posts, key = lambda k : int(k.index))
 
     def printXML(self,out):
         self.strip_duplicates()
